@@ -1,1 +1,80 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 580" fill="none"><defs><linearGradient id="orb" x1="80" y1="80" x2="510" y2="475" gradientUnits="userSpaceOnUse"><stop stop-color="#93f5ef"/><stop offset=".36" stop-color="#e0b8ff"/><stop offset=".7" stop-color="#ffabe3"/><stop offset="1" stop-color="#ffdda3"/></linearGradient><linearGradient id="shirt" x1="244" y1="250" x2="358" y2="420" gradientUnits="userSpaceOnUse"><stop stop-color="#ff54b8"/><stop offset="1" stop-color="#ac3cd7"/></linearGradient><linearGradient id="base"><stop stop-color="#9a72f2"/><stop offset=".5" stop-color="#f7b2ee"/><stop offset="1" stop-color="#7fe7ee"/></linearGradient></defs><circle cx="302" cy="270" r="194" fill="url(#orb)" opacity=".8"/><circle cx="302" cy="270" r="210" stroke="white" stroke-opacity=".85" stroke-width="2"/><ellipse cx="302" cy="294" rx="251" ry="83" stroke="white" stroke-width="3" transform="rotate(-27 302 294)"/><ellipse cx="301" cy="468" rx="199" ry="35" fill="url(#base)" opacity=".6"/><ellipse cx="301" cy="462" rx="192" ry="26" stroke="white" stroke-width="2"/><path d="M170 415l-22 66h39l28-67" fill="#5143ac"/><path d="M132 412l-3 69h34l13-71" fill="#6b52bf"/><path d="M126 474h37v12h-48q-6-8 11-12m47 0h20l13 12h-38z" fill="#382463"/><path d="M126 273q29-27 67 0l23 145q-54 18-96-1z" fill="#49c9d9"/><path d="M137 249q-4-45 29-43 30 0 29 41l-5 27-51-2z" fill="#302442"/><ellipse cx="165" cy="247" rx="24" ry="29" fill="#bb795b"/><path d="M142 237q-9-28 22-28 25 1 27 24-27-3-36-14-2 13-13 18" fill="#302442"/><path d="M151 271l14 17 15-16" fill="#bb795b"/><path d="M131 284l-26 56 23 20 22-38" fill="#49c9d9"/><path d="M125 348l24-11" stroke="#bb795b" stroke-width="15" stroke-linecap="round"/><rect x="144" y="320" width="52" height="40" rx="5" fill="#fff1af" transform="rotate(-12 144 320)"/><path d="M189 284l34 29 22-29" stroke="#49c9d9" stroke-width="23" stroke-linecap="round"/><path d="M240 288l10-18" stroke="#bb795b" stroke-width="14" stroke-linecap="round"/><path d="M266 379l-14 85 39 0 18-79" fill="#6b3fa0"/><path d="M310 382l11 83h39l-9-87" fill="#472c79"/><path d="M250 461h41v15h-53q-4-9 12-15m72 0h36l13 15h-49z" fill="#32214f"/><path d="M265 252q40-24 78 1l22 133q-57 21-111-1z" fill="url(#shirt)"/><path d="M279 233h49v31q-22 25-49 0z" fill="#dba18c"/><ellipse cx="302" cy="218" rx="33" ry="39" fill="#e7b29a"/><path d="M270 212q-12-47 27-50 45-4 40 50l-12-20q-33 9-47-5z" fill="#47304d"/><path d="M268 267l-35 39-23-25" stroke="#ec58b9" stroke-width="27" stroke-linecap="round"/><path d="M210 281l-13-17" stroke="#e7b29a" stroke-width="17" stroke-linecap="round"/><path d="M342 265l33-43 12-44" stroke="#d34cba" stroke-width="26" stroke-linecap="round"/><path d="M387 178l9-27m-7 15 18-13" stroke="#e7b29a" stroke-width="16" stroke-linecap="round"/><path d="M407 404l-9 72h31l19-74m-3-3 9 77h32l-2-77" fill="#c4608f"/><path d="M397 472h33v13h-42q-6-7 9-13m58 0h30l12 13h-42z" fill="#493049"/><path d="M402 291q37-25 66 2l26 114q-50 20-99-1z" fill="#ffba66"/><ellipse cx="438" cy="265" rx="27" ry="32" fill="#85513f"/><path d="M411 258q-10-38 26-39 36 0 29 42l-9-14q-21 2-35-12z" fill="#33243d"/><path d="M425 292l13 16 15-17" fill="#85513f"/><path d="M410 303l-20 40-29-20" stroke="#ffba66" stroke-width="24" stroke-linecap="round"/><path d="M361 323l-14-9" stroke="#85513f" stroke-width="14" stroke-linecap="round"/><path d="M467 304l27 34 3 35" stroke="#ffba66" stroke-width="24" stroke-linecap="round"/><path d="M497 372v14" stroke="#85513f" stroke-width="14" stroke-linecap="round"/><path d="M298 221h1m16 0h1m115 47h1m13 0h1m-288-18h1m13 0h1" stroke="#38263d" stroke-width="3" stroke-linecap="round"/><path d="M298 235q8 6 15-1m121 44q6 5 12-1m-287-14q6 5 11-1" stroke="#8a4b54" stroke-width="2.5" stroke-linecap="round"/><g fill="#fff"><path d="M467 99l7 18 19 7-19 7-7 19-7-19-19-7 19-7z"/><path d="M118 156l5 13 14 5-14 5-5 14-5-14-14-5 14-5z"/><circle cx="221" cy="108" r="6"/><circle cx="505" cy="270" r="5"/></g><path d="M91 346l-5 15 7 14 15 5 13-8 2-16-12-12z" fill="#ad72eb"/><path d="M383 93l8-13 17 2 5 15-11 12-16-4z" fill="#ff8ec9"/><path d="M474 174l13-8 11 10-7 14-15-1z" fill="#65d4e4"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 580" fill="none">
+<title>Chacun son chemin</title><desc>Une enfant avec un carnet, un adolescent avec un casque et une adulte à lunettes, dessinés en deux dimensions avec des contours violets et des aplats colorés.</desc>
+<g stroke="#593267" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<!-- Hand-drawn setting, kept deliberately flat. -->
+<path d="M92 470h424" stroke="#b786cd"/>
+<path d="M108 452h117v18H108z" fill="#e3c5fa" stroke="#be98d9"/>
+<path d="M225 422h149v48H225z" fill="#f5b9dd" stroke="#cc87b9"/>
+<path d="M374 442h132v28H374z" fill="#c6edf0" stroke="#93c8d7"/>
+<!-- Adult: a relaxed seated pose, wavy hair, glasses and a sketchbook. -->
+<path d="M368 249q-15-33 6-58 3-31 35-29 29-14 47 13 30 5 23 35 19 30-2 56l-81 10z" fill="#593267"/>
+<path d="M408 327q19 27 8 49l-17 55 30 7 29-58q10-24-4-43" fill="#7855b7"/>
+<path d="M431 344l44 32-22 62 26 6 34-68q6-18-13-31l-31-27" fill="#a27bdb"/>
+<path d="M400 426l-7 17q-5 10 5 10h28l5-19z" fill="#fff8fb"/>
+<path d="M458 433l-7 15q-5 10 5 10h31l-5-20z" fill="#fff8fb"/>
+<path d="M394 447h31m29 5h31" stroke="#a573b7"/>
+<path d="M396 253q25-16 58 3l20 78q-29 25-75 10l-15-61z" fill="#ffd38b"/>
+<path d="M411 244l-1 20q13 15 26 0l-2-21" fill="#a86b51"/>
+<path d="M394 208q0-29 28-28 31 0 31 31v15q-3 29-28 30-25 0-31-30z" fill="#be8463"/>
+<path d="M393 213q10-10 13-27 20 20 48 14" fill="#593267"/>
+<path d="M391 216l8 0m43 0h13"/>
+<rect x="398" y="207" width="17" height="16" rx="6" fill="#f9dded" fill-opacity=".3"/>
+<rect x="425" y="207" width="17" height="16" rx="6" fill="#f9dded" fill-opacity=".3"/>
+<path d="M415 213q5-4 10 0m-6 7-2 8h6m-9 9q9 7 17-1"/>
+<path d="M392 269l-22 39 31 10" stroke="#593267" stroke-width="21"/>
+<path d="M392 269l-22 39 31 10" stroke="#ffd38b" stroke-width="15"/>
+<path d="M453 268l23 40-27 12" stroke="#593267" stroke-width="21"/>
+<path d="M453 268l23 40-27 12" stroke="#ffd38b" stroke-width="15"/>
+<path d="M394 302l47-3 16 36-48 4z" fill="#fff8fc"/>
+<path d="M407 315l25-2m-20 13 22-2" stroke="#c89ce0"/>
+<path d="M395 317l13 4m42-2-10 4" stroke="#be8463" stroke-width="11"/>
+<!-- Teen: generous organic shapes, headphones, oversized pink sweatshirt. -->
+<path d="M250 340l-12 64-18 32 29 10 30-38 23-58" fill="#4c4687"/>
+<path d="M292 340l20 59-4 31 31 4 8-44-17-58" fill="#6b5ca4"/>
+<path d="M225 432l-21 12q-11 8 0 12h45l3-16" fill="#fff8fc"/>
+<path d="M311 427l-5 17q-2 10 8 10h44q5-8-9-14l-12-10" fill="#fff8fc"/>
+<path d="M207 451h39m65-3h40" stroke="#a478bd"/>
+<path d="M255 232q31-17 63 3l22 108q-49 21-100-2z" fill="#f58ec6"/>
+<path d="M275 218v22q12 13 25 0v-23" fill="#f3b499"/>
+<path d="M257 173q7-26 33-24 31 2 33 34l-3 22q-2 29-29 29-29-1-32-29z" fill="#f5bea4"/>
+<path d="M259 187q-16-5-10-20-8-17 8-24 4-18 21-14 13-15 26-1 20-1 24 16 17 12 3 26-7 12-17 4-10 4-19-6-8 12-20 5z" fill="#65446f"/>
+<path d="M251 188q-4-45 32-50 34-6 46 32" stroke="#9a5ec5" stroke-width="7"/>
+<rect x="249" y="183" width="12" height="23" rx="6" fill="#c2e9ee"/>
+<rect x="318" y="183" width="12" height="23" rx="6" fill="#c2e9ee"/>
+<path d="M274 191l5-1m24 0 5 1m-18 4-2 10h5m-13 8q12 9 23-2"/>
+<path d="M259 250l-31 34-24-23" stroke="#593267" stroke-width="25"/>
+<path d="M259 250l-31 34-24-23" stroke="#f58ec6" stroke-width="19"/>
+<path d="M205 262l-11-16m5 6-8-4" stroke="#f5bea4" stroke-width="13"/>
+<path d="M316 248l30-31 12-37" stroke="#593267" stroke-width="25"/>
+<path d="M316 248l30-31 12-37" stroke="#f58ec6" stroke-width="19"/>
+<path d="M358 182l4-24m-2 10 12-10" stroke="#f5bea4" stroke-width="13"/>
+<path d="M266 291q24 9 48-2m-39 16 3 20 28-1 4-21" stroke="#ce5d9e"/>
+<path d="M263 240l10 16m27-16-6 17" stroke="#fff4fb"/>
+<!-- Child: lively sideways pose, ponytail, patterned top and notebook. -->
+<path d="M133 240q-27-23-39 0-6 19 13 30l17-2" fill="#593267"/>
+<path d="M157 373l-4 45-13 22 22 8 22-26 10-44" fill="#9f72ce"/>
+<path d="M189 372l24 41-1 25 22 2 6-33-23-42" fill="#be92df"/>
+<path d="M143 437l-17 11q-8 7 2 10h33l4-15" fill="#fff7fb"/>
+<path d="M214 434l-2 16q-2 8 7 8h34q2-8-13-13l-8-9" fill="#fff7fb"/>
+<path d="M128 453h29m61 0h29" stroke="#a779b8"/>
+<path d="M148 289q26-14 49 5l28 80q-34 17-77 5l-10-63z" fill="#73d4e0"/>
+<path d="M160 278l3 17q12 9 21-2l-1-19" fill="#d99572"/>
+<path d="M142 250q-1-27 24-29 29-3 32 28l-2 20q-2 22-23 22-24 0-28-23z" fill="#de9d79"/>
+<path d="M143 255q-16-29 12-38 30-10 40 14-23 6-34-3-2 18-18 27" fill="#593267"/>
+<path d="M145 237l-9-6" stroke="#ed85bf" stroke-width="8"/>
+<path d="M158 258h2m20-3h2m-12 6 1 7m-10 5q11 7 19-2"/>
+<path d="M150 304l-19 30 21 14" stroke="#593267" stroke-width="19"/>
+<path d="M150 304l-19 30 21 14" stroke="#73d4e0" stroke-width="13"/>
+<path d="M194 303l22 17-4-33" stroke="#593267" stroke-width="19"/>
+<path d="M194 303l22 17-4-33" stroke="#73d4e0" stroke-width="13"/>
+<path d="M213 287l-4-15" stroke="#de9d79" stroke-width="11"/>
+<path d="M155 330l37-9 14 40-37 10z" fill="#fff0b6"/>
+<path d="M166 342l17-4m-13 14 17-4" stroke="#cf9a68"/>
+<path d="M151 348l15 3" stroke="#de9d79" stroke-width="11"/>
+<path d="M155 307h1m17 4h1m-18 11h1m28-13h1" stroke="#fff8fc" stroke-width="5"/>
+<!-- Small hand-drawn possibilities. -->
+<g stroke="#b261b5" stroke-width="2.5"><path d="M122 166l7 12 14 1-10 10 3 14-13-7-12 7 2-14-10-9 14-2z" fill="#fbc6e7"/><path d="M432 118l6 13 14 2-10 9 2 14-12-7-12 7 2-14-10-9 14-2z" fill="#e3c7ff"/><path d="M463 315q25-5 36-27m-9 0 10-3 1 11" stroke="#ba76cb"/><path d="M205 164l-8-12m11 8 2-13m-14 20-13-4"/></g>
+<path d="M100 389q-29-8-32 13 0 15 20 9 17-6 6-19" stroke="#d499c7"/>
+<path d="M491 218l8 9 11-5-4 13 8 7-13 1-6 12-3-13-12-5 12-5z" fill="#c9edf2" stroke="#8abacb" stroke-width="2"/>
+<path d="M354 114l3 7 8 1-6 5 1 8-7-4-6 4 1-8-6-5 8-1z" fill="#ffd59c" stroke="#daa485" stroke-width="2"/>
+</g></svg>
