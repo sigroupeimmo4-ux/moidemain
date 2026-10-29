@@ -58,3 +58,7 @@ Pour brancher une IA ultérieurement, remplacer le planificateur local par un ap
 - `/auth.html?mode=signup` : formulaire d’inscription.
 
 L’authentification est une interface préparatoire, sans service de comptes connecté. La validation native des formulaires fonctionne, mais les soumissions affichent une explication et ne créent aucune session. Les mots de passe ne sont ni transmis ni enregistrés, et sont vidés à la soumission. La récupération de mot de passe n’envoie aucun e-mail. Le parcours invité reste entièrement accessible. Brancher ensuite un service d’authentification côté serveur pour activer comptes, sessions et réinitialisation.
+
+## Identité visuelle
+
+`vibrant.css` applique une palette rose, violette et turquoise aux trois pages, aux quiz et à Fullta. `assets/possibles.svg` contient les personnages et les formes holographiques, sans service d’images externe. Les animations décoratives respectent `prefers-reduced-motion`. Le serveur local sert les SVG avec le type `image/svg+xml`.
