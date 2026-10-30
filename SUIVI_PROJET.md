@@ -50,6 +50,17 @@ Dernière mise à jour : 30 octobre 2026
 - CGV en version de travail : **aucun achat réel activé**.
 - Avant une ouverture commerciale, fournir les coordonnées officielles, les durées et finalités de conservation et faire valider les textes par un conseil juridique dans le ou les territoires de vente.
 
+### Audit général — correctifs techniques du 30 octobre 2026
+- Nouvelles pages `mon-espace.html`, `parents.html`, `admin.html`.
+- Tables Supabase RLS pour profils, favoris, résultats de quiz, avatars, annonces, rôles d’administration, support et quota Fullta.
+- Fullta : appels au modèle uniquement après authentification et accord explicite ; quota durable et modération.
+- Parcours : sauvegarde et export, comparaison de métiers, badges non compétitifs, recherche enrichie.
+- Supabase : fonction `delete-my-account` déployée (aucune suppression utilisateur réalisée).
+- Administration des annonces, fiches Premium et signalements sécurisée par rôles. Aucun admin créé.
+- SEO initial, contrôles de disponibilité et captures/tests visuels automatisés.
+- **Les paiements réels, le consentement parental vérifié et les informations juridiques officielles restent à finaliser.**
+- Détails opérationnels dans `AUDIT_ACTIONS.md`.
+
 ### Tests / publication
 - `npm test` inclut `experience.test.js` (catalogue et personnalisation) ainsi que les tests Fullta.
 - Workflow GitHub `.github/workflows/ci.yml` : tests Node et contrôles de syntaxe.

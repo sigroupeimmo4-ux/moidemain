@@ -1,0 +1,34 @@
+name: Tests visuels Moi Demain
+on:
+  push:
+    branches: [feature/audit-remediation-foundations]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  visual:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Installer Chromium pour les tests
+        run: |
+          npm install --no-save --no-package-lock playwright
+          npx playwright install --with-deps chromium
+      - name: Démarrer le site
+        run: |
+          npm run dev > /tmp/moidemain-server.log 2>&1 &
+          for i in $(seq 1 20); do curl -fsS http://127.0.0.1:3000/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/moidemain-server.log
+          exit 1
+      - name: Vérifier desktop et mobile
+        run: MOI_DEMAIN_URL=http://127.0.0.1:3000/ node visual-qa.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: captures-audit
+          path: qa-screenshots/
+          if-no-files-found: ignore

@@ -1,4 +1,5 @@
 import { planLocalAction } from './fullta.js';
+import {getSession,SUPABASE_PUBLISHABLE_KEY} from './auth-client.js';
 import {extraFreeJobs,premiumPreviews} from './catalogue-extra.js';
 
 // Public catalogue pour que Fullta reconnaisse les métiers sur toutes les pages.
@@ -64,6 +65,7 @@ export function mountFullta({jobs=publicJobs,onAction=null}={}) {
         '<input id="fullta-input" name="message" maxlength="400" placeholder="Écrivez votre demande…" autocomplete="off" required>',
         '<button type="submit" aria-label="Envoyer le message">➜</button>',
       '</form>',
+      '<label class="fullta-ai-consent"><input type="checkbox" id="fullta-ai-allowed"> J’autorise le traitement de mes messages libres par le service IA externe, lorsque celui-ci est activé.</label>',
       '<p class="fullta-footnote">Fullta ne choisit pas votre avenir à votre place. Ne partagez pas de données personnelles sensibles.</p>',
     '</section>'
   ].join('');
@@ -120,13 +122,16 @@ export function mountFullta({jobs=publicJobs,onAction=null}={}) {
   }
 
   async function askAI(message,context) {
+    if(!widget.querySelector('#fullta-ai-allowed').checked)throw new Error('Activez l’option IA pour autoriser l’envoi de messages à un service externe.');
+    const session=await getSession();
+    if(!session)throw new Error('La discussion IA nécessite un compte connecté. Les actions locales restent gratuites.');
     const controller=new AbortController();
     const timeout=setTimeout(()=>controller.abort(),12000);
     const endpoint=document.querySelector('meta[name="fullta-endpoint"]')?.content || DEFAULT_ENDPOINT;
     try {
       const response=await fetch(endpoint,{
         method:'POST',
-        headers:{'Content-Type':'application/json'},
+        headers:{'Content-Type':'application/json',apikey:SUPABASE_PUBLISHABLE_KEY,Authorization:'Bearer '+session.access_token},
         body:JSON.stringify({message,history:context}),
         signal:controller.signal
       });
@@ -161,9 +166,9 @@ export function mountFullta({jobs=publicJobs,onAction=null}={}) {
           } else {
             addMessage(answer.reply);
           }
-        } catch {
-          useLocalMode();
-          addMessage(action.message+' Le mode discussion libre nécessite l’activation du service IA.');
+        } catch (error) {
+          if(/Service indisponible|Service not configured|Failed to fetch|Le modèle IA/.test(error.message))useLocalMode();
+          addMessage(action.message+' '+(error.message||'Service IA indisponible.'));
         }
       } else addMessage(action.message);
     } catch {
