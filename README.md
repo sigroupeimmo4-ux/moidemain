@@ -62,3 +62,7 @@ L’authentification est une interface préparatoire, sans service de comptes co
 ## Identité visuelle
 
 `vibrant.css` applique une palette rose, violette et turquoise aux trois pages, aux quiz et à Fullta. `assets/possibles.svg` contient les personnages et les formes holographiques, sans service d’images externe. Les animations décoratives respectent `prefers-reduced-motion`. Le serveur local sert les SVG avec le type `image/svg+xml`.
+
+## Illustration détaillée
+
+La page d’accueil et la connexion utilisent `assets/people-detailed-v3.png`, intégrée via `vibrant-illustrated.css`. Ces nouveaux noms évitent la réutilisation en cache des anciens dessins. L’illustration originale reste disponible dans les fichiers historiques.
