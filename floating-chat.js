@@ -1,4 +1,5 @@
 import { planLocalAction } from './fullta.js';
+import {extraFreeJobs,premiumPreviews} from './catalogue-extra.js';
 
 // Public catalogue pour que Fullta reconnaisse les métiers sur toutes les pages.
 export const publicJobs = [
@@ -9,7 +10,9 @@ export const publicJobs = [
   {id:'data',name:'Analyste de données',category:'Technologie'},
   {id:'communication',name:'Chargé de communication',category:'Création'},
   {id:'infirmier',name:'Infirmier / infirmière',category:'Lien humain'},
-  {id:'artisan',name:'Menuisier / menuisière',category:'Nature & terrain'}
+  {id:'artisan',name:'Menuisier / menuisière',category:'Nature & terrain'},
+  ...extraFreeJobs,
+  ...premiumPreviews
 ];
 
 const CATEGORIES = ['Création', 'Technologie', 'Lien humain', 'Nature & terrain'];
