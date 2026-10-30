@@ -17,7 +17,7 @@ function setMode(nextMode){
   const selected=b.dataset.mode===mode;b.setAttribute('aria-selected',String(selected));b.tabIndex=selected?0:-1;
  });
  form.setAttribute('aria-labelledby',signup?'tab-signup':'tab-login');
- document.querySelector('#name-field').hidden=!signup;
+ document.querySelector('#name-field').hidden=true; // Pseudonyme facultatif à renseigner depuis Mon espace, sans collecter de vrai prénom lors de l'inscription.
  nameInput.required=false;
  document.querySelector('#forgot').hidden=signup;
  document.querySelector('#password-hint').hidden=!signup;
