@@ -65,7 +65,14 @@ export async function verifyOrder(token){
  const order=orders[0];
  if(!order||order.provider!=='paydunya')throw Error('Unknown payment reference');
  if(order.mode!==cfg.mode)throw Error('Payment mode mismatch');
- if(order.status==='completed'||order.status==='test_completed')return order.status;
+ if(order.status==='test_completed')return order.status;
+ if(order.status==='completed'){
+  await db('premium_access?on_conflict=user_id',{
+   method:'POST',headers:{Prefer:'resolution=merge-duplicates,return=representation'},
+   body:JSON.stringify({user_id:order.user_id,active:true,purchased_at:new Date().toISOString(),payment_provider:'paydunya',payment_token:token,amount_xof:order.amount_xof})
+  });
+  return 'completed';
+ }
  const confirmed=await paydunya('confirm/'+encodeURIComponent(token));
  const invoice=confirmed.invoice||{};
  const meta=confirmed.custom_data||{};
@@ -82,15 +89,15 @@ export async function verifyOrder(token){
  const status=String(confirmed.status||'').toLowerCase();
  if(status==='completed'){
   const finalStatus=cfg.mode==='live'?'completed':'test_completed';
-  await db('premium_orders?id=eq.'+encodeURIComponent(order.id),{
-   method:'PATCH',body:JSON.stringify({status:finalStatus,updated_at:new Date().toISOString()})
-  });
   if(cfg.mode==='live'){
    await db('premium_access?on_conflict=user_id',{
     method:'POST',headers:{Prefer:'resolution=merge-duplicates,return=representation'},
     body:JSON.stringify({user_id:order.user_id,active:true,purchased_at:new Date().toISOString(),payment_provider:'paydunya',payment_token:token,amount_xof:order.amount_xof})
    });
   }
+  await db('premium_orders?id=eq.'+encodeURIComponent(order.id),{
+   method:'PATCH',body:JSON.stringify({status:finalStatus,updated_at:new Date().toISOString()})
+  });
   return finalStatus;
  }
  if(['cancelled','failed'].includes(status)){
