@@ -19,6 +19,24 @@ async function loadAnnouncements(){
  }
  if(!list.length)parent.append(el('p','Aucune annonce pour le moment.'));
 }
+async function loadSupport(){
+ const data=await api('support_tickets',{query:'select=id,category,message,status,created_at&order=created_at.desc&limit=100'});
+ const parent=$('admin-support');parent.replaceChildren();
+ for(const ticket of data){
+  const row=el('article');row.className='journey-row';
+  const info=el('div');
+  info.append(el('strong',ticket.category+' · '+ticket.status),el('p',ticket.message),el('p',new Date(ticket.created_at).toLocaleDateString('fr-FR')));
+  const button=el('button',ticket.status==='ouvert'?'Marquer résolu':'Rouvrir');
+  button.addEventListener('click',async()=>{
+   try{
+    await api('support_tickets',{method:'PATCH',query:'id=eq.'+ticket.id,data:{status:ticket.status==='ouvert'?'resolu':'ouvert'}});
+    await loadSupport();
+   }catch(e){report(e.message);}
+  });
+  row.append(info,button);parent.append(row);
+ }
+ if(!data.length)parent.append(el('p','Aucun signalement reçu.'));
+}
 async function loadCareers(){
  careers=await api('premium_careers',{query:'select=id,name,category,emoji,detail,training,tasks&order=name.asc&limit=100'});
  const select=$('admin-career');select.replaceChildren();
@@ -55,7 +73,7 @@ async function init(){
   if(!admins.length){note.textContent='Accès refusé : ce compte ne possède aucun rôle administrateur.';return;}
   note.textContent='Accès administrateur vérifié. Les changements restent soumis aux règles RLS.';
   panel.hidden=false;
-  await Promise.all([loadAnnouncements(),loadCareers()]);
+  await Promise.all([loadAnnouncements(),loadCareers(),loadSupport()]);
  }catch(e){note.textContent=e.message;}
 }
 void init();
