@@ -1,0 +1,25 @@
+name: Surveillance Moi Demain
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '20 */6 * * *'
+permissions:
+  contents: read
+jobs:
+  uptime:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tester les pages publiques importantes
+        shell: bash
+        run: |
+          set -eu
+          BASE="https://sigroupeimmo4-ux.github.io/moidemain"
+          for route in / /explorer.html /mon-espace.html /personnages.html /conseils.html /parents.html /premium.html /a-propos.html /cgu.html /confidentialite.html; do
+            echo "Checking: $BASE$route"
+            curl --fail --location --silent --show-error --max-time 20 --retry 2 -o /tmp/health-check.html "$BASE$route"
+            if [ ! -s /tmp/health-check.html ]; then exit 1; fi
+          done
+      - name: Contrôler que les achats restent désactivés sans configuration
+        run: |
+          curl --fail --silent --show-error --max-time 20 https://sjhvaaaiwijhcykznfqn.supabase.co/functions/v1/premium-checkout \
+          | node -e "let b='';process.stdin.on('data',x=>b+=x).on('end',()=>{const d=JSON.parse(b);if(d.provider!=='PayDunya')process.exit(1);console.log('Paiement disponible :',d.available);})"
