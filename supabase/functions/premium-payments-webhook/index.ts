@@ -1,9 +1,9 @@
-import {configured,json,validPaydunyaHash,verifyOrder} from '../_shared/premium-payment.ts';
+import {providerReady,json,validPaydunyaHash,verifyOrder} from '../_shared/premium-payment.ts';
 // PayDunya sends form-urlencoded data[invoice][token] and data[hash].
 // Never trust IPN values for entitlements: always re-check via PayDunya's authenticated confirm API.
 Deno.serve(async(req)=>{
  if(req.method!=='POST')return json({error:'Method not allowed'},405);
- if(!configured())return json({error:'Provider unavailable'},503);
+ if(!providerReady())return json({error:'Provider unavailable'},503);
  const contentType=req.headers.get('content-type')||'';
  if(!contentType.includes('application/x-www-form-urlencoded'))return json({error:'Invalid content type'},415);
  try{
