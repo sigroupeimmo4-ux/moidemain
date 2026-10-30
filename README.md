@@ -1,6 +1,6 @@
 # moidemain
 
-Site d’orientation en français, sans compte et sans dépendance applicative.
+Site d’orientation en français avec parcours invité, comptes facultatifs via Supabase, catalogue gratuit et espace Premium préparé.
 
 ## Démarrer
 
@@ -15,8 +15,8 @@ Le serveur écoute sur le port 3000 (personnalisable avec `PORT`).
 ## Fonctionnalités
 
 - Quiz de découverte en 8 questions, suggestions expliquées selon quatre familles de préférences.
-- Catalogue de 8 métiers avec recherche et filtres.
-- Fiches métier et mini-quiz de 3 situations avec restitution.
+- Catalogue de 36 métiers : 20 fiches gratuites et 16 aperçus Premium, avec recherche et filtres.
+- Fiches et mini-quiz gratuits, et 16 fiches Premium stockées côté Supabase avec vérification du droit d’accès par RLS.
 - Favoris conservés dans le stockage local du navigateur.
 - Interface adaptée aux téléphones, navigation clavier et fenêtres modales natives.
 
@@ -29,7 +29,23 @@ node --check app.js
 node --check server.mjs
 ```
 
-Aucune publication ou connexion à un service externe n’est nécessaire pour utiliser le site.
+Le parcours invité reste disponible sans connexion. Les comptes et l’accès Premium nécessitent Supabase ; les achats ne sont pas encore activés.
+
+## Nouveaux espaces (octobre 2026)
+
+- `/personnages.html` : atelier gratuit de quatre animaux personnalisables (lapin, renard, chat, hibou), avec palette, tenue, accessoire, prénom et sauvegarde locale.
+- `/conseils.html` : conseils d’orientation pour 8–11, 12–15 et 16–18 ans avec feuille de route locale.
+- `/premium.html` : présentation des 16 métiers Premium et état de la configuration des achats. **Aucun paiement n’est actuellement possible**.
+- `/explorer.html` : catalogue de 20 métiers gratuits et 16 aperçus Premium verrouillés.
+- `/auth.html` : connexion et inscription Supabase. Les sessions sont conservées dans `sessionStorage`.
+
+Les 16 contenus Premium détaillés sont uniquement dans la base Supabase ; l’API les renvoie à un utilisateur authentifié uniquement si la table `premium_access` indique un droit actif. Les politiques RLS sont activées. Il n’existe pas de raccourci via `localStorage` permettant de déverrouiller les fiches.
+
+### Paiement à configurer
+
+Il reste à définir un tarif, sélectionner un prestataire de paiement et mettre en place **une transaction vérifiée côté serveur**, son webhook signé et l’attribution/révocation des droits Premium. **Ne jamais** déverrouiller des fiches sur la seule base d’un paramètre d’URL ou d’une confirmation envoyée par le navigateur. Cette version n’encaisse aucun argent, et son interface ne prétend pas le contraire. Les achats doivent être réservés à un adulte responsable.
+
+Les données d’orientation et d’identification des mineurs nécessitent une politique de confidentialité, un contrôle des accès et une validation juridique avant ouverture commerciale.
 
 ## Fullta, chat flottant (toutes les pages)
 
@@ -73,7 +89,7 @@ Pour brancher une IA ultérieurement, remplacer le planificateur local par un ap
 - `/auth.html` : formulaire de connexion.
 - `/auth.html?mode=signup` : formulaire d’inscription.
 
-L’authentification est une interface préparatoire, sans service de comptes connecté. La validation native des formulaires fonctionne, mais les soumissions affichent une explication et ne créent aucune session. Les mots de passe ne sont ni transmis ni enregistrés, et sont vidés à la soumission. La récupération de mot de passe n’envoie aucun e-mail. Le parcours invité reste entièrement accessible. Brancher ensuite un service d’authentification côté serveur pour activer comptes, sessions et réinitialisation.
+Les formulaires d’inscription, connexion et demande de réinitialisation sont désormais reliés à Supabase Auth. Leur bon fonctionnement dépend de la configuration d’e-mail et des URL de redirection dans le tableau de bord Supabase. La navigation gratuite reste disponible sans compte. Les mots de passe ne sont jamais stockés par le site.
 
 ## Identité visuelle
 
