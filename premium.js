@@ -53,7 +53,7 @@ async function init(){
  }catch{}
  decorate();
  const query=new URLSearchParams(location.search);
- if(query.get('checkout')==='return'&&query.get('token')&&session){
+ if(query.get('token')&&session){
   await verifyReturnedPayment(query.get('token'),session);
   history.replaceState(null,'',location.pathname);
   if(await checkPremium().catch(()=>false)){
