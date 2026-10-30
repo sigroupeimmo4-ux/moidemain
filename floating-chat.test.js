@@ -16,7 +16,7 @@ test('Fullta refuse les actions et paramètres inconnus',()=>{
   assert.equal(sanitizeFulltaAction(null),null);
 });
 test('Le catalogue public correspond aux commandes disponibles',()=>{
-  assert.equal(publicJobs.length,8);
+  assert.equal(publicJobs.length,36);
   assert.deepEqual(planLocalAction('ajoute paysagiste aux favoris',publicJobs),{type:'add_favorite',jobId:'paysage'});
   assert.deepEqual(planLocalAction('Lance le quiz développeur web',publicJobs),{type:'start_job_quiz',jobId:'dev'});
   assert.deepEqual(planLocalAction('Montre les métiers technologie',publicJobs),{type:'filter_jobs',category:'Technologie'});

@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "node server.mjs",
     "start": "node server.mjs",
-    "test": "node --test fullta.test.js floating-chat.test.js"
+    "test": "node --test fullta.test.js floating-chat.test.js experience.test.js"
   },
   "type": "module"
 }

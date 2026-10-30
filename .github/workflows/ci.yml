@@ -1,0 +1,22 @@
+name: Vérification Moi Demain
+on:
+  push:
+    branches: [main, feature/catalogue-premium-avatars-conseils]
+  pull_request:
+    branches: [main]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm test
+      - run: node --check app.js
+      - run: node --check auth.js
+      - run: node --check premium.js
+      - run: node --check personnages.js
+      - run: node --check conseils.js
