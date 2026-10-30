@@ -1,0 +1,59 @@
+# SUIVI DE PROJET — MOI DEMAIN
+Dernière mise à jour : 30 octobre 2026
+
+## Références
+- GitHub : https://github.com/sigroupeimmo4-ux/moidemain
+- Branche principale : `main`
+- Site : https://sigroupeimmo4-ux.github.io/moidemain/
+- Supabase : projet **Moi demain**, référence `sjhvaaaiwijhcykznfqn` (région eu-west-1)
+
+## Version : catalogue élargi / avatars / conseils / Premium
+
+### Catalogue
+- Ancien contenu : 8 fiches métier gratuites + quiz de découverte.
+- Nouveau contenu : **20 fiches gratuites complètes** (8 d'origine + 12 nouvelles), **16 aperçus Premium**.
+- Source publique : `catalogue-extra.js` avec fiches gratuites et titres des Premium uniquement.
+- Les détails des 16 fiches Premium sont enregistrés en base Supabase, **jamais dans le JavaScript public**.
+- `app.js` et `floating-chat.js` reconnaissent désormais les 36 métiers.
+- Les entrées Premium ne lancent pas directement les mini-quiz non autorisés et renvoient vers la page Premium.
+
+### Sécurité Supabase
+- Tables : `public.premium_careers` et `public.premium_access`.
+- RLS activée sur les deux tables, lecture des droits limitée au propriétaire ; lecture du contenu Premium uniquement si `premium_access.active=true` pour l'utilisateur connecté.
+- Aucune politique publique d'écriture des droits d'achat.
+- Contenu des 16 fiches Premium ajouté sur Supabase (pas en clair dans GitHub).
+- Contrôler régulièrement les conseillers sécurité Supabase.
+
+### Pages
+- `personnages.html` + `personnages.js` : quatre animaux (lapin, renard, chat, hibou), couleurs, accessoires, tenues et prénom ; sauvegarde et réinitialisation locale.
+- `conseils.html` + `conseils.js` : conseils par tranche d'âge 8–11 / 12–15 / 16–18 ans et liste d'actions hebdomadaires.
+- `premium.html` + `premium.js` : présentation de l'offre et vérification des conditions d'achat.
+- `experience.css` : style pastel responsive des trois nouvelles pages et bandeau de navigation.
+- `auth-client.js` et `auth.js` : compte facultatif via Supabase Auth (sessions en sessionStorage).
+- Les liens vers ces pages ont été ajoutés sur l'accueil et l'explorateur.
+- Tous les contenus gratuits restent accessibles sans compte.
+
+### État du paiement — À NE PAS CONFONDRE AVEC UNE ACTIVATION
+- **Les paiements NE SONT PAS activés**. Aucun prix n'a encore été défini et aucun prestataire n'a été branché.
+- La page Premium annonce cet état et désactive les achats.
+- Ne pas prétendre qu'un utilisateur peut payer ou que les droits Premium s'activent automatiquement.
+- Pour lancer l'offre : choisir le tarif et le prestataire, sécuriser une page de paiement côté serveur, vérifier des webhooks signés, attribuer/révoquer les droits après validation effective de la transaction.
+- Les achats doivent être réalisés par un adulte. Préparer politique de confidentialité et dispositif adapté aux mineurs avant mise en vente.
+
+### Tests / publication
+- `npm test` inclut `experience.test.js` (catalogue et personnalisation) ainsi que les tests Fullta.
+- Workflow GitHub `.github/workflows/ci.yml` : tests Node et contrôles de syntaxe.
+- Vérifier la réussite du workflow avant de fusionner les changements avec `main`.
+- L'accès public dépend de la réussite de GitHub Pages après fusion.
+
+## Éléments en attente
+1. Tarification et choix d'un prestataire de paiement pour le contenu Premium.
+2. Vérification complète de l'inscription, de la réception de l'email de confirmation et de la récupération de mot de passe avec les URL autorisées dans Supabase Auth.
+3. Vérifier la conformité de l'usage par des mineurs avant les premières ventes.
+4. Ajouter des tests de navigation réels sur mobile et desktop si un navigateur de test est disponible.
+
+## Règles de maintenance
+- Garder les 20 fiches gratuites accessibles.
+- Conserver les secrets Supabase/Prestataire **hors de GitHub et du navigateur** ; seule la clé publishable Supabase est publiable.
+- Ne jamais donner accès à une fiche Premium sur la seule base du localStorage, d'un cookie non signé ou d'un paramètre URL.
+- Pour chaque nouvelle évolution, mettre à jour ce fichier de suivi.
