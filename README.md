@@ -31,6 +31,22 @@ node --check server.mjs
 
 Aucune publication ou connexion à un service externe n’est nécessaire pour utiliser le site.
 
+## Fullta, chat flottant (toutes les pages)
+
+Un bouton « Parler à Fullta » apparaît sur l’accueil, l’explorateur et la connexion. Depuis n’importe quelle page, Fullta sait lancer le quiz, ouvrir une fiche, filtrer les métiers et gérer les favoris. Les actions déclenchées hors de l’explorateur sont transportées par sessionStorage sous forme d’objets strictement validés. Aucune exécution arbitraire ni insertion HTML dans le chat.
+
+Les commandes reconnues localement fonctionnent **sans aucune API**. Pour les questions libres, `floating-chat.js` appelle la fonction Supabase `fullta-chat`, installée dans le projet *Moi demain*. Cette fonction retourne 503 tant qu’aucune clé de modèle n’est configurée ; le chat repasse alors en mode commandes locales. Elle n’envoie jamais les commandes locales au modèle.
+
+### Activer la véritable IA
+
+1. Dans le tableau de bord Supabase du projet *Moi demain*, ouvrir **Edge Functions → Secrets** et définir `OPENAI_API_KEY` avec votre clé API privée. Ne jamais placer cette clé dans GitHub, le HTML ou JavaScript côté navigateur.
+2. Facultatif : définir `OPENAI_MODEL` (par défaut `gpt-4o-mini`).
+3. Si le site utilise un domaine distinct de `https://sigroupeimmo4-ux.github.io`, définir `FULLTA_ALLOWED_ORIGINS` avec les origines autorisées séparées par des virgules, puis redéployer si besoin.
+
+La fonction propose des réponses et des actions structurées. Le navigateur revérifie **chaque action** contre une liste explicite et un catalogue connu avant toute exécution. Les messages libres, lorsqu’une clé est activée, transitent vers le modèle IA ; le chat invite à ne pas partager de données sensibles. Les réponses aux quiz ne sont pas envoyées.
+
+**Important avant un déploiement public à grande échelle :** la limite de requêtes par IP fournie dans la fonction est seulement en mémoire, par instance. Ajouter un contrôle d’identité ou anti-abus et un quota durable côté serveur, surveiller les dépenses API, ainsi qu’une politique de confidentialité adaptée aux mineurs.
+
 ## Fullta, assistant d’action
 
 Le panneau Fullta reconnaît des commandes locales et agit dans l’interface :
