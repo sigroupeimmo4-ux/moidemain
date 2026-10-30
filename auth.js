@@ -5,7 +5,7 @@ const nameInput=document.querySelector('#name');
 const email=document.querySelector('#email'),submit=document.querySelector('#auth-submit');
 let mode='login';
 const next=new URLSearchParams(location.search).get('next')||'';
-const destination=/^(premium\.html|explorer\.html|personnages\.html|conseils\.html)$/.test(next)?'./'+next:'./explorer.html';
+const destination=/^(premium\.html|explorer\.html|personnages\.html|conseils\.html|mon-espace\.html|admin\.html)$/.test(next)?'./'+next:'./mon-espace.html';
 function notice(message){feedback.textContent=message;feedback.hidden=false;feedback.focus();}
 function setMode(nextMode){
  mode=nextMode==='signup'?'signup':'login';
@@ -22,6 +22,7 @@ function setMode(nextMode){
  document.querySelector('#forgot').hidden=signup;
  document.querySelector('#password-hint').hidden=!signup;
  document.querySelector('#signup-notice').hidden=!signup;
+ document.querySelector('#adult-registration-field').hidden=!signup;
  password.autocomplete=signup?'new-password':'current-password';
  password.minLength=signup?8:1;password.value='';password.type='password';
  document.querySelector('#toggle-password').textContent='Afficher';
@@ -50,6 +51,7 @@ form.addEventListener('submit',async e=>{
  const pass=password.value;
  try{
   if(mode==='signup'){
+   if(!document.getElementById('adult-registration').checked){notice('La création de compte est actuellement réservée à un parent ou un adulte responsable.');return;}
    const data=await signUp(email.value.trim(),pass);
    if(data.access_token){
     notice('Compte créé. Redirection vers votre espace…');
