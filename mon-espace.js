@@ -27,6 +27,21 @@ function stats(){
   container.append(c);
  }
 }
+function renderBadges(){
+ const wrap=$('journey-badges');wrap.replaceChildren();
+ const available=[
+  {name:'Première découverte',icon:'🔎',earned:snapshot.history.length>=1,condition:'Terminer un premier quiz'},
+  {name:'Curiosité sans frontières',icon:'🌈',earned:snapshot.favorites.length>=3,condition:'Garder trois métiers différents'},
+  {name:'Explorateur de métiers',icon:'🧭',earned:snapshot.history.filter(x=>x.quiz_type==='job').length>=3,condition:'Essayer trois mini-quiz métiers'},
+  {name:'Créateur de possibles',icon:'🎨',earned:snapshot.avatars.length>=1,condition:'Enregistrer un personnage'}
+ ];
+ for(const badge of available){
+  const card=make('article',null,'experience-card');
+  card.style.opacity=badge.earned?'1':'.64';
+  card.append(make('span',badge.icon,'experience-icon'),make('h3',badge.name),make('p',badge.earned?'Débloqué !':'À découvrir : '+badge.condition));
+  wrap.append(card);
+ }
+}
 function renderFavorites(){
  const wrap=$('journey-favorites');wrap.replaceChildren();
  if(!snapshot.favorites.length){clearAndMessage(wrap,'Aucun favori synchronisé. Découvre les métiers dans le catalogue.');return;}
@@ -45,7 +60,7 @@ function renderHistory(){
   info.append(make('p',item.outcome+' · '+new Date(item.created_at).toLocaleDateString('fr-FR')));
   const btn=make('button','Effacer');btn.type='button';btn.addEventListener('click',async()=>{
    if(!confirm('Effacer ce résultat de quiz ?'))return;
-   try{await deleteHistory(item.id);snapshot.history=snapshot.history.filter(x=>x.id!==item.id);renderHistory();stats();}catch(e){status.textContent=e.message;}
+   try{await deleteHistory(item.id);snapshot.history=snapshot.history.filter(x=>x.id!==item.id);renderHistory();stats();renderBadges();}catch(e){status.textContent=e.message;}
   });
   row.append(info,btn);wrap.append(row);
  }
@@ -57,7 +72,7 @@ function renderAvatars(){
   const card=make('article',null,'experience-card'),animal=ANIMALS.find(x=>x.id===a.animal);
   card.append(make('span',animal?.symbol||'🐰','account-avatar'),make('h3',a.name),make('span',animal?.label||'Compagnon','account-pill'));
   const btn=make('button','Supprimer ce personnage','experience-secondary small-button');
-  btn.type='button';btn.addEventListener('click',async()=>{if(!confirm('Supprimer ce personnage synchronisé ?'))return;try{await deleteAvatar(a.id);snapshot.avatars=snapshot.avatars.filter(x=>x.id!==a.id);renderAvatars();stats();}catch(e){status.textContent=e.message;}});
+  btn.type='button';btn.addEventListener('click',async()=>{if(!confirm('Supprimer ce personnage synchronisé ?'))return;try{await deleteAvatar(a.id);snapshot.avatars=snapshot.avatars.filter(x=>x.id!==a.id);renderAvatars();stats();renderBadges();}catch(e){status.textContent=e.message;}});
   card.append(btn);wrap.append(card);
  }
 }
@@ -92,7 +107,7 @@ async function load(){
  if(results.some(x=>x.status==='rejected'))status.textContent+=' Certaines données n’ont pas pu être chargées : réessayez après actualisation.';
  $('profile-name').value=snapshot.profile?.display_name||'';
  $('profile-age').value=snapshot.profile?.age_group||'non_renseigne';
- stats();renderFavorites();renderHistory();renderAvatars();buildCompare();
+ stats();renderBadges();renderFavorites();renderHistory();renderAvatars();buildCompare();
 }
 $('profile-form').addEventListener('submit',async event=>{
  event.preventDefault();
@@ -103,7 +118,7 @@ $('compare-go').addEventListener('click',compare);
 $('sign-out').addEventListener('click',async()=>{await signOut();location.assign('./');});
 $('clear-journey').addEventListener('click',async()=>{
  if(!confirm('Effacer tous les favoris synchronisés, résultats de quiz et personnages de ce compte ?'))return;
- try{await deleteMyJourney();snapshot.favorites=[];snapshot.history=[];snapshot.avatars=[];stats();renderFavorites();renderHistory();renderAvatars();$('security-status').textContent='Parcours effacé.';}
+ try{await deleteMyJourney();snapshot.favorites=[];snapshot.history=[];snapshot.avatars=[];stats();renderBadges();renderFavorites();renderHistory();renderAvatars();$('security-status').textContent='Parcours effacé.';}
  catch(e){$('security-status').textContent=e.message;}
 });
 $('export-data').addEventListener('click',()=>{
