@@ -31,6 +31,21 @@ node --check server.mjs
 
 Le parcours invité reste disponible sans connexion. Les comptes et l’accès Premium nécessitent Supabase ; les achats ne sont pas encore activés.
 
+## Pages institutionnelles et documents juridiques
+
+Pages ajoutées (octobre 2026) :
+- `a-propos.html` : vision, mission et fonctionnement réel de la plateforme.
+- `contact.html` : informations de support et canal de contact à compléter par l’éditeur.
+- `cgu.html` : conditions générales d’utilisation adaptées aux quiz, Fullta, comptes et jeunes.
+- `cgv.html` : conditions générales de vente **préparatoires**, sans encaissement actif.
+- `mentions-legales.html` : éditeur, direction de publication, hébergement, immatriculation à confirmer.
+- `confidentialite.html` : données traitées, fournisseurs, droits des utilisateurs et mineurs.
+- `cookies.html` : cookies, localStorage, sessionStorage et contrôle par le navigateur.
+
+Les liens figurent désormais dans le pied de page de l'accueil, de l’explorateur et des pages comptes, personnages, conseils et Premium. Les nouvelles pages ont un style dédié (`legal.css`), responsive, avec sommaire accessible.
+
+**IMPORTANT :** les documents sont des brouillons précommerciaux conformes au fonctionnement connu de l’application, non des documents juridiques définitifs. L'identité de l'éditeur, ses contacts, ses données d'immatriculation, les durées de conservation, la politique de remboursement et l'audit des traceurs restent à renseigner et vérifier. Ne pas activer les ventes tant que ces exigences ne sont pas satisfaites. Voir `LEGAL_A_COMPLETER.md` pour la checklist.
+
 ## Nouveaux espaces (octobre 2026)
 
 - `/personnages.html` : atelier gratuit de quatre animaux personnalisables (lapin, renard, chat, hibou), avec palette, tenue, accessoire, prénom et sauvegarde locale.

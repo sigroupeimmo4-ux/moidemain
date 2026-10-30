@@ -1,7 +1,7 @@
 name: Vérification Moi Demain
 on:
   push:
-    branches: [main, feature/premium-paydunya-secure-checkout]
+    branches: [main, feature/pages-legales-a-propos]
   pull_request:
     branches: [main]
 jobs:
