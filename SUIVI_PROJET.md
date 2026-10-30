@@ -33,12 +33,15 @@ Dernière mise à jour : 30 octobre 2026
 - Les liens vers ces pages ont été ajoutés sur l'accueil et l'explorateur.
 - Tous les contenus gratuits restent accessibles sans compte.
 
-### État du paiement — À NE PAS CONFONDRE AVEC UNE ACTIVATION
-- **Les paiements NE SONT PAS activés**. Aucun prix n'a encore été défini et aucun prestataire n'a été branché.
-- La page Premium annonce cet état et désactive les achats.
-- Ne pas prétendre qu'un utilisateur peut payer ou que les droits Premium s'activent automatiquement.
-- Pour lancer l'offre : choisir le tarif et le prestataire, sécuriser une page de paiement côté serveur, vérifier des webhooks signés, attribuer/révoquer les droits après validation effective de la transaction.
-- Les achats doivent être réalisés par un adulte. Préparer politique de confidentialité et dispositif adapté aux mineurs avant mise en vente.
+### État du paiement — préparé, pas encore activé
+- **PayDunya retenu pour l'intégration technique** : Wave, Orange Money, Free Money et carte bancaire sous réserve des services du compte marchand.
+- **Prix indicatif proposé : 2 500 FCFA, accès unique**, soumis à validation commerciale ; aucun prix réel facturé.
+- Edge Functions `premium-checkout` et `premium-payments-webhook` déployées sur Supabase, avec vérification des retours PayDunya.
+- Table `premium_orders` sous RLS, et colonnes de provenance du paiement ajoutées à `premium_access`.
+- Activation des droits Premium uniquement après confirmation serveur d’un paiement **live**. Les simulations ne débloquent pas le contenu.
+- **Aucune clé PayDunya n'est renseignée** dans ce travail. Les paiements restent désactivés jusqu’à configuration marchand et validation du lancement.
+- Lire `PAIEMENT_PREPARATION.md` avant toute mise en vente.
+- Ne jamais considérer un retour URL comme preuve d’un paiement.
 
 ### Tests / publication
 - `npm test` inclut `experience.test.js` (catalogue et personnalisation) ainsi que les tests Fullta.
@@ -47,7 +50,7 @@ Dernière mise à jour : 30 octobre 2026
 - L'accès public dépend de la réussite de GitHub Pages après fusion.
 
 ## Éléments en attente
-1. Tarification et choix d'un prestataire de paiement pour le contenu Premium.
+1. Faire valider le montant commercial définitif et connecter le compte marchand PayDunya en sandbox, puis tester avant l'ouverture réelle.
 2. Vérification complète de l'inscription, de la réception de l'email de confirmation et de la récupération de mot de passe avec les URL autorisées dans Supabase Auth.
 3. Vérifier la conformité de l'usage par des mineurs avant les premières ventes.
 4. Ajouter des tests de navigation réels sur mobile et desktop si un navigateur de test est disponible.
