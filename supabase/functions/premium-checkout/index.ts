@@ -1,4 +1,4 @@
-import {cfg,configured,SITE,json,headers,allowOrigin,db,getBuyer,paydunya,verifyOrder} from '../_shared/premium-payment.ts';
+import {cfg,configured,providerReady,SITE,json,headers,allowOrigin,db,getBuyer,paydunya,verifyOrder} from '../_shared/premium-payment.ts';
 Deno.serve(async(req)=>{
  const origin=req.headers.get('origin');
  if(origin&&!allowOrigin(origin))return json({error:'Origine non autorisée'},403,origin);
@@ -13,7 +13,7 @@ Deno.serve(async(req)=>{
   },200,origin);
  }
  if(req.method!=='POST')return json({error:'Méthode non autorisée'},405,origin);
- if(!configured())return json({error:'Le paiement n’est pas encore activé.'},503,origin);
+ if(!providerReady())return json({error:'Le paiement n’est pas encore configuré.'},503,origin);
  if(!req.headers.get('content-type')?.includes('application/json'))return json({error:'Format invalide'},415,origin);
  const user=await getBuyer(req.headers.get('authorization'));
  if(!user)return json({error:'Vous devez vous connecter.'},401,origin);
@@ -29,6 +29,7 @@ Deno.serve(async(req)=>{
   }catch{return json({error:'Vérification indisponible, veuillez réessayer.'},503,origin)}
  }
  if(body.action!=='checkout'||body.confirmAdult!==true)return json({error:'Un adulte responsable doit confirmer l’achat.'},400,origin);
+ if(!configured())return json({error:'Les nouveaux achats ne sont pas activés.'},503,origin);
  try{
   const own=await db('premium_access?user_id=eq.'+user.id+'&active=eq.true&select=user_id');
   if(own.length)return json({error:'Ce compte dispose déjà de Premium.'},409,origin);
