@@ -76,6 +76,17 @@ if(typeof document!=='undefined'){
    catch{feedback.textContent='La sauvegarde est bloquée par ton navigateur.';}
    render();
   });
+  document.querySelector('#avatar-cloud').addEventListener('click',async()=>{
+   const b=document.querySelector('#avatar-cloud');
+   b.disabled=true;
+   try{
+    const {saveAvatar}=await import('./user-data.js');
+    const value={...current,name:name.value.trim().slice(0,24)||defaults.name};
+    if(!await saveAvatar(value))throw Error('Connexion nécessaire : ouvrez Mon espace pour vous connecter.');
+    feedback.textContent='Ton personnage est sauvegardé dans Mon espace !';
+   }catch(e){feedback.textContent=e.message||'Sauvegarde indisponible.';}
+   finally{b.disabled=false;}
+  });
   document.querySelector('#avatar-reset').addEventListener('click',()=>{
    current={...defaults};try{localStorage.removeItem(key)}catch{}
    feedback.textContent='Le personnage a été réinitialisé.';render();
