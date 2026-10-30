@@ -42,11 +42,11 @@ export function mountFullta({jobs=publicJobs,onAction=null}={}) {
   widget.setAttribute('aria-label','Assistant Fullta');
   widget.innerHTML=[
     '<button class="fullta-launch" type="button" aria-label="Ouvrir le chat avec Fullta" aria-expanded="false" aria-controls="fullta-panel">',
-      '<img class="fullta-launch-icon" src="./assets/fullta-mascot.svg" width="122" height="140" alt="" aria-hidden="true">',
+      '<img class="fullta-launch-icon" src="./assets/fullta-3d.webp?v=3d20261030" width="150" height="188" alt="" aria-hidden="true">',
       '<span class="fullta-launch-copy sr-only">Parler à Fullta</span>',
     '</button>',
     '<section id="fullta-panel" class="fullta-panel" role="dialog" aria-modal="false" aria-labelledby="fullta-title" hidden>',
-      '<div class="fullta-head"><img class="fullta-avatar" src="./assets/fullta-mascot.svg" width="42" height="42" alt="Fullta, le petit lapin pastel">',
+      '<div class="fullta-head"><img class="fullta-avatar" src="./assets/fullta-3d.webp?v=3d20261030" width="42" height="42" alt="Fullta, le petit lapin pastel en 3D">',
         '<div class="fullta-head-copy"><strong id="fullta-title">Fullta</strong><small>Votre copilote dans Moi Demain</small></div>',
         '<button type="button" class="fullta-close" aria-label="Fermer le chat">×</button>',
       '</div>',
