@@ -1,4 +1,4 @@
-import { mountFullta } from './floating-chat.js?v=3d20261030';
+import { mountFullta } from './floating-chat.js?v=exp20261030';
 import {extraFreeJobs,premiumPreviews} from './catalogue-extra.js';
 import {fetchPremiumCareer} from './auth-client.js';
 const baseJobs=[
