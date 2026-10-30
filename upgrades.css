@@ -12,3 +12,7 @@
 .account-quicklink:hover{text-decoration:underline}
 .legal-site-footer .account-quicklink{margin-right:5px}
 @media(max-width:700px){.site-announcements{padding:0 12px}.account-quicklink{font-size:11px}}
+
+.access-filter{display:flex;gap:12px;align-items:center;justify-content:flex-end;margin:15px 0;font-size:12px;font-weight:750;color:#725582}
+.access-filter select{font:inherit;color:#715483;background:white;border:1px solid #e4cfe9;border-radius:12px;padding:10px 15px;max-width:220px}
+@media(max-width:600px){.access-filter{justify-content:flex-start;flex-wrap:wrap}}
