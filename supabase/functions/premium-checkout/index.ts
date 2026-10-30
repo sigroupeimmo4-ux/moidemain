@@ -47,7 +47,7 @@ Deno.serve(async(req)=>{
    custom_data:{order_id,user_id:user.id},
    actions:{
     cancel_url:SITE+'premium.html?checkout=cancel',
-    return_url:SITE+'premium.html?checkout=return',
+    return_url:SITE+'premium.html',
     callback_url:cfg.url+'/functions/v1/premium-payments-webhook'
    }
   };
