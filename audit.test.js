@@ -14,7 +14,7 @@ test('Le parcours personnel est accessible et limité aux comptes connectés',()
 test('Les contenus transmis par le catalogue sont échappés avant injection HTML',()=>{
  const src=read('app.js');
  assert.ok(src.includes('const safe=v=>escapeHtml(v)'));
- for(const token of ['safe(j.name)','safe(j.desc)','safe(j.category)','safe(title)','safe(full.name)','safe(full.training)','safe(j.detail)'])assert.ok(src.includes(token),token);
+ for(const token of ['safe(j.name)','safe(j.desc)','safe(j.category)','safe(title)','escapeHtml(full.name)','escapeHtml(full.training)','safe(j.detail)'])assert.ok(src.includes(token),token);
 });
 test('Les actions IA gardent le mode local, avec consentement et connexion pour le modèle',()=>{
  const src=read('floating-chat.js');
