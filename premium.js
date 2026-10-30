@@ -48,6 +48,7 @@ purchase.addEventListener('click',async()=>{
  const session=await getSession();
  if(!session){location.assign('./auth.html?next=premium.html');return;}
  if(!configured)return;
+ if(!document.querySelector('#adult-confirm')?.checked){message('Un adulte doit confirmer qu’il réalise cet achat.','error');return;}
  purchase.disabled=true;purchase.textContent='Ouverture du paiement…';
  try{
   const response=await fetch(SUPABASE_URL+'/functions/v1/premium-checkout',{
