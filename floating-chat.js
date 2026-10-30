@@ -42,11 +42,11 @@ export function mountFullta({jobs=publicJobs,onAction=null}={}) {
   widget.setAttribute('aria-label','Assistant Fullta');
   widget.innerHTML=[
     '<button class="fullta-launch" type="button" aria-expanded="false" aria-controls="fullta-panel">',
-      '<span class="fullta-launch-icon" aria-hidden="true">✦</span>',
+      '<img class="fullta-launch-icon" src="./assets/fullta-avatar.webp" width="42" height="42" alt="" aria-hidden="true">',
       '<span class="fullta-launch-copy"><strong>Parler à Fullta</strong><small>Votre copilote</small></span>',
     '</button>',
     '<section id="fullta-panel" class="fullta-panel" role="dialog" aria-modal="false" aria-labelledby="fullta-title" hidden>',
-      '<div class="fullta-head"><div class="fullta-avatar" aria-hidden="true">✦</div>',
+      '<div class="fullta-head"><img class="fullta-avatar" src="./assets/fullta-avatar.webp" width="42" height="42" alt="Fullta, le petit lapin pastel">',
         '<div class="fullta-head-copy"><strong id="fullta-title">Fullta</strong><small>Votre copilote dans Moi Demain</small></div>',
         '<button type="button" class="fullta-close" aria-label="Fermer le chat">×</button>',
       '</div>',
@@ -181,7 +181,7 @@ export function mountFullta({jobs=publicJobs,onAction=null}={}) {
   widget.querySelectorAll('[data-prompt]').forEach(button=>{
     button.addEventListener('click',()=>void sendMessage(button.dataset.prompt));
   });
-  addMessage('Bonjour ! Je suis Fullta ✨ Je peux lancer votre quiz, ouvrir un métier, filtrer le catalogue et gérer vos favoris. Que souhaitez-vous découvrir ?');
+  addMessage('Coucou ! 🐰 Je suis Fullta, ton petit compagnon pour explorer les métiers. Je peux lancer un quiz, ouvrir une fiche ou garder tes favoris. Par quoi commence-t-on ?');
 
   if(typeof onAction==='function') {
     let stored=null;
