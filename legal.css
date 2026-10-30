@@ -56,3 +56,78 @@
 .legal-links-inline a{display:inline-block;font-size:12px;font-weight:700;text-decoration:none;color:#82578e;line-height:1.6}
 .legal-links-inline a:hover{text-decoration:underline}
 @media(max-width:650px){.legal-links-inline{justify-content:center;gap:10px 15px;text-align:center;padding:18px 5px}}
+
+
+/* Correctif : style.css applique nav{display:flex} globalement.
+   Le sommaire des pages juridiques doit être vertical, jamais sur une rangée. */
+.legal-page .legal-layout {
+  display:grid;
+  grid-template-columns:minmax(0,225px) minmax(0,1fr);
+  align-items:start;
+  gap:26px;
+  width:100%;
+  max-width:100%;
+}
+.legal-page nav.legal-sidebar {
+  display:block;
+  flex-direction:column;
+  gap:0;
+  width:100%;
+  min-width:0;
+  max-width:100%;
+  overflow-wrap:anywhere;
+}
+.legal-page nav.legal-sidebar > strong,
+.legal-page nav.legal-sidebar > a {
+  display:block;
+  width:100%;
+  max-width:100%;
+  flex:none;
+  margin:0;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+.legal-page .legal-document {
+  width:100%;
+  min-width:0;
+  max-width:100%;
+  overflow-wrap:break-word;
+}
+.legal-page .legal-document p,
+.legal-page .legal-document li,
+.legal-page .legal-attention {
+  overflow-wrap:anywhere;
+}
+.legal-page .legal-hero,
+.legal-page .legal-wrap {
+  width:100%;
+  min-width:0;
+}
+.legal-page .legal-topbar nav.legal-nav,
+.legal-site-footer nav {
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+}
+@media(max-width:820px) {
+  .legal-page .legal-layout {
+    grid-template-columns:minmax(0,1fr);
+    gap:18px;
+  }
+  .legal-page nav.legal-sidebar {
+    position:static;
+    display:block;
+    width:100%;
+  }
+  .legal-page nav.legal-sidebar > a {
+    display:block;
+    padding:10px 12px;
+    border-bottom:1px solid #f2eaf3;
+  }
+  .legal-page nav.legal-sidebar > a:last-child {border-bottom:0}
+}
+@media print {
+  .legal-page nav.legal-sidebar {display:none!important}
+  .legal-page .legal-layout {display:block}
+}
