@@ -69,3 +69,19 @@
 @media(max-width:850px){.experience-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.premium-cards{grid-template-columns:repeat(3,minmax(0,1fr))}.avatar-layout{grid-template-columns:1fr}.avatar-preview{position:static;min-height:340px}}
 @media(max-width:650px){.experience-wrap{padding:25px 18px 135px}.experience-hero{padding:28px 22px}.experience-grid,.advice-cards{grid-template-columns:1fr}.premium-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.avatar-options{grid-template-columns:repeat(2,minmax(0,1fr))}.experience-page header .navbar-extra{display:none}.experience-page header{padding:0 18px}.avatar-preview{min-height:290px}.avatar-preview svg{max-height:220px}}
 @media(max-width:380px){.premium-cards{grid-template-columns:1fr}}
+
+
+/* Accès visible depuis l'explorateur et le catalogue. */
+.site-extras-nav{display:flex;justify-content:center;gap:14px;align-items:center;flex-wrap:wrap;padding:12px 18px;background:linear-gradient(100deg,#fff1f9,#f5f0ff,#ecfcff);border-bottom:1px solid #ebdced}
+.site-extras-nav a{font-size:12px;color:#87538f;text-decoration:none;font-weight:750;padding:8px 13px;background:#fffafdd9;border-radius:999px;border:1px solid #efd8ec}
+.site-extras-nav a:hover{background:#f8e6fa}
+.job.job-premium{position:relative;border-color:#dec3e6}
+.job.job-premium .job-cover{position:relative}
+.job.job-premium .premium-lock{position:absolute;right:10px;top:10px;font-size:10px;background:#fff9ff;color:#994a9b;border:1px solid #ead7ef;border-radius:999px;padding:7px 9px;font-weight:800}
+.job.job-premium .text-btn{color:#914f9a;background:#fdf4fe;border-color:#eddaee}
+.job.job-premium:hover{box-shadow:0 12px 28px #8b68a11b}
+@media(max-width:650px){
+ .site-extras-nav{gap:7px;padding:10px}
+ .site-extras-nav a{font-size:10px;padding:8px 10px}
+ .experience-page .navbar-extra{display:none}
+}
