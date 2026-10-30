@@ -13,7 +13,8 @@ export const cfg={
 };
 export const SITE='https://sigroupeimmo4-ux.github.io/moidemain/';
 export const endpoint='https://app.paydunya.com/'+(cfg.mode==='live'?'api':'sandbox-api')+'/v1/checkout-invoice/';
-export const configured=()=>Boolean(cfg.enabled&&cfg.master&&cfg.privateKey&&cfg.token&&cfg.url&&cfg.anon&&cfg.admin&&Number.isInteger(cfg.amount)&&cfg.amount>=100&&cfg.amount<=1000000&&(cfg.mode==='test'||env('PAYDUNYA_LIVE_APPROVED')==='true'));
+export const providerReady=()=>Boolean(cfg.master&&cfg.privateKey&&cfg.token&&cfg.url&&cfg.anon&&cfg.admin);
+export const configured=()=>Boolean(cfg.enabled&&providerReady()&&Number.isInteger(cfg.amount)&&cfg.amount>=100&&cfg.amount<=1000000&&(cfg.mode==='test'||env('PAYDUNYA_LIVE_APPROVED')==='true'));
 export const allowOrigin=o=>['https://sigroupeimmo4-ux.github.io','http://localhost:3000','http://127.0.0.1:3000'].includes(o||'');
 export function headers(origin){
  return {'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','Vary':'Origin',
