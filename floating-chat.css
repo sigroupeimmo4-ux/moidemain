@@ -150,7 +150,7 @@
 .fullta-widget .fullta-message:not(.user)::before {
   border:none;
   border-radius:0;
-  background:transparent url('./assets/fullta-mascot.svg') center/contain no-repeat;
+  background:transparent url('./assets/fullta-3d.webp?v=3d20261030') center/contain no-repeat;
   box-shadow:none;
 }
 @keyframes fullta-mascot-float {
@@ -176,4 +176,14 @@
 }
 @media(prefers-reduced-motion:reduce) {
   .fullta-widget .fullta-launch-icon {animation:none}
+}
+
+/* Illustration 3D transparente et haute visibilité sur desktop / mobile. */
+.fullta-widget .fullta-launch{width:140px;height:175px}
+.fullta-widget .fullta-panel{bottom:178px;max-height:min(620px,calc(100dvh - 205px))}
+.fullta-widget .fullta-launch-icon{object-fit:contain;image-rendering:auto}
+.fullta-widget .fullta-avatar{object-fit:contain}
+@media(max-width:600px){
+ .fullta-widget .fullta-launch{width:112px;height:140px}
+ .fullta-widget .fullta-panel{bottom:145px;max-height:calc(100dvh - 166px)}
 }
