@@ -43,6 +43,13 @@ Dernière mise à jour : 30 octobre 2026
 - Lire `PAIEMENT_PREPARATION.md` avant toute mise en vente.
 - Ne jamais considérer un retour URL comme preuve d’un paiement.
 
+### Pages légales et À propos (30 octobre 2026)
+- Sept nouvelles pages publiques : `a-propos.html`, `contact.html`, `cgu.html`, `cgv.html`, `confidentialite.html`, `cookies.html`, `mentions-legales.html`.
+- Pied de page commun intégré aux pages existantes, CSS `legal.css`, test de cohérence `legal.test.js`.
+- Informations d'éditeur et contact inconnues : **placeholders visibles** et document `LEGAL_A_COMPLETER.md`.
+- CGV en version de travail : **aucun achat réel activé**.
+- Avant une ouverture commerciale, fournir les coordonnées officielles, les durées et finalités de conservation et faire valider les textes par un conseil juridique dans le ou les territoires de vente.
+
 ### Tests / publication
 - `npm test` inclut `experience.test.js` (catalogue et personnalisation) ainsi que les tests Fullta.
 - Workflow GitHub `.github/workflows/ci.yml` : tests Node et contrôles de syntaxe.
