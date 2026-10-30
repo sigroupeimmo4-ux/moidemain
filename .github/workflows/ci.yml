@@ -20,9 +20,15 @@ jobs:
       - run: node --check premium.js
       - run: node --check personnages.js
       - run: node --check conseils.js
+      - run: node --check mon-espace.js
+      - run: node --check user-data.js
+      - run: node --check admin.js
+      - run: node --check support.js
+      - run: node --check announcements.js
+      - run: node --check floating-chat.js
       - name: Vérifier les fonctions serveur (syntaxe)
         run: |
-          for file in supabase/functions/_shared/premium-payment.ts supabase/functions/premium-checkout/index.ts supabase/functions/premium-payments-webhook/index.ts; do
+          for file in supabase/functions/_shared/premium-payment.ts supabase/functions/premium-checkout/index.ts supabase/functions/premium-payments-webhook/index.ts supabase/functions/fullta-chat/index.ts supabase/functions/delete-my-account/index.ts; do
             cp "$file" /tmp/moidemain-payment-check.mjs
             node --check /tmp/moidemain-payment-check.mjs
           done
