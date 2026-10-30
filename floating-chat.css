@@ -39,3 +39,55 @@
   .fullta-widget .fullta-messages{min-height:130px;max-height:35dvh}
 }
 @media(prefers-reduced-motion:reduce){.fullta-widget .fullta-launch{transition:none}}
+
+
+/* Identité de Fullta : notre petit lapin pastel. */
+.fullta-widget .fullta-launch-icon {
+  display:block;
+  object-fit:cover;
+  width:46px;height:46px;
+  border-radius:50%;
+  background:#f8dce8;
+  border:2px solid #fff;
+  box-shadow:0 2px 10px #512c5d28;
+  flex-shrink:0;
+}
+.fullta-widget .fullta-avatar {
+  display:block;
+  object-fit:cover;
+  width:46px;height:46px;
+  border-radius:50%;
+  background:#f8dce8;
+  border:2px solid #fffc;
+  flex-shrink:0;
+  box-shadow:0 3px 9px #45305220;
+}
+.fullta-widget .fullta-launch {
+  background:linear-gradient(105deg,#f08dad,#bc84c7);
+  border:1px solid #fff9;
+  box-shadow:0 9px 28px #bb74a63d;
+}
+.fullta-widget .fullta-launch:hover {box-shadow:0 13px 31px #bb74a650}
+.fullta-widget .fullta-head {
+  background:linear-gradient(112deg,#e9afd0,#b5a4d9 62%,#a9d8e9);
+}
+.fullta-widget .fullta-message:not(.user) {
+  position:relative;
+  margin-left:34px;
+  max-width:calc(90% - 14px);
+}
+.fullta-widget .fullta-message:not(.user)::before {
+  content:"";
+  position:absolute;
+  left:-36px;
+  top:3px;
+  width:29px;height:29px;
+  border-radius:50%;
+  border:1px solid #e7d5e5;
+  background:#f8dce8 url('./assets/fullta-avatar.webp') center/cover no-repeat;
+  box-shadow:0 2px 8px #57466a16;
+}
+@media(max-width:600px) {
+  .fullta-widget .fullta-launch-icon {width:42px;height:42px}
+  .fullta-widget .fullta-avatar {width:42px;height:42px}
+}
