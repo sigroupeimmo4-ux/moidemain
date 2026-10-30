@@ -85,3 +85,5 @@
  .site-extras-nav a{font-size:10px;padding:8px 10px}
  .experience-page .navbar-extra{display:none}
 }
+
+.experience-adult{display:flex;gap:11px;align-items:center;margin-top:20px;color:#705c7a;font-size:13px;line-height:1.5;font-weight:650}.experience-adult input{width:19px;height:19px;accent-color:#9651b2;flex-shrink:0}
