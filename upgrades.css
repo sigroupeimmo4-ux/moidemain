@@ -1,0 +1,14 @@
+/* Audit 2026 — espaces personnels, annonces et choix de confidentialité. */
+.site-announcements{display:grid;gap:10px;max-width:1110px;margin:18px auto;padding:0 20px}
+.site-announcement{background:#fff9fe;border:1px solid #ead5ef;border-left:5px solid #ac71c6;border-radius:16px;padding:16px 20px}
+.site-announcement strong{font-size:14px;color:#704583}
+.site-announcement p{margin:6px 0 0;color:#7f6a8b;font-size:13px;line-height:1.65}
+.fullta-widget .fullta-ai-consent{font-size:10px;line-height:1.6;color:#6f5a79;display:flex;gap:8px;align-items:flex-start;padding:10px 17px 0}
+.fullta-widget .fullta-ai-consent input{accent-color:#9950a1;flex-shrink:0;margin-top:3px;width:15px;height:15px}
+.adult-registration{display:flex!important;align-items:flex-start;gap:12px;margin:16px 0;color:#6b5674;font-size:12px;line-height:1.6}
+.adult-registration[hidden]{display:none!important}
+.adult-registration input{width:17px;height:17px;accent-color:#a755a9;flex-shrink:0}
+.account-quicklink{display:inline-flex;align-items:center;gap:4px;color:#7e458f;text-decoration:none;font-weight:800;font-size:12px;border-radius:12px;padding:8px 11px;background:#fff7ff;border:1px solid #eddbef}
+.account-quicklink:hover{text-decoration:underline}
+.legal-site-footer .account-quicklink{margin-right:5px}
+@media(max-width:700px){.site-announcements{padding:0 12px}.account-quicklink{font-size:11px}}
