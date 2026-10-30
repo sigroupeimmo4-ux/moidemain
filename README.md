@@ -41,9 +41,13 @@ Le parcours invité reste disponible sans connexion. Les comptes et l’accès P
 
 Les 16 contenus Premium détaillés sont uniquement dans la base Supabase ; l’API les renvoie à un utilisateur authentifié uniquement si la table `premium_access` indique un droit actif. Les politiques RLS sont activées. Il n’existe pas de raccourci via `localStorage` permettant de déverrouiller les fiches.
 
-### Paiement à configurer
+### Paiement PayDunya préparé (non activé)
 
-Il reste à définir un tarif, sélectionner un prestataire de paiement et mettre en place **une transaction vérifiée côté serveur**, son webhook signé et l’attribution/révocation des droits Premium. **Ne jamais** déverrouiller des fiches sur la seule base d’un paramètre d’URL ou d’une confirmation envoyée par le navigateur. Cette version n’encaisse aucun argent, et son interface ne prétend pas le contraire. Les achats doivent être réservés à un adulte responsable.
+Une passerelle PayDunya par redirection a été intégrée et déployée via Supabase Edge Functions (`premium-checkout` et `premium-payments-webhook`). L’activation des droits dépend d’une confirmation serveur du fournisseur et du RLS Supabase.
+
+**Proposition, pas encore validée** : 2 500 FCFA en paiement unique pour les 16 fiches Premium, sans abonnement. Les moyens de paiement envisageables au Sénégal sont Wave, Orange Money, Free Money et la carte bancaire selon les canaux activés par le commerçant. Les achats sont bloqués sans compte marchand ni tarif confirmé.
+
+Voir `PAIEMENT_PREPARATION.md` pour les étapes PayDunya Business, le mode sandbox, les secrets Supabase, les tests de retour et les conditions avant ouverture réelle des paiements.
 
 Les données d’orientation et d’identification des mineurs nécessitent une politique de confidentialité, un contrôle des accès et une validation juridique avant ouverture commerciale.
 

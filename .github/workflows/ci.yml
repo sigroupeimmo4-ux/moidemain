@@ -1,7 +1,7 @@
 name: Vérification Moi Demain
 on:
   push:
-    branches: [main, feature/catalogue-premium-avatars-conseils]
+    branches: [main, feature/premium-paydunya-secure-checkout]
   pull_request:
     branches: [main]
 jobs:
@@ -20,3 +20,14 @@ jobs:
       - run: node --check premium.js
       - run: node --check personnages.js
       - run: node --check conseils.js
+      - name: Vérifier les fonctions serveur (syntaxe)
+        run: |
+          for file in supabase/functions/_shared/premium-payment.ts supabase/functions/premium-checkout/index.ts supabase/functions/premium-payments-webhook/index.ts; do
+            cp "$file" /tmp/moidemain-payment-check.mjs
+            node --check /tmp/moidemain-payment-check.mjs
+          done
+      - name: Vérifier la réponse publique du service de paiement
+        run: |
+          curl --retry 3 --retry-delay 2 --max-time 20 --fail --silent --show-error \
+            https://sjhvaaaiwijhcykznfqn.supabase.co/functions/v1/premium-checkout \
+            | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>{const c=JSON.parse(s);if(c.provider!=='PayDunya'||typeof c.available!=='boolean'||c.currency!=='XOF')process.exit(1);console.log('PayDunya status:',c.available?'configuré':'non configuré')})"
