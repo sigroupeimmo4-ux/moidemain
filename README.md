@@ -1,3 +1,15 @@
+## Sécurité, comptes et fonctionnalités après audit (octobre 2026)
+
+L’espace `/mon-espace.html` permet aux adultes connectés de conserver et gérer un profil minimal, les favoris, l’historique des quiz et plusieurs personnages. Il inclut l’export, l’effacement du parcours et une demande authentifiée de suppression définitive du compte.
+
+L’espace `/parents.html` explique la protection des jeunes utilisateurs et les limites de la déclaration de majorité à l’inscription. L’accès au contenu gratuit reste possible sans compte.
+
+Le panneau `/admin.html` est protégé par les rôles Supabase RLS. Aucun compte administrateur n’est désigné automatiquement. Il gère les annonces, les signalements et les dossiers Premium.
+
+Fullta conserve ses commandes locales. Les appels à un modèle externe nécessitent un compte, un consentement spécifique, une configuration de clé serveur, un quota et une modération. Sans configuration, la discussion libre n’est pas disponible.
+
+Le site dispose d’une surveillance automatique et de tests visuels desktop/mobile dans GitHub Actions. Voir `AUDIT_ACTIONS.md` pour le périmètre exact, les limites et les prérequis avant commercialisation.
+
 # moidemain
 
 Site d’orientation en français avec parcours invité, comptes facultatifs via Supabase, catalogue gratuit et espace Premium préparé.
