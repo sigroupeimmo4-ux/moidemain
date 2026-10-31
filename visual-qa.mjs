@@ -31,10 +31,18 @@ for(const viewport of [{width:1280,height:850},{width:390,height:844}]){
    if(route==='explorer.html'||route===''){
      const mascot=page.locator('.fullta-launch');
      await mascot.waitFor({timeout:6000});
-     if(!await page.locator('.fullta-blink-eye').count())throw Error('Yeux animés absents');
+     if(!await page.locator('svg.fullta-blink-eyes').count())throw Error('Paupière animée SVG absente');
      await mascot.focus();
      const blinked=await mascot.evaluate(node=>node.classList.contains('is-blinking'));
      if(!blinked)throw Error('Le clignement ne réagit pas à la sélection');
+     await page.waitForTimeout(240);
+     const eyelid=await page.locator('.fullta-blink-eyes').evaluate(el=>({
+       opacity:Number.parseFloat(getComputedStyle(el).opacity),
+       bounds:el.getBoundingClientRect().toJSON()
+     }));
+     if(eyelid.opacity<0.7)throw Error('Paupière invisible pendant le clignement : '+JSON.stringify(eyelid));
+     await page.screenshot({path:'qa-screenshots/'+viewport.width+'-'+name+'-fullta-blink.png',fullPage:true});
+
      await mascot.click();
      await page.locator('#fullta-panel:not([hidden])').waitFor({timeout:3000});
      if(await mascot.getAttribute('aria-expanded')!=='true')throw Error('Fullta ne reflète pas le chat ouvert');
