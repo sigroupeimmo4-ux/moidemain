@@ -1,3 +1,11 @@
+## Fullta 3D interactif (31 octobre 2026)
+
+Le petit lapin Fullta flotte directement dans le coin du site et sert **lui-même** de bouton pour ouvrir et fermer le chat. Il cligne des yeux de façon irrégulière, se penche au survol de la souris, réagit avec de petites étoiles à l’ouverture et aux réponses, et rebondit doucement pendant le traitement d’un message.
+
+Les animations sont légères, ne nécessitent aucune API ni collecte supplémentaire, sont adaptées aux téléphones et s’arrêtent avec la préférence système « Réduire les animations ». Le bouton est accessible au clavier et conserve `aria-expanded` ainsi que les libellés d’ouverture et de fermeture. Les commandes locales de Fullta restent disponibles comme avant.
+
+Les tests `fullta-interactive.test.js` et `visual-qa.mjs` couvrent le clignement, l’ouverture du chat, la fermeture au clavier et le mouvement réduit.
+
 ## Nouveaux quiz de découverte (31 octobre 2026)
 
 - **`/quiz-personnalites.html?test=ecrans`** : quiz visible à l’accueil sur les vidéos YouTube, Shorts, TikTok et films **déclarés librement par la personne**. Aucune connexion aux plateformes, aucun historique importé ou analysé.
