@@ -5,7 +5,7 @@ const read=name=>readFileSync(new URL(name,import.meta.url),'utf8');
 const js=read('floating-chat.js');
 const css=read('floating-chat.css');
 test('Fullta garde son bouton flottant 3D et cliquable',()=>{
- assert.match(js,/<button class=\\"fullta-launch\\"/);
+ assert.match(js,/<button class="fullta-launch"/);
  assert.match(js,/fullta-mascot-art/);
  assert.match(js,/fullta-3d\.webp/);
  assert.match(js,/fullta-blink-eyes/);
