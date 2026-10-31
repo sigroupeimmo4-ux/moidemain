@@ -396,3 +396,9 @@
   .fullta-widget .fullta-sparkle-two{animation:none!important;opacity:0}
   .fullta-widget .fullta-hello{transition:none!important}
 }
+
+/* Lapin volumétrique : mêmes dimensions et même emplacement que la mascotte. */
+.fullta-webgl{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;filter:drop-shadow(0 6px 9px #6c477330)}
+.fullta-widget .has-webgl .fullta-launch-icon,
+.fullta-widget .has-webgl .fullta-blink-eyes{visibility:hidden}
+.fullta-widget .has-webgl .fullta-mascot-art{animation:none!important;transform:none}

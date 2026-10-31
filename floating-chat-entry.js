@@ -1,2 +1,2 @@
-import { mountFullta } from './floating-chat.js?v=fullta-visible-v2';
+import { mountFullta } from './floating-chat.js?v=fullta-webgl-v1';
 mountFullta();

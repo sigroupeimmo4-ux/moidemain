@@ -1,3 +1,11 @@
+## Fullta en véritable 3D (WebGL)
+
+Le bouton Fullta utilise désormais un lapin composé de volumes 3D, éclairés et animés en temps réel : respiration, clignement, oreilles mobiles, suivi du pointeur et salut de la patte. Sa palette pastel, sa position et le panneau assistant existant sont conservés. Clic, Entrée et Espace ouvrent le chat ; Échap le referme.
+
+Le rendu se met en pause dans les onglets masqués et devient immobile avec « Réduire les animations ». Sans WebGL ou en cas de perte du contexte graphique, l’illustration précédente reste cliquable. Aucun modèle distant ni service 3D n’est nécessaire : Three.js 0.170.0 est livré localement avec sa licence MIT dans `assets/vendor/`.
+
+`npm test` vérifie la logique existante. `visual-qa.mjs` vérifie également le rendu animé sur ordinateur/mobile, le mouvement réduit et le secours sans WebGL. Pour utiliser un Chromium déjà installé, définir `CHROMIUM_PATH`.
+
 ## Fullta 3D interactif (31 octobre 2026)
 
 Le petit lapin Fullta flotte directement dans le coin du site et sert **lui-même** de bouton pour ouvrir et fermer le chat. Il cligne des yeux de façon irrégulière, se penche au survol de la souris, réagit avec de petites étoiles à l’ouverture et aux réponses, et rebondit doucement pendant le traitement d’un message.

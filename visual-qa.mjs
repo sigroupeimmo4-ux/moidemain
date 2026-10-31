@@ -1,13 +1,30 @@
 import {chromium} from 'playwright';
 import {mkdirSync} from 'node:fs';
+import assert from 'node:assert/strict';
 const base=process.env.MOI_DEMAIN_URL||'https://sigroupeimmo4-ux.github.io/moidemain/';
-const browser=await chromium.launch({headless:true});
+const browser=await chromium.launch({headless:true, ...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{}), args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
 mkdirSync('qa-screenshots',{recursive:true});
 const failures=[];
 for(const viewport of [{width:1280,height:850},{width:390,height:844}]){
  const context=await browser.newContext({viewport});
  for(const route of ['','explorer.html','a-propos.html','cgu.html','cgv.html','confidentialite.html','mon-espace.html','personnages.html','premium.html','quiz-personnalites.html','quiz-personnalites.html?test=ecrans']){
   const page=await context.newPage();
+  await page.addInitScript(()=>{
+    const getContext=HTMLCanvasElement.prototype.getContext;
+    const seen=new WeakSet();
+    HTMLCanvasElement.prototype.getContext=function(type,...args){
+      const context=getContext.call(this,type,...args);
+      if(context&&/^webgl/.test(type)&&!seen.has(context)){
+        seen.add(context);
+        this.fulltaDrawCount=0;
+        for(const method of ['drawElements','drawArrays']){
+          const draw=context[method];
+          context[method]=(...values)=>{this.fulltaDrawCount++;return draw.apply(context,values);};
+        }
+      }
+      return context;
+    };
+  });
   const name=(route||'accueil').replace(/[^a-z0-9]+/gi,'-');
   try{
    const response=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:30000});
@@ -31,18 +48,14 @@ for(const viewport of [{width:1280,height:850},{width:390,height:844}]){
    if(route==='explorer.html'||route===''){
      const mascot=page.locator('.fullta-launch');
      await mascot.waitFor({timeout:6000});
-     if(!await page.locator('svg.fullta-blink-eyes').count())throw Error('Paupière animée SVG absente');
+     await page.locator('.has-webgl canvas.fullta-webgl').waitFor({timeout:10000});
+     const canvas=mascot.locator('canvas');
+     assert.ok(await canvas.evaluate(el=>el.width>0&&el.height>0),'Canvas 3D vide');
      await mascot.focus();
-     const blinked=await mascot.evaluate(node=>node.classList.contains('is-blinking'));
-     if(!blinked)throw Error('Le clignement ne réagit pas à la sélection');
-     await page.waitForTimeout(240);
-     const eyelid=await page.locator('.fullta-blink-eyes').evaluate(el=>({
-       opacity:Number.parseFloat(getComputedStyle(el).opacity),
-       bounds:el.getBoundingClientRect().toJSON()
-     }));
-     if(eyelid.opacity<0.7)throw Error('Paupière invisible pendant le clignement : '+JSON.stringify(eyelid));
-     await page.screenshot({path:'qa-screenshots/'+viewport.width+'-'+name+'-fullta-blink.png',fullPage:true});
-
+     await page.waitForTimeout(250);
+     const before=await canvas.evaluate(el=>el.fulltaDrawCount);
+     await page.waitForTimeout(400);
+     assert.ok(await canvas.evaluate(el=>el.fulltaDrawCount)>before,'Le lapin 3D ne s’anime pas');
      await mascot.click();
      await page.locator('#fullta-panel:not([hidden])').waitFor({timeout:3000});
      if(await mascot.getAttribute('aria-expanded')!=='true')throw Error('Fullta ne reflète pas le chat ouvert');
@@ -52,6 +65,11 @@ for(const viewport of [{width:1280,height:850},{width:390,height:844}]){
      await page.emulateMedia({reducedMotion:'reduce'});
      const noMotion=await mascot.locator('.fullta-mascot-art').evaluate(node=>getComputedStyle(node).animationName);
      if(noMotion!=='none')throw Error('Préférence de mouvement réduit ignorée');
+     // Laisser finir le redimensionnement dû à la transition du bouton.
+     await page.waitForTimeout(600);
+     const still=await canvas.evaluate(el=>el.fulltaDrawCount);
+     await page.waitForTimeout(350);
+     assert.equal(await canvas.evaluate(el=>el.fulltaDrawCount),still,'Le rendu 3D bouge malgré le mouvement réduit');
      await page.emulateMedia({reducedMotion:'no-preference'});
    }
 
@@ -74,6 +92,30 @@ for(const viewport of [{width:1280,height:850},{width:390,height:844}]){
   await page.close();
  }
  await context.close();
+}
+// Sans WebGL, le bouton conserve son illustration et son fonctionnement.
+{
+ const page=await browser.newPage();
+ await page.addInitScript(()=>{
+   const original=HTMLCanvasElement.prototype.getContext;
+   HTMLCanvasElement.prototype.getContext=function(type,...args){
+     return /^webgl|experimental-webgl/.test(type)?null:original.call(this,type,...args);
+   };
+ });
+ try{
+   await page.goto(base,{waitUntil:'networkidle'});
+   const button=page.locator('.fullta-launch');
+   assert.equal(await button.evaluate(el=>el.classList.contains('has-webgl')),false);
+   assert.ok(await button.locator('img').isVisible());
+   await button.focus();
+   await page.keyboard.press('Enter');
+   await page.locator('#fullta-panel:not([hidden])').waitFor();
+   assert.equal(await button.getAttribute('aria-expanded'),'true');
+   await page.keyboard.press('Escape');
+   assert.equal(await button.getAttribute('aria-expanded'),'false');
+   console.log('OK secours sans WebGL et clavier');
+ }catch(e){failures.push('Secours WebGL : '+e.message);}
+ await page.close();
 }
 await browser.close();
 if(failures.length){console.error(failures.join('\n'));process.exitCode=1;}
