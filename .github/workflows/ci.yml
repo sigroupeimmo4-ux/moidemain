@@ -1,7 +1,7 @@
 name: Vérification Moi Demain
 on:
   push:
-    branches: [main, feature/pages-legales-a-propos]
+    branches: [main, feature/quiz-personnalites-et-culture-video]
   pull_request:
     branches: [main]
 jobs:
@@ -26,6 +26,8 @@ jobs:
       - run: node --check support.js
       - run: node --check announcements.js
       - run: node --check floating-chat.js
+      - run: node --check quiz-personnalites.js
+      - run: node --check quiz-personnalites-data.js
       - name: Vérifier les fonctions serveur (syntaxe)
         run: |
           for file in supabase/functions/_shared/premium-payment.ts supabase/functions/premium-checkout/index.ts supabase/functions/premium-payments-webhook/index.ts supabase/functions/fullta-chat/index.ts supabase/functions/delete-my-account/index.ts; do
