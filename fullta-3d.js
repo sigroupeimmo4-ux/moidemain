@@ -45,7 +45,9 @@ export function mountRabbit(button) {
     return mesh;
   }
   const body = new THREE.Group();
-  body.scale.x=0.92;
+  // Réduire la hauteur du corps en conservant sa largeur et l’appui des pieds.
+  body.scale.set(0.92,0.8,1);
+  body.position.y=0.024;
   rabbit.add(body);
   // Anatomie de lapin assis : dos en pente, poitrine étroite et bassin plus bas.
   const profile = [[0,0.36],[0.18,0.44],[0.27,0.64],[0.32,0.86],
@@ -115,7 +117,7 @@ export function mountRabbit(button) {
     }
   }
   const head = new THREE.Group();
-  head.position.y = 2.16;
+  head.position.y = 1.82;
   rabbit.add(head);
   oval(head, fur, [0, 0, 0], [0.82, 0.71, 0.62]);
   // Une petite mèche en trois mèches douces au-dessus du front.

@@ -1,4 +1,4 @@
-import { mountFullta } from './floating-chat.js?v=fullta-webgl-v8';
+import { mountFullta } from './floating-chat.js?v=fullta-webgl-v9';
 import {extraFreeJobs,premiumPreviews} from './catalogue-extra.js';
 import {fetchPremiumCareer} from './auth-client.js';
 import {addHistory,readFavorites,writeFavorite} from './user-data.js';
