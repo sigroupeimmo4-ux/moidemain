@@ -32,6 +32,8 @@ export function mountRabbit(button) {
   const dark = new THREE.MeshStandardMaterial({color: 0x30213e, roughness: 0.24});
   const white = new THREE.MeshBasicMaterial({color: 0xffffff});
   const mint = new THREE.MeshStandardMaterial({color: 0x83ddd2, roughness: 0.55});
+  const lavender = new THREE.MeshStandardMaterial({color: 0x9f83bf, roughness: 0.55});
+  const gold = new THREE.MeshStandardMaterial({color: 0xffd58b, metalness: 0.15, roughness: 0.4});
   const geometry = new THREE.SphereGeometry(1, 28, 20);
   const rabbit = new THREE.Group();
   scene.add(rabbit);
@@ -46,6 +48,14 @@ export function mountRabbit(button) {
   oval(rabbit, cream, [0, 1.05, 0.44], [0.42, 0.44, 0.1]);
   oval(rabbit, fur, [-0.37, 0.47, 0.23], [0.33, 0.22, 0.43]);
   oval(rabbit, fur, [0.37, 0.47, 0.23], [0.33, 0.22, 0.43]);
+  // Petits coussinets et doigts sculptés dans le volume des pattes.
+  for (const side of [-1, 1]) {
+    oval(rabbit, cream, [side * 0.37, 0.49, 0.6], [0.22, 0.13, 0.065]);
+    oval(rabbit, pink, [side * 0.37, 0.48, 0.655], [0.1, 0.065, 0.018]);
+    for (const offset of [-0.09, 0, 0.09]) {
+      oval(rabbit, pink, [side * 0.37 + offset, 0.575, 0.613], [0.032, 0.035, 0.018]);
+    }
+  }
   oval(rabbit, cream, [0.53, 0.92, -0.34], [0.27, 0.27, 0.27]);
   const leftArm = new THREE.Group();
   leftArm.position.set(-0.54, 1.5, 0);
@@ -55,10 +65,25 @@ export function mountRabbit(button) {
   rightArm.position.set(0.54, 1.52, 0);
   rabbit.add(rightArm);
   oval(rightArm, fur, [0.09, -0.24, 0.08], [0.21, 0.4, 0.22]);
+  for (const [arm, x] of [[leftArm, -0.04], [rightArm, 0.09]]) {
+    oval(arm, cream, [x, -0.43, 0.26], [0.13, 0.14, 0.045]);
+    oval(arm, pink, [x, -0.43, 0.302], [0.065, 0.07, 0.018]);
+  }
   const head = new THREE.Group();
   head.position.y = 2.02;
   rabbit.add(head);
   oval(head, fur, [0, 0, 0], [0.82, 0.71, 0.62]);
+  // Une petite mèche en trois mèches douces au-dessus du front.
+  for (const [x, y, angle] of [[-0.13, 0.61, -0.35], [0, 0.65, 0], [0.13, 0.6, 0.4]]) {
+    const tuft = oval(head, cream, [x, y, 0.26], [0.105, 0.2, 0.1]);
+    tuft.rotation.z = angle;
+  }
+  function curve(parent, material, points, radius = 0.012) {
+    const line = new THREE.CatmullRomCurve3(points.map(point => new THREE.Vector3(...point)));
+    const mesh = new THREE.Mesh(new THREE.TubeGeometry(line, 12, radius, 5, false), material);
+    parent.add(mesh);
+    return mesh;
+  }
   const ears = [];
   for (const side of [-1, 1]) {
     const ear = new THREE.Group();
@@ -67,6 +92,7 @@ export function mountRabbit(button) {
     head.add(ear);
     oval(ear, fur, [0, 0.56, 0], [0.25, 0.74, 0.21]);
     oval(ear, pink, [0, 0.56, 0.16], [0.14, 0.55, 0.066]);
+    oval(ear, cream, [-0.04, 0.64, 0.217], [0.035, 0.36, 0.015]);
     ears.push(ear);
   }
   const eyes = [];
@@ -74,12 +100,21 @@ export function mountRabbit(button) {
     const eye = new THREE.Group();
     eye.position.set(side * 0.28, 0.045, 0.555);
     head.add(eye);
-    oval(eye, dark, [0, 0, 0], [0.135, 0.175, 0.085]);
-    oval(eye, white, [-0.035, 0.057, 0.074], [0.042, 0.048, 0.018]);
-    oval(eye, white, [0.039, -0.048, 0.073], [0.019, 0.022, 0.012]);
+    oval(eye, cream, [0, 0, -0.017], [0.155, 0.195, 0.07]);
+    oval(eye, lavender, [0, 0, 0], [0.135, 0.175, 0.085]);
+    oval(eye, dark, [0, 0.009, 0.035], [0.104, 0.143, 0.065]);
+    oval(eye, white, [-0.035, 0.057, 0.096], [0.042, 0.048, 0.03]);
+    oval(eye, white, [0.039, -0.048, 0.095], [0.019, 0.022, 0.012]);
     eyes.push(eye);
     oval(head, pink, [side * 0.46, -0.17, 0.515], [0.17, 0.095, 0.045]);
     oval(head, cream, [side * 0.13, -0.24, 0.565], [0.21, 0.15, 0.1]);
+    curve(head, lavender, [[side * 0.17, 0.28, 0.54], [side * 0.27, 0.315, 0.535], [side * 0.36, 0.29, 0.51]], 0.018);
+    for (const row of [-1, 1]) {
+      curve(head, lavender, [[side * 0.3, -0.24, 0.63], [side * 0.55, -0.23 + row * 0.045, 0.6], [side * 0.76, -0.22 + row * 0.1, 0.53]], 0.008);
+    }
+    for (const [x, y] of [[0.14, -0.23], [0.22, -0.25], [0.17, -0.3]]) {
+      oval(head, lavender, [side * x, y, 0.661], [0.013, 0.012, 0.008]);
+    }
   }
   const nose = oval(head, pink, [0, -0.15, 0.695], [0.075, 0.055, 0.05]);
   nose.rotation.z = Math.PI;
@@ -90,6 +125,26 @@ export function mountRabbit(button) {
   oval(rabbit, mint, [0, 1.61, 0.02], [0.59, 0.13, 0.48]);
   const scarf = oval(rabbit, mint, [0.31, 1.37, 0.45], [0.14, 0.33, 0.06]);
   scarf.rotation.z = 0.22;
+  const fold = oval(rabbit, mint, [0.13, 1.4, 0.49], [0.11, 0.24, 0.055]);
+  fold.rotation.z = -0.23;
+  // Tricot en relief et franges : les détails restent de la géométrie locale.
+  for (let i = 0; i < 4; i++) {
+    curve(rabbit, cream, [[0.24, 1.18 + i * 0.075, 0.514], [0.32, 1.19 + i * 0.075, 0.522], [0.41, 1.21 + i * 0.075, 0.5]], 0.009);
+  }
+  for (let i = 0; i < 3; i++) {
+    oval(rabbit, mint, [0.3 + i * 0.07, 1.07, 0.46], [0.025, 0.07, 0.03]);
+  }
+  const starShape = new THREE.Shape();
+  for (let i = 0; i < 10; i++) {
+    const angle = Math.PI / 2 + i * Math.PI / 5;
+    const radius = i % 2 ? 0.052 : 0.11;
+    const x = Math.cos(angle) * radius, y = Math.sin(angle) * radius;
+    if (i === 0) starShape.moveTo(x, y); else starShape.lineTo(x, y);
+  }
+  starShape.closePath();
+  const badge = new THREE.Mesh(new THREE.ExtrudeGeometry(starShape, {depth: 0.025, bevelEnabled: true, bevelThickness: 0.01, bevelSize: 0.008, bevelSegments: 2, steps: 1}), gold);
+  badge.position.set(-0.2, 1.61, 0.48);
+  rabbit.add(badge);
   const shadow = new THREE.Mesh(new THREE.CircleGeometry(0.7, 32), new THREE.MeshBasicMaterial({color: 0x795291, transparent: true, opacity: 0.14, depthWrite: false}));
   shadow.rotation.x = -Math.PI / 2;
   shadow.position.y = 0.22;
@@ -150,9 +205,13 @@ export function mountRabbit(button) {
     window.removeEventListener('pageshow', resume);
     button.removeEventListener('pointermove', move);
     button.removeEventListener('pointerleave', leave);
-    geometry.dispose();
-    smile.geometry.dispose(); shadow.geometry.dispose(); shadow.material.dispose();
-    for (const material of [fur, pink, cream, dark, white, mint]) material.dispose();
+    const geometries = new Set(), materials = new Set();
+    scene.traverse(object => {
+      if (object.geometry) geometries.add(object.geometry);
+      if (object.material) materials.add(object.material);
+    });
+    geometries.forEach(item => item.dispose());
+    materials.forEach(item => item.dispose());
     renderer.dispose();
   }
   canvas.addEventListener('webglcontextlost', contextLost);
