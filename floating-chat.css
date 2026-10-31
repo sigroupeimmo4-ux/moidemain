@@ -187,3 +187,140 @@
  .fullta-widget .fullta-launch{width:112px;height:140px}
  .fullta-widget .fullta-panel{bottom:145px;max-height:calc(100dvh - 166px)}
 }
+
+
+/* Fullta vivant : clin d’œil, curiosité, réaction et attente.
+   Le lapin 3D reste directement cliquable, sans bulle ni bouton visible autour. */
+.fullta-widget .fullta-launch{
+  isolation:isolate;
+  overflow:visible;
+}
+.fullta-widget .fullta-mascot-art{
+  display:block;
+  position:relative;
+  width:100%;
+  height:100%;
+  transform-origin:50% 88%;
+  animation:fullta-gentle-breathe 4.5s ease-in-out infinite;
+  transition:filter 220ms ease;
+  will-change:transform;
+  pointer-events:none;
+}
+.fullta-widget .fullta-launch-icon{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  animation:none;
+  filter:drop-shadow(0 6px 9px #6c477330);
+  user-select:none;
+  -webkit-user-drag:none;
+}
+.fullta-widget .fullta-blink-eyes{
+  position:absolute;
+  inset:0;
+  display:block;
+  opacity:0;
+  pointer-events:none;
+  transform-origin:center;
+}
+.fullta-widget .fullta-blink-eye{
+  position:absolute;
+  top:43%;
+  width:17%;
+  height:8%;
+  min-height:7px;
+  background:linear-gradient(180deg,#fffaff 0%,#f1e9fc 78%,#e8dcf5 100%);
+  border-radius:60% 60% 55% 55%;
+  box-shadow:0 1px 0 #9b81af65;
+  transform:rotate(-3deg);
+}
+.fullta-widget .fullta-blink-eye::after{
+  content:"";
+  position:absolute;
+  left:15%;
+  right:15%;
+  bottom:12%;
+  border-bottom:2px solid #816a93;
+  border-radius:50%;
+}
+.fullta-widget .fullta-blink-eye-left{left:31%}
+.fullta-widget .fullta-blink-eye-right{left:53%;transform:rotate(3deg)}
+.fullta-widget .fullta-launch.is-blinking .fullta-blink-eyes{
+  animation:fullta-eyelid-close 280ms ease-in-out both;
+}
+.fullta-widget .fullta-sparkle{
+  position:absolute;
+  z-index:2;
+  pointer-events:none;
+  user-select:none;
+  opacity:0;
+  color:#e58bb5;
+  text-shadow:0 1px 5px #fff8;
+  font-weight:900;
+  line-height:1;
+}
+.fullta-widget .fullta-sparkle-one{left:4%;top:24%;font-size:25px}
+.fullta-widget .fullta-sparkle-two{right:0;top:12%;font-size:30px;color:#f5c979}
+.fullta-widget .fullta-sparkle-three{right:6%;top:53%;font-size:17px;color:#93cec2}
+.fullta-widget .fullta-launch.is-reacting .fullta-sparkle-one{
+  animation:fullta-sparkle-pop 830ms ease-out both;
+}
+.fullta-widget .fullta-launch.is-reacting .fullta-sparkle-two{
+  animation:fullta-sparkle-pop 850ms 100ms ease-out both;
+}
+.fullta-widget .fullta-launch.is-reacting .fullta-sparkle-three{
+  animation:fullta-sparkle-pop 760ms 160ms ease-out both;
+}
+.fullta-widget .fullta-launch.is-curious .fullta-mascot-art{
+  animation:fullta-curious-tilt 750ms ease-in-out infinite alternate;
+  filter:brightness(1.03);
+}
+.fullta-widget .fullta-launch.is-thinking .fullta-mascot-art{
+  animation:fullta-thinking 900ms ease-in-out infinite;
+}
+.fullta-widget .fullta-launch.is-chatting{
+  filter:drop-shadow(0 1px 5px #a66eb433);
+}
+.fullta-widget .fullta-launch.is-chatting .fullta-mascot-art{
+  animation-duration:3.4s;
+}
+@keyframes fullta-gentle-breathe{
+  0%,100%{transform:translateY(0) rotate(-1.5deg)}
+  50%{transform:translateY(-5px) rotate(1.5deg)}
+}
+@keyframes fullta-curious-tilt{
+  0%{transform:translateY(-2px) rotate(calc(var(--fullta-tilt, 0deg) - 4deg))}
+  100%{transform:translateY(-6px) rotate(calc(var(--fullta-tilt, 0deg) + 4deg))}
+}
+@keyframes fullta-thinking{
+  0%,100%{transform:translateY(0) rotate(-2deg)}
+  50%{transform:translateY(-8px) rotate(2deg)}
+}
+@keyframes fullta-eyelid-close{
+  0%,100%{opacity:0;transform:scaleY(.3)}
+  30%,68%{opacity:1;transform:scaleY(1)}
+}
+@keyframes fullta-sparkle-pop{
+  0%{opacity:0;transform:scale(.4) translateY(10px)}
+  35%{opacity:1;transform:scale(1.1) translateY(-7px)}
+  100%{opacity:0;transform:scale(.8) translateY(-22px)}
+}
+@media(max-width:600px){
+  .fullta-widget .fullta-blink-eye{min-height:5px}
+  .fullta-widget .fullta-sparkle-one{font-size:19px}
+  .fullta-widget .fullta-sparkle-two{font-size:22px}
+  .fullta-widget .fullta-sparkle-three{font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){
+  .fullta-widget .fullta-mascot-art,
+  .fullta-widget .fullta-launch-icon,
+  .fullta-widget .fullta-blink-eyes,
+  .fullta-widget .fullta-sparkle{
+    animation:none!important;
+    transition:none!important;
+    transform:none!important;
+  }
+  .fullta-widget .fullta-launch.is-blinking .fullta-blink-eyes{opacity:0}
+  .fullta-widget .fullta-launch:hover{transform:none}
+}

@@ -1,7 +1,7 @@
 name: Tests visuels Moi Demain
 on:
   push:
-    branches: [feature/quiz-personnalites-et-culture-video]
+    branches: [feature/fullta-3d-clignement-interactif]
   pull_request:
     branches: [main]
   workflow_dispatch:

@@ -28,6 +28,25 @@ for(const viewport of [{width:1280,height:850},{width:390,height:844}]){
    }
    if(route==='mon-espace.html'&&!await page.locator('#account-status').count())throw Error('Statut compte absent');
    if(route==='explorer.html'&&!await page.locator('.fullta-launch').count())throw Error('Mascotte Fullta absente');
+   if(route==='explorer.html'||route===''){
+     const mascot=page.locator('.fullta-launch');
+     await mascot.waitFor({timeout:6000});
+     if(!await page.locator('.fullta-blink-eye').count())throw Error('Yeux animés absents');
+     await mascot.focus();
+     const blinked=await mascot.evaluate(node=>node.classList.contains('is-blinking'));
+     if(!blinked)throw Error('Le clignement ne réagit pas à la sélection');
+     await mascot.click();
+     await page.locator('#fullta-panel:not([hidden])').waitFor({timeout:3000});
+     if(await mascot.getAttribute('aria-expanded')!=='true')throw Error('Fullta ne reflète pas le chat ouvert');
+     await page.screenshot({path:'qa-screenshots/'+viewport.width+'-'+name+'-fullta-open.png',fullPage:true});
+     await page.keyboard.press('Escape');
+     if(await mascot.getAttribute('aria-expanded')!=='false')throw Error('Le chat ne se referme pas');
+     await page.emulateMedia({reducedMotion:'reduce'});
+     const noMotion=await mascot.locator('.fullta-mascot-art').evaluate(node=>getComputedStyle(node).animationName);
+     if(noMotion!=='none')throw Error('Préférence de mouvement réduit ignorée');
+     await page.emulateMedia({reducedMotion:'no-preference'});
+   }
+
    if(route===''&&!await page.locator('.quiz-home-cta').count())throw Error('Nouveau quiz non visible sur accueil');
    if(route==='quiz-personnalites.html?test=ecrans'){
      if(await page.locator('#quiz-play').getAttribute('hidden')!==null)throw Error('Quiz vidéo ne démarre pas');
