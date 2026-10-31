@@ -34,9 +34,6 @@ export function mountRabbit(button) {
   const mint = new THREE.MeshStandardMaterial({color: 0x83ddd2, roughness: 0.55});
   const lavender = new THREE.MeshStandardMaterial({color: 0x9f83bf, roughness: 0.55});
   const gold = new THREE.MeshStandardMaterial({color: 0xffd58b, metalness: 0.15, roughness: 0.4});
-  const jacket = new THREE.MeshStandardMaterial({color: 0x70c9c3, roughness: 0.82});
-  const trim = new THREE.MeshStandardMaterial({color: 0x408d94, roughness: 0.8});
-  const shorts = new THREE.MeshStandardMaterial({color: 0x9979be, roughness: 0.85});
   const geometry = new THREE.SphereGeometry(1, 28, 20);
   const rabbit = new THREE.Group();
   scene.add(rabbit);
@@ -48,60 +45,51 @@ export function mountRabbit(button) {
     return mesh;
   }
   const body = new THREE.Group();
-  // Affiner l'ensemble du corps et de la tenue, sans changer le visage.
-  body.scale.set(0.8,1,0.87);
   rabbit.add(body);
-  // Silhouette sculptée : taille cintrée, poitrine et épaules distinctes.
-  const profile = [[0,0.66],[0.28,0.68],[0.4,0.76],[0.41,0.9],
-    [0.4,1.08],[0.4,1.3],[0.43,1.51],[0.38,1.66],[0.27,1.79],[0,1.82]];
-  const torso = new THREE.Mesh(new THREE.LatheGeometry(profile.map(([r,y])=>new THREE.Vector2(r,y)),48),jacket);
-  torso.scale.z=0.84;
+  // Anatomie de lapin assis : dos en pente, poitrine étroite et bassin plus bas.
+  const profile = [[0,0.36],[0.25,0.42],[0.38,0.62],[0.43,0.85],
+    [0.4,1.05],[0.34,1.28],[0.28,1.51],[0.23,1.72],[0,1.79]];
+  const torso = new THREE.Mesh(new THREE.LatheGeometry(profile.map(([r,y])=>new THREE.Vector2(r,y)),48),fur);
+  torso.scale.z=0.95;
+  torso.position.z=-0.1;
   body.add(torso);
-  oval(body, cream, [0,1.32,0.34],[0.22,0.42,0.09]);
-  // Jambes courtes, cuisses et genoux modelés sous le short.
+  oval(body,cream,[0,1.08,0.245],[0.25,0.45,0.085]);
+  // Cuisses repliées, jarrets bas et longs pieds tournés légèrement vers l'extérieur.
   for (const side of [-1,1]) {
-    oval(body, shorts, [side*0.3,0.64,0],[0.25,0.27,0.29]);
-    oval(body, fur, [side*0.32,0.38,0.09],[0.16,0.28,0.19]);
-    oval(body, shorts, [side*0.32,0.47,0.02],[0.25,0.075,0.28]);
-    // Semelles contrastées, chaussures arrondies et lacets en relief.
-    oval(body, trim, [side*0.34,0.23,0.29],[0.3,0.095,0.43]);
-    oval(body, cream, [side*0.34,0.31,0.29],[0.29,0.16,0.42]);
-    oval(body, mint, [side*0.34,0.36,0.02],[0.19,0.09,0.16]);
-    for (const y of [0.34,0.4]) {
-      curve(body, lavender, [[side*0.34-0.09,y,0.64],[side*0.34,y+0.025,0.66],[side*0.34+0.09,y,0.64]],0.012);
+    const haunch=oval(body,fur,[side*0.36,0.68,-0.1],[0.29,0.38,0.36]);
+    haunch.rotation.z=side*-0.18;
+    oval(body,fur,[side*0.41,0.38,0.04],[0.17,0.21,0.22]);
+    const foot=new THREE.Group();
+    foot.position.set(side*0.37,0.26,0.26);
+    foot.rotation.y=side*0.17;
+    body.add(foot);
+    oval(foot,fur,[0,0,0],[0.22,0.15,0.52]);
+    oval(foot,cream,[0,0.035,0.3],[0.19,0.105,0.23]);
+    for (const offset of [-0.065,0.065]) {
+      curve(foot,lavender,[[offset,0.09,0.37],[offset,0.085,0.45],[offset,0.055,0.51]],0.008);
     }
-    curve(body, pink, [[side*0.34-0.17,0.26,0.62],[side*0.34,0.25,0.7],[side*0.34+0.17,0.26,0.62]],0.009);
+    curve(body,lavender,[[side*0.51,0.79,0.19],[side*0.57,0.65,0.2],[side*0.51,0.47,0.22]],0.009);
   }
-  oval(body, cream, [0.49,0.88,-0.32],[0.25,0.25,0.25]);
-  const leftArm = new THREE.Group();
-  leftArm.position.set(-0.43,1.58,0);
+  // Queue en pompon, visible à côté de la hanche.
+  oval(body,cream,[0.5,0.78,-0.35],[0.23,0.23,0.23]);
+  for (const [x,y,z] of [[0.59,0.88,-0.31],[0.63,0.72,-0.31],[0.48,0.65,-0.34]]) {
+    oval(body,cream,[x,y,z],[0.115,0.115,0.12]);
+  }
+  const leftArm=new THREE.Group();
+  leftArm.position.set(-0.27,1.43,0.17);
   body.add(leftArm);
-  const rightArm = new THREE.Group();
-  rightArm.position.set(0.43,1.58,0);
+  const rightArm=new THREE.Group();
+  rightArm.position.set(0.27,1.43,0.17);
   body.add(rightArm);
+  // Petites pattes antérieures en fourrure, sans mains ni manches.
   for (const [arm,side] of [[leftArm,-1],[rightArm,1]]) {
-    // Épaule, bras, coude et avant-bras : la manche suit la pose.
-    oval(arm,jacket,[side*0.1,-0.08,0],[0.18,0.24,0.2]);
-    const sleeve=oval(arm,jacket,[side*0.18,-0.29,0.045],[0.18,0.27,0.19]);
-    sleeve.rotation.z=side*0.14;
-    oval(arm,trim,[side*0.2,-0.47,0.08],[0.18,0.065,0.19]);
-    oval(arm,cream,[side*0.2,-0.48,0.085],[0.16,0.038,0.19]);
-    oval(arm,fur,[side*0.21,-0.61,0.11],[0.185,0.2,0.18]);
-    oval(arm,fur,[side*0.09,-0.58,0.23],[0.09,0.12,0.1]);
-    oval(arm,pink,[side*0.22,-0.63,0.27],[0.085,0.09,0.025]);
-    for (const offset of [-0.06,0.025]) {
-      curve(arm,lavender,[[side*0.21+offset,-0.7,0.27],[side*0.21+offset,-0.75,0.24]],0.008);
+    const foreleg=oval(arm,fur,[side*0.045,-0.31,0.1],[0.13,0.38,0.145]);
+    foreleg.rotation.x=-0.14;
+    oval(arm,cream,[side*0.04,-0.63,0.19],[0.14,0.13,0.22]);
+    for (const offset of [-0.045,0.045]) {
+      curve(arm,lavender,[[side*0.04+offset,-0.62,0.35],[side*0.04+offset,-0.67,0.39]],0.007);
     }
-    // Poches à rabat, surpiqûres et coutures verticales de la veste.
-    const pocket=oval(body,trim,[side*0.3,0.98,0.33],[0.13,0.145,0.055]);
-    pocket.rotation.y=side*0.32;
-    oval(body,jacket,[side*0.3,1.07,0.372],[0.14,0.055,0.025]);
-    oval(body,gold,[side*0.3,1.052,0.398],[0.022,0.022,0.012]);
-    curve(body,cream,[[side*0.21,0.89,0.375],[side*0.29,0.875,0.389],[side*0.37,0.9,0.35]],0.008);
-    curve(body,trim,[[side*0.19,1.62,0.28],[side*0.17,1.38,0.385],[side*0.16,1.12,0.407],[side*0.12,0.82,0.395]],0.012);
   }
-  oval(body,trim,[0,0.75,0],[0.39,0.052,0.35]);
-  oval(body,gold,[0,0.76,0.362],[0.045,0.037,0.012]);
   const head = new THREE.Group();
   head.position.y = 2.16;
   rabbit.add(head);
@@ -155,17 +143,21 @@ export function mountRabbit(button) {
   smile.rotation.z = Math.PI;
   smile.position.set(0, -0.27, 0.675);
   head.add(smile);
-  oval(body, mint, [0, 1.61, 0.02], [0.59, 0.13, 0.48]);
-  const scarf = oval(body, mint, [0.31, 1.37, 0.45], [0.14, 0.33, 0.06]);
+  const scarfGroup=new THREE.Group();
+  scarfGroup.scale.setScalar(0.72);
+  scarfGroup.position.set(0,0.49,-0.04);
+  body.add(scarfGroup);
+  oval(scarfGroup, mint, [0, 1.61, 0.02], [0.59, 0.13, 0.48]);
+  const scarf = oval(scarfGroup, mint, [0.31, 1.37, 0.45], [0.14, 0.33, 0.06]);
   scarf.rotation.z = 0.22;
-  const fold = oval(body, mint, [0.13, 1.4, 0.49], [0.11, 0.24, 0.055]);
+  const fold = oval(scarfGroup, mint, [0.13, 1.4, 0.49], [0.11, 0.24, 0.055]);
   fold.rotation.z = -0.23;
   // Tricot en relief et franges : les détails restent de la géométrie locale.
   for (let i = 0; i < 4; i++) {
-    curve(body, cream, [[0.24, 1.18 + i * 0.075, 0.514], [0.32, 1.19 + i * 0.075, 0.522], [0.41, 1.21 + i * 0.075, 0.5]], 0.009);
+    curve(scarfGroup, cream, [[0.24, 1.18 + i * 0.075, 0.514], [0.32, 1.19 + i * 0.075, 0.522], [0.41, 1.21 + i * 0.075, 0.5]], 0.009);
   }
   for (let i = 0; i < 3; i++) {
-    oval(body, mint, [0.3 + i * 0.07, 1.07, 0.46], [0.025, 0.07, 0.03]);
+    oval(scarfGroup, mint, [0.3 + i * 0.07, 1.07, 0.46], [0.025, 0.07, 0.03]);
   }
   const starShape = new THREE.Shape();
   for (let i = 0; i < 10; i++) {
@@ -177,7 +169,7 @@ export function mountRabbit(button) {
   starShape.closePath();
   const badge = new THREE.Mesh(new THREE.ExtrudeGeometry(starShape, {depth: 0.025, bevelEnabled: true, bevelThickness: 0.01, bevelSize: 0.008, bevelSegments: 2, steps: 1}), gold);
   badge.position.set(-0.2, 1.61, 0.48);
-  body.add(badge);
+  scarfGroup.add(badge);
   const shadow = new THREE.Mesh(new THREE.CircleGeometry(0.7, 32), new THREE.MeshBasicMaterial({color: 0x795291, transparent: true, opacity: 0.14, depthWrite: false}));
   shadow.rotation.x = -Math.PI / 2;
   shadow.position.y = 0.22;
