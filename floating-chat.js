@@ -46,7 +46,13 @@ export function mountFullta({jobs=publicJobs,onAction=null}={}) {
   widget.setAttribute('aria-label','Assistant Fullta');
   widget.innerHTML=[
     '<button class="fullta-launch" type="button" aria-label="Ouvrir le chat avec Fullta" aria-expanded="false" aria-controls="fullta-panel">',
-      '<img class="fullta-launch-icon" src="./assets/fullta-3d.webp?v=3d20261030" width="150" height="188" alt="" aria-hidden="true">',
+      '<span class="fullta-mascot-art" aria-hidden="true">',
+        '<img class="fullta-launch-icon" src="./assets/fullta-3d.webp?v=3d20261030" width="150" height="188" alt="">',
+        '<span class="fullta-blink-eyes"><span class="fullta-blink-eye fullta-blink-eye-left"></span><span class="fullta-blink-eye fullta-blink-eye-right"></span></span>',
+      '</span>',
+      '<span class="fullta-sparkle fullta-sparkle-one" aria-hidden="true">✦</span>',
+      '<span class="fullta-sparkle fullta-sparkle-two" aria-hidden="true">✧</span>',
+      '<span class="fullta-sparkle fullta-sparkle-three" aria-hidden="true">✦</span>',
       '<span class="fullta-launch-copy sr-only">Parler à Fullta</span>',
     '</button>',
     '<section id="fullta-panel" class="fullta-panel" role="dialog" aria-modal="false" aria-labelledby="fullta-title" hidden>',
@@ -82,6 +88,49 @@ export function mountFullta({jobs=publicJobs,onAction=null}={}) {
   let pending=false;
   let aiUnavailable=false;
   let opened=false;
+  const motionPreference=window.matchMedia('(prefers-reduced-motion: reduce)');
+  let blinkTimer=null;
+  let blinkEndTimer=null;
+  let reactionTimer=null;
+  const canAnimate=()=>!motionPreference.matches && !document.hidden;
+
+  // L'illustration 3D reste le seul bouton : yeux et réactions sont décoratifs.
+  function blink(){
+    if(!canAnimate() || launch.classList.contains('is-blinking'))return;
+    launch.classList.add('is-blinking');
+    clearTimeout(blinkEndTimer);
+    blinkEndTimer=setTimeout(()=>launch.classList.remove('is-blinking'),280);
+  }
+  function scheduleBlink(){
+    clearTimeout(blinkTimer);
+    if(!canAnimate())return;
+    blinkTimer=setTimeout(()=>{
+      blink();
+      scheduleBlink();
+    },3800+Math.round(Math.random()*4700));
+  }
+  function react(){
+    if(!canAnimate())return;
+    launch.classList.remove('is-reacting');
+    void launch.offsetWidth;
+    launch.classList.add('is-reacting');
+    clearTimeout(reactionTimer);
+    reactionTimer=setTimeout(()=>launch.classList.remove('is-reacting'),1050);
+  }
+  function onVisibilityChange(){
+    if(document.hidden){
+      clearTimeout(blinkTimer);
+      launch.classList.remove('is-blinking','is-reacting');
+    }else scheduleBlink();
+  }
+  document.addEventListener('visibilitychange',onVisibilityChange);
+  motionPreference.addEventListener('change',onVisibilityChange);
+  window.addEventListener('pagehide',()=>{
+    clearTimeout(blinkTimer);
+    clearTimeout(blinkEndTimer);
+    clearTimeout(reactionTimer);
+  },{once:true});
+  scheduleBlink();
 
   function addMessage(message,role='assistant') {
     const p=document.createElement('p');
@@ -89,12 +138,15 @@ export function mountFullta({jobs=publicJobs,onAction=null}={}) {
     p.textContent=String(message).slice(0,1500);
     log.append(p);
     log.scrollTop=log.scrollHeight;
+    if(role==='assistant')react();
     history.push({role,content:p.textContent});
     if(history.length>12)history.shift();
   }
   function setOpen(value,focus=true) {
     opened=Boolean(value);
     panel.hidden=!opened;
+    launch.classList.toggle('is-chatting',opened);
+    if(opened){blink();react();}
     launch.setAttribute('aria-expanded',String(opened));
     launch.setAttribute('aria-label',opened?'Fermer le chat avec Fullta':'Ouvrir le chat avec Fullta');
     if (focus) (opened?input:launch).focus();
@@ -150,6 +202,7 @@ export function mountFullta({jobs=publicJobs,onAction=null}={}) {
     addMessage(value,'user');
     input.value='';
     pending=true;
+    launch.classList.add('is-thinking');
     send.disabled=true;
     form.setAttribute('aria-busy','true');
     try {
@@ -175,6 +228,7 @@ export function mountFullta({jobs=publicJobs,onAction=null}={}) {
       addMessage('Je n’ai pas pu effectuer cette demande. Essayez une suggestion ou utilisez les boutons du site.');
     } finally {
       pending=false;
+      launch.classList.remove('is-thinking');
       send.disabled=false;
       form.removeAttribute('aria-busy');
       if(opened && !document.querySelector('#modal')?.open)input.focus();
@@ -182,6 +236,22 @@ export function mountFullta({jobs=publicJobs,onAction=null}={}) {
   }
 
   launch.addEventListener('click',()=>setOpen(!opened));
+  launch.addEventListener('pointerenter',event=>{
+    if(event.pointerType!=='mouse'&&event.pointerType!=='pen')return;
+    launch.classList.add('is-curious');
+    blink();
+  });
+  launch.addEventListener('pointerleave',()=>{
+    launch.classList.remove('is-curious');
+    launch.style.removeProperty('--fullta-tilt');
+  });
+  launch.addEventListener('pointermove',event=>{
+    if(!canAnimate()||event.pointerType!=='mouse')return;
+    const rect=launch.getBoundingClientRect();
+    const offset=(event.clientX-rect.left)/rect.width-0.5;
+    launch.style.setProperty('--fullta-tilt',(offset*8).toFixed(1)+'deg');
+  });
+  launch.addEventListener('focus',blink);
   widget.querySelector('.fullta-close').addEventListener('click',()=>setOpen(false));
   widget.addEventListener('keydown',event=>{
     if(event.key==='Escape' && opened){event.preventDefault();setOpen(false);}
