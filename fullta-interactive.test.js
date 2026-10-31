@@ -36,13 +36,13 @@ test('Les préférences de mouvement et les onglets inactifs sont respectés',()
  assert.match(css,/animation:none!important/);
 });
 test('Cache-busting identique sur les modules et toutes les pages avec Fullta',()=>{
- assert.match(read('app.js'),/floating-chat\.js\?v=fullta-webgl-v5/);
- assert.match(read('floating-chat-entry.js'),/floating-chat\.js\?v=fullta-webgl-v5/);
+ assert.match(read('app.js'),/floating-chat\.js\?v=fullta-webgl-v6/);
+ assert.match(read('floating-chat-entry.js'),/floating-chat\.js\?v=fullta-webgl-v6/);
  for(const page of ['index.html','explorer.html','a-propos.html','conseils.html','premium.html','quiz-personnalites.html','mon-espace.html']){
-  assert.ok(read(page).includes('floating-chat.css?v=fullta-webgl-v5'),page+' CSS');
+  assert.ok(read(page).includes('floating-chat.css?v=fullta-webgl-v6'),page+' CSS');
  }
  for(const page of ['index.html','a-propos.html','conseils.html','premium.html','quiz-personnalites.html','mon-espace.html']){
-  assert.ok(read(page).includes('floating-chat-entry.js?v=fullta-webgl-v5'),page+' script');
+  assert.ok(read(page).includes('floating-chat-entry.js?v=fullta-webgl-v6'),page+' script');
  }
- assert.match(read('explorer.html'),/app\.js\?v=fullta-webgl-v5/);
+ assert.match(read('explorer.html'),/app\.js\?v=fullta-webgl-v6/);
 });
