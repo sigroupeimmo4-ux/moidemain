@@ -9,6 +9,13 @@ test('Fullta garde son bouton flottant 3D et cliquable',()=>{
  assert.match(js,/fullta-mascot-art/);
  assert.match(js,/fullta-3d\.webp/);
  assert.match(js,/fullta-blink-eyes/);
+ assert.match(js,/svg class="fullta-blink-eyes"/);
+ assert.match(js,/ellipse cx="69" cy="83"/);
+ assert.match(js,/fullta-hello/);
+ assert.match(css,/@keyframes fullta-visible-blink/);
+ assert.match(css,/fullta-idle-shine/);
+ assert.match(js,/firstBlink\?950/);
+
  assert.match(js,/launch\.addEventListener\('click',\(\)=>setOpen\(!opened\)\)/);
  assert.match(js,/aria-expanded/);
 });
@@ -29,13 +36,13 @@ test('Les préférences de mouvement et les onglets inactifs sont respectés',()
  assert.match(css,/animation:none!important/);
 });
 test('Cache-busting identique sur les modules et toutes les pages avec Fullta',()=>{
- assert.match(read('app.js'),/floating-chat\.js\?v=blink20261031b/);
- assert.match(read('floating-chat-entry.js'),/floating-chat\.js\?v=blink20261031b/);
+ assert.match(read('app.js'),/floating-chat\.js\?v=fullta-visible-v2/);
+ assert.match(read('floating-chat-entry.js'),/floating-chat\.js\?v=fullta-visible-v2/);
  for(const page of ['index.html','explorer.html','a-propos.html','conseils.html','premium.html','quiz-personnalites.html','mon-espace.html']){
-  assert.ok(read(page).includes('floating-chat.css?v=blink20261031b'),page+' CSS');
+  assert.ok(read(page).includes('floating-chat.css?v=fullta-visible-v2'),page+' CSS');
  }
  for(const page of ['index.html','a-propos.html','conseils.html','premium.html','quiz-personnalites.html','mon-espace.html']){
-  assert.ok(read(page).includes('floating-chat-entry.js?v=blink20261031b'),page+' script');
+  assert.ok(read(page).includes('floating-chat-entry.js?v=fullta-visible-v2'),page+' script');
  }
- assert.match(read('explorer.html'),/app\.js\?v=blink20261031b/);
+ assert.match(read('explorer.html'),/app\.js\?v=fullta-visible-v2/);
 });
