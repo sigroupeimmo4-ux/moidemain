@@ -1,3 +1,10 @@
+### Fullta vivant — 31 octobre 2026
+- Conservé le lapin 3D existant et son fonctionnement de bouton flottant, sans bulle autour.
+- Ajout de paupières animées pour les clignements, mouvement curieux au survol, étoiles lors des réponses, rebond pendant l’attente du chat.
+- Respect de `prefers-reduced-motion`, de la navigation clavier et mise en pause lorsque l’onglet est masqué.
+- Mise à jour des versions des fichiers JS/CSS dans les pages afin d’éviter les anciennes ressources en cache.
+- Tests automatiques et vérifications navigateur mobile/ordinateur.
+
 ### Nouveaux quiz (31 octobre 2026)
 - Quatre quiz supplémentaires : centres d’intérêt vidéo/films, quotidien, passions, approche des défis.
 - Mise en avant de l’expérience vidéo/films directement sur l’accueil.
