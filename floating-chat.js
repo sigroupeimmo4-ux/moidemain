@@ -89,7 +89,7 @@ export function mountFullta({jobs=publicJobs,onAction=null}={}) {
 
   const launch=widget.querySelector('.fullta-launch');
   // Chargement différé : le chat reste utilisable si WebGL est indisponible.
-  import('./fullta-3d.js?v=webgl-v1').then(({mountRabbit})=>mountRabbit(launch)).catch(()=>{});
+  import('./fullta-3d.js?v=webgl-v2').then(({mountRabbit})=>mountRabbit(launch)).catch(()=>{});
   const panel=widget.querySelector('.fullta-panel');
   const input=widget.querySelector('#fullta-input');
   const log=widget.querySelector('.fullta-messages');

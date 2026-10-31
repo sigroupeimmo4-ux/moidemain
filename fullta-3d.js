@@ -42,8 +42,8 @@ export function mountRabbit(button) {
     parent.add(mesh);
     return mesh;
   }
-  oval(rabbit, fur, [0, 1.13, 0], [0.59, 0.78, 0.46]);
-  oval(rabbit, cream, [0, 1.05, 0.4], [0.39, 0.5, 0.1]);
+  oval(rabbit, fur, [0, 1.13, 0], [0.62, 0.69, 0.49]);
+  oval(rabbit, cream, [0, 1.05, 0.44], [0.42, 0.44, 0.1]);
   oval(rabbit, fur, [-0.37, 0.47, 0.23], [0.33, 0.22, 0.43]);
   oval(rabbit, fur, [0.37, 0.47, 0.23], [0.33, 0.22, 0.43]);
   oval(rabbit, cream, [0.53, 0.92, -0.34], [0.27, 0.27, 0.27]);
@@ -56,35 +56,36 @@ export function mountRabbit(button) {
   rabbit.add(rightArm);
   oval(rightArm, fur, [0.09, -0.24, 0.08], [0.21, 0.4, 0.22]);
   const head = new THREE.Group();
-  head.position.y = 2.08;
+  head.position.y = 2.02;
   rabbit.add(head);
-  oval(head, fur, [0, 0, 0], [0.75, 0.66, 0.57]);
+  oval(head, fur, [0, 0, 0], [0.82, 0.71, 0.62]);
   const ears = [];
   for (const side of [-1, 1]) {
     const ear = new THREE.Group();
     ear.position.set(side * 0.36, 0.47, -0.04);
     ear.rotation.z = -side * 0.16;
     head.add(ear);
-    oval(ear, fur, [0, 0.56, 0], [0.23, 0.79, 0.2]);
-    oval(ear, pink, [0, 0.59, 0.15], [0.128, 0.59, 0.066]);
+    oval(ear, fur, [0, 0.56, 0], [0.25, 0.74, 0.21]);
+    oval(ear, pink, [0, 0.56, 0.16], [0.14, 0.55, 0.066]);
     ears.push(ear);
   }
   const eyes = [];
   for (const side of [-1, 1]) {
     const eye = new THREE.Group();
-    eye.position.set(side * 0.265, 0.065, 0.51);
+    eye.position.set(side * 0.28, 0.045, 0.555);
     head.add(eye);
-    oval(eye, dark, [0, 0, 0], [0.105, 0.145, 0.07]);
-    oval(eye, white, [-0.026, 0.047, 0.058], [0.032, 0.037, 0.018]);
+    oval(eye, dark, [0, 0, 0], [0.135, 0.175, 0.085]);
+    oval(eye, white, [-0.035, 0.057, 0.074], [0.042, 0.048, 0.018]);
+    oval(eye, white, [0.039, -0.048, 0.073], [0.019, 0.022, 0.012]);
     eyes.push(eye);
-    oval(head, pink, [side * 0.43, -0.15, 0.47], [0.14, 0.075, 0.04]);
-    oval(head, cream, [side * 0.13, -0.23, 0.51], [0.2, 0.14, 0.1]);
+    oval(head, pink, [side * 0.46, -0.17, 0.515], [0.17, 0.095, 0.045]);
+    oval(head, cream, [side * 0.13, -0.24, 0.565], [0.21, 0.15, 0.1]);
   }
-  const nose = oval(head, pink, [0, -0.14, 0.635], [0.095, 0.065, 0.06]);
+  const nose = oval(head, pink, [0, -0.15, 0.695], [0.075, 0.055, 0.05]);
   nose.rotation.z = Math.PI;
   const smile = new THREE.Mesh(new THREE.TorusGeometry(0.075, 0.012, 8, 16, Math.PI), dark);
   smile.rotation.z = Math.PI;
-  smile.position.set(0, -0.25, 0.61);
+  smile.position.set(0, -0.27, 0.675);
   head.add(smile);
   oval(rabbit, mint, [0, 1.61, 0.02], [0.59, 0.13, 0.48]);
   const scarf = oval(rabbit, mint, [0.31, 1.37, 0.45], [0.14, 0.33, 0.06]);
@@ -111,12 +112,12 @@ export function mountRabbit(button) {
     rabbit.rotation.y = animate ? -0.13 + turn + Math.sin(time * 0.7) * 0.09 : -0.13;
     rabbit.position.y = animate ? Math.sin(time * 2) * 0.045 : 0;
     head.rotation.z = animate ? Math.sin(time * 1.3) * 0.035 : 0;
-    ears.forEach((ear, i) => { ear.rotation.z = (i ? -1 : 1) * 0.16 + (animate ? Math.sin(time * 2.1 + i) * 0.045 : 0); });
+    ears.forEach((ear, i) => { ear.rotation.z = (i ? -0.28 : 0.16) + (animate ? Math.sin(time * 2.1 + i) * 0.045 : 0); });
     if (animate && time > nextBlink) { blinkStart = time; nextBlink = time + 2.5 + Math.random() * 3; }
     const blink = animate ? Math.max(0.06, 1 - Math.sin(Math.min(1, (time - blinkStart) / 0.22) * Math.PI)) : 1;
     eyes.forEach(eye => { eye.scale.y = blink; });
     const wave = button.matches(':hover, :focus-visible') || button.classList.contains('is-reacting');
-    rightArm.rotation.z = animate && wave ? 2.2 + Math.sin(time * 8) * 0.25 : -0.1;
+    rightArm.rotation.z = animate && wave ? 2.2 + Math.sin(time * 6) * 0.2 : -0.1;
     leftArm.rotation.z = animate && button.classList.contains('is-thinking') ? Math.sin(time * 5) * 0.15 : 0.12;
     renderer.render(scene, camera);
   }
