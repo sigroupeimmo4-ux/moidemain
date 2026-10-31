@@ -84,7 +84,7 @@
   width:29px;height:29px;
   border-radius:50%;
   border:1px solid #e7d5e5;
-  background:#f8dce8 url('./assets/fullta-avatar.webp') center/cover no-repeat;
+  background:#f8dce8 url('./assets/fullta-detailed-avatar.png') center/cover no-repeat;
   box-shadow:0 2px 8px #57466a16;
 }
 @media(max-width:600px) {
@@ -150,7 +150,7 @@
 .fullta-widget .fullta-message:not(.user)::before {
   border:none;
   border-radius:0;
-  background:transparent url('./assets/fullta-3d.webp?v=3d20261030') center/contain no-repeat;
+  background:transparent url('./assets/fullta-detailed.png') center/contain no-repeat;
   box-shadow:none;
 }
 @keyframes fullta-mascot-float {
