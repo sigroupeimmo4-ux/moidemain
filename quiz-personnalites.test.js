@@ -56,7 +56,7 @@ test('Le quiz vidéo est directement visible sur l’accueil, les autres parcour
 });
 test('Les réponses des médias restent uniquement en mémoire et le résumé est enregistré sur action explicite',()=>{
  const ui=read('quiz-personnalites.js'),page=read('quiz-personnalites.html');
- assert.match(ui,/button\.addEventListener\('click',async\(\)=>/);
+ assert.ok(ui.includes("$('quiz-save').addEventListener('click',async()=>"));
  assert.match(ui,/addHistory\('personality'/);
  assert.ok(!ui.includes('localStorage'));
  assert.ok(!ui.includes('getYouTubeHistory'));
