@@ -1,3 +1,14 @@
+## Nouveaux quiz de découverte (31 octobre 2026)
+
+- **`/quiz-personnalites.html?test=ecrans`** : quiz visible à l’accueil sur les vidéos YouTube, Shorts, TikTok et films **déclarés librement par la personne**. Aucune connexion aux plateformes, aucun historique importé ou analysé.
+- **`?test=moi`** : réactions et préférences au quotidien.
+- **`?test=passions`** : passions et activités qui attirent.
+- **`?test=apprendre`** : façons d’aborder des défis et d’explorer un sujet, sans prétention de « style d’apprentissage » fixe.
+- Les quatre questionnaires sont gratuits et accessibles sans compte. Ils donnent des pistes à explorer parmi des fiches métier gratuites, jamais de diagnostic ni d’orientation obligatoire.
+- Le calcul et les réponses détaillées restent dans le navigateur en mémoire de page. Aucun stockage des choix détaillés ; l’utilisateur connecté peut décider d’enregistrer uniquement un résumé général grâce au bouton dédié.
+- Fichiers : `quiz-personnalites-data.js`, `quiz-personnalites.js`, `quiz-personnalites.html`, `quiz-personnalites.css`, `quiz-home.css` et `quiz-personnalites.test.js`.
+- Le quiz initial de l’explorateur reste accessible et inchangé.
+
 ## Sécurité, comptes et fonctionnalités après audit (octobre 2026)
 
 L’espace `/mon-espace.html` permet aux adultes connectés de conserver et gérer un profil minimal, les favoris, l’historique des quiz et plusieurs personnages. Il inclut l’export, l’effacement du parcours et une demande authentifiée de suppression définitive du compte.

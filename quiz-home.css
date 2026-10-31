@@ -1,0 +1,27 @@
+/* Spotlight du quiz médias sur l'accueil Moi Demain */
+.landing-page .quiz-home-spotlight{display:grid;grid-template-columns:minmax(0,1.23fr) minmax(270px,.77fr);gap:25px;align-items:center;position:relative;padding:clamp(27px,5vw,55px);margin:42px 0 22px;border-radius:30px;border:1px solid #eed4ee;background:radial-gradient(ellipse at 91% 15%,#d4f4f8 0%,transparent 39%),linear-gradient(125deg,#fff0f7 0%,#efe5ff 58%,#e0faf4 100%);box-shadow:0 18px 55px #b078c815;overflow:hidden}
+.quiz-home-main{position:relative;z-index:2}
+.landing-page .quiz-home-main h2{font-size:clamp(29px,3.5vw,46px);line-height:1.18;letter-spacing:-1.5px;color:#583264;margin:14px 0 17px;max-width:660px}
+.landing-page .quiz-home-main p{font-size:14px;line-height:1.85;color:#765d81;max-width:580px}
+.quiz-home-chips{display:flex;flex-wrap:wrap;gap:9px;margin:18px 0 24px}
+.quiz-home-chips span{font-weight:780;font-size:11px;color:#78548a;background:#fff9ffbb;border:1px solid #ecdaf2;border-radius:999px;padding:8px 11px}
+.quiz-home-cta{display:inline-flex;align-items:center;justify-content:center;gap:16px;padding:16px 21px;background:linear-gradient(105deg,#b75bb3,#8456bd);color:white!important;font-weight:830;text-decoration:none!important;font-size:13px;border-radius:14px;box-shadow:0 10px 23px #86499b2c;line-height:1.4;transition:transform .15s,box-shadow .15s}
+.quiz-home-cta:hover{transform:translateY(-2px);box-shadow:0 15px 24px #86499b39}
+.quiz-home-cta:focus-visible,.quiz-home-links a:focus-visible{outline:3px solid #9743a8;outline-offset:4px}
+.landing-page .quiz-home-main .quiz-home-privacy{font-size:11px;color:#7d6982;margin:14px 0 0}
+.quiz-home-poster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px;align-items:center;transform:rotate(5deg)}
+.quiz-home-tile{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;aspect-ratio:1/1;border-radius:30px;border:1px solid #fff9;box-shadow:0 13px 30px #7c52a51a;font-size:clamp(39px,5vw,68px)}
+.quiz-home-tile small{font-size:9px;letter-spacing:2px;font-weight:800;color:#85578c}
+.quiz-home-tile.tile-one{background:#ffccdf;transform:translateY(13px) rotate(-7deg)}
+.quiz-home-tile.tile-two{background:#e4d2ff;transform:translateY(-8px) rotate(4deg)}
+.quiz-home-tile.tile-three{background:#cff1f2;transform:translateY(-10px) rotate(3deg)}
+.quiz-home-tile.tile-four{background:#ffe7f5;transform:translateY(4px) rotate(-5deg)}
+.landing-page .quiz-home-all{display:flex;gap:25px;align-items:center;justify-content:space-between;padding:30px 15px 45px}
+.landing-page .quiz-home-all h2{font-size:clamp(24px,3vw,32px);letter-spacing:-.6px;line-height:1.25;margin:10px 0}
+.landing-page .quiz-home-all p{font-size:12px;line-height:1.65;max-width:480px;color:#7c6686}
+.quiz-home-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:min(530px,100%)}
+.quiz-home-links a{display:flex;align-items:center;text-decoration:none;background:#fffafd;border:1px solid #ebd5ed;border-radius:13px;padding:14px;font-weight:770;font-size:12px;color:#8d5a94;min-height:60px}
+.quiz-home-links a:hover{background:#f6e9fa;border-color:#d7b8df}
+@media(max-width:950px){.landing-page .quiz-home-spotlight{grid-template-columns:1fr}.quiz-home-poster{display:flex;transform:none;gap:12px}.quiz-home-tile{flex:1;aspect-ratio:1.3;max-height:120px;font-size:32px;border-radius:19px;transform:none!important}.quiz-home-tile small{font-size:8px}.landing-page .quiz-home-all{flex-direction:column;align-items:stretch;gap:10px}.quiz-home-links{width:100%}}
+@media(max-width:550px){.landing-page .quiz-home-spotlight{margin:24px 0 15px;padding:24px 18px;border-radius:22px}.landing-page .quiz-home-main h2{font-size:30px}.quiz-home-tile{max-height:81px;font-size:26px;border-radius:13px}.quiz-home-tile small{font-size:7px;letter-spacing:1px}.quiz-home-poster{gap:7px}.quiz-home-links{grid-template-columns:1fr}.quiz-home-links a{min-height:49px;padding:12px}.landing-page .quiz-home-all{padding:23px 9px 35px}.quiz-home-chips{gap:6px}.quiz-home-chips span{font-size:10px;padding:7px 9px}.quiz-home-cta{width:100%;font-size:12px;padding:14px}}
+@media(prefers-reduced-motion:reduce){.quiz-home-cta{transition:none}}

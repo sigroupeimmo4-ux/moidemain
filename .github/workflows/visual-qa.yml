@@ -1,7 +1,9 @@
 name: Tests visuels Moi Demain
 on:
   push:
-    branches: [feature/audit-remediation-foundations]
+    branches: [feature/quiz-personnalites-et-culture-video]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
