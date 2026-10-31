@@ -6,7 +6,7 @@ mkdirSync('qa-screenshots',{recursive:true});
 const failures=[];
 for(const viewport of [{width:1280,height:850},{width:390,height:844}]){
  const context=await browser.newContext({viewport});
- for(const route of ['','explorer.html','a-propos.html','cgu.html','cgv.html','confidentialite.html','mon-espace.html','personnages.html','premium.html']){
+ for(const route of ['','explorer.html','a-propos.html','cgu.html','cgv.html','confidentialite.html','mon-espace.html','personnages.html','premium.html','quiz-personnalites.html','quiz-personnalites.html?test=ecrans']){
   const page=await context.newPage();
   const name=(route||'accueil').replace(/[^a-z0-9]+/gi,'-');
   try{
@@ -28,6 +28,20 @@ for(const viewport of [{width:1280,height:850},{width:390,height:844}]){
    }
    if(route==='mon-espace.html'&&!await page.locator('#account-status').count())throw Error('Statut compte absent');
    if(route==='explorer.html'&&!await page.locator('.fullta-launch').count())throw Error('Mascotte Fullta absente');
+   if(route===''&&!await page.locator('.quiz-home-cta').count())throw Error('Nouveau quiz non visible sur accueil');
+   if(route==='quiz-personnalites.html?test=ecrans'){
+     if(await page.locator('#quiz-play').getAttribute('hidden')!==null)throw Error('Quiz vidéo ne démarre pas');
+     for(let i=0;i<8;i++){
+       await page.locator('#quiz-options input[type=radio]').first().check();
+       await page.locator('#quiz-next').click();
+     }
+     await page.locator('#quiz-result:not([hidden])').waitFor({timeout:7000});
+     const links=await page.locator('#result-careers a').count();
+     if(links<3)throw Error('Résultat sans métiers suggérés');
+     await page.screenshot({path:'qa-screenshots/'+viewport.width+'-quiz-result.png',fullPage:true});
+     if(await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+4))
+      throw Error('Débordement du résultat de quiz');
+   }
    console.log('OK',viewport.width,route||'accueil');
   }catch(e){failures.push(viewport.width+'px '+(route||'accueil')+' : '+e.message);}
   await page.close();
