@@ -1,3 +1,11 @@
+### Nouveaux quiz (31 octobre 2026)
+- Quatre quiz supplémentaires : centres d’intérêt vidéo/films, quotidien, passions, approche des défis.
+- Mise en avant de l’expérience vidéo/films directement sur l’accueil.
+- Questions et résultats à vocation exploratoire, sans inférence de personnalité scientifique.
+- Réponses détaillées traitées en mémoire du navigateur uniquement, sans consultation de l’historique YouTube/TikTok.
+- Sauvegarde **opt-in** du résumé général dans `quiz_history` pour les comptes connectés, aucun changement de schéma.
+- Tests de scoring, liens et navigation ajoutés. L’ancien quiz reste conservé.
+
 # SUIVI DE PROJET — MOI DEMAIN
 Dernière mise à jour : 30 octobre 2026
 
