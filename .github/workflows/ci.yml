@@ -1,7 +1,7 @@
 name: Vérification Moi Demain
 on:
   push:
-    branches: [main, feature/quiz-personnalites-et-culture-video]
+    branches: [main, feature/fullta-3d-clignement-interactif]
   pull_request:
     branches: [main]
 jobs:
