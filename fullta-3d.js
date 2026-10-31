@@ -45,47 +45,71 @@ export function mountRabbit(button) {
     return mesh;
   }
   const body = new THREE.Group();
+  body.scale.x=0.92;
   rabbit.add(body);
   // Anatomie de lapin assis : dos en pente, poitrine étroite et bassin plus bas.
-  const profile = [[0,0.36],[0.25,0.42],[0.38,0.62],[0.43,0.85],
-    [0.4,1.05],[0.34,1.28],[0.28,1.51],[0.23,1.72],[0,1.79]];
+  const profile = [[0,0.36],[0.18,0.44],[0.27,0.64],[0.32,0.86],
+    [0.29,1.08],[0.25,1.32],[0.23,1.54],[0.2,1.74],[0,1.84]];
   const torso = new THREE.Mesh(new THREE.LatheGeometry(profile.map(([r,y])=>new THREE.Vector2(r,y)),48),fur);
-  torso.scale.z=0.95;
+  torso.scale.z=0.88;
   torso.position.z=-0.1;
   body.add(torso);
-  oval(body,cream,[0,1.08,0.245],[0.25,0.45,0.085]);
+  // Poitrail effilé en mèches superposées, plutôt qu'un ventre ovale.
+  oval(body,cream,[0,1.18,0.14],[0.17,0.43,0.075]);
+  for (let row=0;row<4;row++) {
+    const y=1.49-row*0.16;
+    for (const side of [-1,1]) {
+      const tuft=oval(body,cream,[side*(0.08-row*0.009),y,0.19],[0.037,0.11,0.023]);
+      tuft.rotation.z=side*0.48;
+    }
+  }
   // Cuisses repliées, jarrets bas et longs pieds tournés légèrement vers l'extérieur.
   for (const side of [-1,1]) {
-    const haunch=oval(body,fur,[side*0.36,0.68,-0.1],[0.29,0.38,0.36]);
+    const haunch=oval(body,fur,[side*0.29,0.7,-0.12],[0.22,0.39,0.28]);
     haunch.rotation.z=side*-0.18;
-    oval(body,fur,[side*0.41,0.38,0.04],[0.17,0.21,0.22]);
+    oval(body,fur,[side*0.32,0.4,0.04],[0.125,0.25,0.18]);
     const foot=new THREE.Group();
-    foot.position.set(side*0.37,0.26,0.26);
+    foot.position.set(side*0.3,0.26,0.29);
     foot.rotation.y=side*0.17;
     body.add(foot);
-    oval(foot,fur,[0,0,0],[0.22,0.15,0.52]);
-    oval(foot,cream,[0,0.035,0.3],[0.19,0.105,0.23]);
+    oval(foot,fur,[0,0,0],[0.175,0.125,0.55]);
+    oval(foot,cream,[0,0.035,0.3],[0.15,0.085,0.25]);
     for (const offset of [-0.065,0.065]) {
       curve(foot,lavender,[[offset,0.09,0.37],[offset,0.085,0.45],[offset,0.055,0.51]],0.008);
     }
-    curve(body,lavender,[[side*0.51,0.79,0.19],[side*0.57,0.65,0.2],[side*0.51,0.47,0.22]],0.009);
+    curve(body,lavender,[[side*0.38,0.91,0.09],[side*0.47,0.69,0.12],[side*0.37,0.48,0.16]],0.009);
+  }
+  // Mèches orientées sur les flancs et les cuisses, modelées en relief.
+  for (const side of [-1,1]) {
+    for (let row=0;row<4;row++) {
+      const tuft=oval(body,fur,[side*(0.24+row*0.043),1.09-row*0.12,0.065],[0.045,0.13,0.06]);
+      tuft.rotation.z=side*(0.35+row*0.09);
+      curve(body,cream,[[side*(0.26+row*0.035),1.12-row*0.12,0.12],[side*(0.28+row*0.035),1.02-row*0.12,0.135]],0.006);
+    }
   }
   // Queue en pompon, visible à côté de la hanche.
-  oval(body,cream,[0.5,0.78,-0.35],[0.23,0.23,0.23]);
-  for (const [x,y,z] of [[0.59,0.88,-0.31],[0.63,0.72,-0.31],[0.48,0.65,-0.34]]) {
-    oval(body,cream,[x,y,z],[0.115,0.115,0.12]);
+  oval(body,cream,[0.4,0.8,-0.31],[0.18,0.18,0.18]);
+  for (const [x,y,z] of [[0.47,0.88,-0.28],[0.51,0.76,-0.28],[0.4,0.69,-0.31]]) {
+    oval(body,cream,[x,y,z],[0.09,0.09,0.095]);
   }
   const leftArm=new THREE.Group();
-  leftArm.position.set(-0.27,1.43,0.17);
+  leftArm.position.set(-0.22,1.46,0.12);
   body.add(leftArm);
   const rightArm=new THREE.Group();
-  rightArm.position.set(0.27,1.43,0.17);
+  rightArm.position.set(0.22,1.46,0.12);
   body.add(rightArm);
   // Petites pattes antérieures en fourrure, sans mains ni manches.
   for (const [arm,side] of [[leftArm,-1],[rightArm,1]]) {
-    const foreleg=oval(arm,fur,[side*0.045,-0.31,0.1],[0.13,0.38,0.145]);
-    foreleg.rotation.x=-0.14;
-    oval(arm,cream,[side*0.04,-0.63,0.19],[0.14,0.13,0.22]);
+    const upper=oval(arm,fur,[side*0.035,-0.18,0.025],[0.095,0.23,0.105]);
+    upper.rotation.z=side*0.14;
+    oval(arm,fur,[side*0.06,-0.36,0.08],[0.095,0.11,0.1]);
+    const foreleg=oval(arm,fur,[side*0.045,-0.48,0.13],[0.085,0.23,0.105]);
+    foreleg.rotation.x=-0.3;
+    oval(arm,cream,[side*0.04,-0.67,0.2],[0.105,0.1,0.205]);
+    for (let i=0;i<3;i++) {
+      const tuft=oval(arm,cream,[side*0.03,-0.24-i*0.07,0.115],[0.033,0.07,0.025]);
+      tuft.rotation.z=side*0.3;
+    }
     for (const offset of [-0.045,0.045]) {
       curve(arm,lavender,[[side*0.04+offset,-0.62,0.35],[side*0.04+offset,-0.67,0.39]],0.007);
     }

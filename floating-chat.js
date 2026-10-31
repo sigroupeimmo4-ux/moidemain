@@ -47,7 +47,7 @@ export function mountFullta({jobs=publicJobs,onAction=null}={}) {
   widget.innerHTML=[
     '<button class="fullta-launch" type="button" aria-label="Ouvrir le chat avec Fullta" aria-expanded="false" aria-controls="fullta-panel">',
       '<span class="fullta-mascot-art" aria-hidden="true">',
-        '<img class="fullta-launch-icon" src="./assets/fullta-detailed.png?v=rabbit-v7" width="150" height="188" alt="">',
+        '<img class="fullta-launch-icon" src="./assets/fullta-detailed.png?v=rabbit-v8" width="150" height="188" alt="">',
         '<svg class="fullta-blink-eyes" viewBox="0 0 150 188" preserveAspectRatio="xMidYMid meet" focusable="false" aria-hidden="true">',
           '<defs>',
             '<linearGradient id="fullta-eyelid-fur" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#c7aede"/><stop offset="58%" stop-color="#e9d9ef"/><stop offset="100%" stop-color="#f4e3ef"/></linearGradient>',
@@ -66,7 +66,7 @@ export function mountFullta({jobs=publicJobs,onAction=null}={}) {
       '<span class="fullta-launch-copy sr-only">Parler à Fullta</span>',
     '</button>',
     '<section id="fullta-panel" class="fullta-panel" role="dialog" aria-modal="false" aria-labelledby="fullta-title" hidden>',
-      '<div class="fullta-head"><img class="fullta-avatar" src="./assets/fullta-detailed-avatar.png?v=rabbit-v7" width="42" height="42" alt="Fullta, le petit lapin pastel en 3D">',
+      '<div class="fullta-head"><img class="fullta-avatar" src="./assets/fullta-detailed-avatar.png?v=rabbit-v8" width="42" height="42" alt="Fullta, le petit lapin pastel en 3D">',
         '<div class="fullta-head-copy"><strong id="fullta-title">Fullta</strong><small>Votre copilote dans Moi Demain</small></div>',
         '<button type="button" class="fullta-close" aria-label="Fermer le chat">×</button>',
       '</div>',
@@ -89,7 +89,7 @@ export function mountFullta({jobs=publicJobs,onAction=null}={}) {
 
   const launch=widget.querySelector('.fullta-launch');
   // Chargement différé : le chat reste utilisable si WebGL est indisponible.
-  import('./fullta-3d.js?v=webgl-v7').then(({mountRabbit})=>mountRabbit(launch)).catch(()=>{});
+  import('./fullta-3d.js?v=webgl-v8').then(({mountRabbit})=>mountRabbit(launch)).catch(()=>{});
   const panel=widget.querySelector('.fullta-panel');
   const input=widget.querySelector('#fullta-input');
   const log=widget.querySelector('.fullta-messages');
