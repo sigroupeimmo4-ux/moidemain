@@ -1,2 +1,2 @@
-import { mountFullta } from './floating-chat.js?v=blink20261031b';
+import { mountFullta } from './floating-chat.js?v=fullta-visible-v2';
 mountFullta();
