@@ -80,7 +80,7 @@ if(typeof document!=='undefined'){
    const b=document.querySelector('#avatar-cloud');
    b.disabled=true;
    try{
-    const {saveAvatar}=await import('./user-data.js');
+    const {saveAvatar}=await import('./user-data.js?v=fix20261101');
     const value={...current,name:name.value.trim().slice(0,24)||defaults.name};
     if(!await saveAvatar(value))throw Error('Connexion nécessaire : ouvrez Mon espace pour vous connecter.');
     feedback.textContent='Ton personnage est sauvegardé dans Mon espace !';

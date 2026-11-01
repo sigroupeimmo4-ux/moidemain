@@ -1,4 +1,4 @@
-import {signIn,signUp,recoverPassword,getSession} from './auth-client.js?v=app20261101';
+import {signIn,signUp,recoverPassword,getSession} from './auth-client.js?v=fix20261101';
 const form=document.querySelector('#auth-form');
 const password=document.querySelector('#password'),feedback=document.querySelector('#auth-feedback');
 const nameInput=document.querySelector('#name');

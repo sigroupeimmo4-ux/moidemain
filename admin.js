@@ -1,5 +1,5 @@
-import {getSession} from './auth-client.js';
-import {api} from './user-data.js';
+import {getSession} from './auth-client.js?v=fix20261101';
+import {api} from './user-data.js?v=fix20261101';
 const $=id=>document.getElementById(id);
 const note=$('admin-status'),panel=$('admin-content'),feedback=$('admin-feedback');
 let careers=[];

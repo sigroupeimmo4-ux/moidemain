@@ -29,7 +29,7 @@ test('Les actions IA gardent le mode local, avec consentement et connexion pour 
 });
 test('Les avatars peuvent être synchronisés et la connexion est réservée aux adultes responsables',()=>{
  assert.ok(read('personnages.html').includes('avatar-cloud'));
- assert.ok(read('personnages.js').includes("import('./user-data.js')"));
+ assert.ok(read('personnages.js').includes("import('./user-data.js?v=fix20261101')"));
  assert.ok(read('auth.html').includes('adult-registration'));
  assert.ok(read('auth.js').includes('adult-registration'));
 });

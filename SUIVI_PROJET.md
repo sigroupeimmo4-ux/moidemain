@@ -104,3 +104,14 @@ Dernière mise à jour : 30 octobre 2026
 - Pré requis externe : ajouter `https://sigroupeimmo4-ux.github.io/moidemain/reset-password.html` aux URL de redirection autorisées dans Supabase Auth. L’envoi et la réception d’un e-mail réel n’ont pas été validés ; les scénarios de récupération utilisent des réponses API simulées, sans modification d’un compte existant.
 - Tests : `npm test`, `app-journeys.browser.mjs` et `visual-qa.mjs`. Le workflow visuel couvre désormais aussi les push sur `main`.
 - Les paiements, l’identité légale, l’attribution d’un administrateur et la validation pédagogique locale restent des prérequis externes décrits dans `AUDIT_ACTIONS.md`.
+
+### Vérification et corrections de bugs — 1 novembre 2026
+
+Défauts reproduits par des tests avant correction :
+- Le bouton d’un compte Premium renvoyait à l’accueil de l’explorateur ; les cartes Premium renvoyaient vers la page d’achat au lieu d’ouvrir la fiche autorisée. Le catalogue filtré et l’ouverture via contrôle serveur sont corrigés.
+- Ajouter ou retirer un favori depuis un résultat de mini-quiz réenregistrait le même résultat dans l’historique. L’affichage du résultat ne réécrit plus l’historique.
+- Des lectures simultanées déclenchaient plusieurs rafraîchissements de session ; les interruptions réseau effaçaient la session. Le rafraîchissement est partagé entre composants, les erreurs temporaires conservent la session, les jetons refusés sont invalidés et une déconnexion n’est pas annulée par une réponse tardive.
+- Des données locales invalides faussaient le nombre de favoris ou bloquaient les cases des conseils. Les données sont normalisées avant utilisation.
+- Une réponse de synchronisation lente pouvait rétablir un favori qui venait d’être retiré. Les modifications locales récentes sont préservées.
+
+Validation : suite Node, tests de récupération de compte, 10 scénarios navigateur de régression, contrôles des 19 pages à 390 et 1280 pixels, et suite visuelle existante. Les tests Auth/Premium utilisent des réponses simulées et ne créent ni paiement ni compte réel. Les réglages Supabase, les e-mails réels, les autorisations RLS en production et le déploiement GitHub Pages restent à vérifier avec les accès nécessaires.

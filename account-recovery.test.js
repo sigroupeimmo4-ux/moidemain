@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {recoverPassword,verifyRecoveryToken,updateRecoveredPassword,revokeRecoveryToken} from './auth-client.js';
+import {recoverPassword,verifyRecoveryToken,updateRecoveredPassword,revokeRecoveryToken} from './auth-client.js?v=fix20261101';
 import {jobs} from './catalogue.js';
 
 test('Le catalogue partagé conserve les 20 fiches gratuites et ne divulgue pas les détails Premium',()=>{

@@ -1,6 +1,6 @@
 import {mountSiteNavigation} from './site-navigation.js';
 import { planLocalAction } from './fullta.js';
-import {getSession,SUPABASE_PUBLISHABLE_KEY} from './auth-client.js?v=app20261101';
+import {getSession,SUPABASE_PUBLISHABLE_KEY} from './auth-client.js?v=fix20261101';
 import {extraFreeJobs,premiumPreviews} from './catalogue-extra.js';
 
 // Public catalogue pour que Fullta reconnaisse les métiers sur toutes les pages.

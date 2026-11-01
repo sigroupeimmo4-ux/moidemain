@@ -1,5 +1,5 @@
-import {getSession} from './auth-client.js';
-import {api,userId} from './user-data.js';
+import {getSession} from './auth-client.js?v=fix20261101';
+import {api,userId} from './user-data.js?v=fix20261101';
 const area=document.getElementById('support-form-area');
 if(area){
  const status=document.getElementById('support-form-status');

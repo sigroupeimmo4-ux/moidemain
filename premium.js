@@ -1,5 +1,5 @@
 import {premiumPreviews} from './catalogue-extra.js';
-import {SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,getSession,checkPremium} from './auth-client.js';
+import {SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,getSession,checkPremium} from './auth-client.js?v=fix20261101';
 
 const root=document.querySelector('#premium-cards');
 const buy=document.querySelector('#premium-purchase');
@@ -96,7 +96,8 @@ async function verifyReturnedPayment(token,session){
 buy.addEventListener('click',async()=>{
  if(buy.dataset.mode==='explore'){location.assign('./explorer.html?premium=1');return;}
  if(!config.available)return;
- const session=await getSession();
+ let session;
+ try{session=await getSession();}catch{message('Connexion indisponible : réessayez lorsque le réseau est rétabli.','error');return;}
  if(!session){location.assign('./auth.html?next=premium.html');return;}
  if(!document.querySelector('#adult-confirm')?.checked){
   message('Un parent ou un responsable légal majeur doit confirmer l’achat.','error');return;
@@ -117,4 +118,4 @@ buy.addEventListener('click',async()=>{
   buy.disabled=false;buy.textContent=config.mode==='test'?'Réessayer la simulation':'Réessayer le paiement';
  }
 });
-void init();
+void init().catch(()=>{disable('Réessayez après actualisation');message('Le service est temporairement indisponible. Votre session a été conservée ; réessayez après actualisation.','error');});

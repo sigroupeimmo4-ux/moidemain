@@ -1,5 +1,5 @@
 import {QUIZZES,getQuiz,scoreQuiz} from './quiz-personnalites-data.js';
-import {addHistory} from './user-data.js';
+import {addHistory} from './user-data.js?v=fix20261101';
 
 const $=id=>document.getElementById(id);
 const catalog=$('quiz-catalogue');

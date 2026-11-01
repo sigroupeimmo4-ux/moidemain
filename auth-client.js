@@ -16,7 +16,7 @@ async function authFetch(path,{method='POST',token,body}={}){
   ...(body?{body:JSON.stringify(body)}:{})
  });
  let data={};try{data=await response.json()}catch{}
- if(!response.ok)throw new Error(data.msg||data.error_description||data.message||'Le service de connexion est indisponible.');
+ if(!response.ok){const error=new Error(data.msg||data.error_description||data.message||'Le service de connexion est indisponible.');error.status=response.status;throw error;}
  return data;
 }
 export async function signIn(email,password){
@@ -32,23 +32,39 @@ export async function recoverPassword(email){
  const redirect=new URL('./reset-password.html',location.href).href;
  return authFetch('recover?redirect_to='+encodeURIComponent(redirect),{body:{email}});
 }
+let refreshInFlight=null;
 export async function getSession(){
- let session=getStored();if(!session)return null;
- if((session.expires_at||0) > Date.now()/1000+SESSION_TOLERANCE)return session;
- try{
-  const data=await authFetch('token?grant_type=refresh_token',{body:{refresh_token:session.refresh_token}});
-  saveSession(data);session=getStored();return session;
- }catch{clearSession();return null}
+ const session=getStored();if(!session)return null;
+ if((session.expires_at||0)>Date.now()/1000+SESSION_TOLERANCE)return session;
+ if(!refreshInFlight){
+  refreshInFlight=(async()=>{
+   try{
+    const data=await authFetch('token?grant_type=refresh_token',{body:{refresh_token:session.refresh_token}});
+    // Une déconnexion effectuée entre-temps ne doit pas être annulée par cette réponse.
+    if(getStored()?.refresh_token!==session.refresh_token)return null;
+    saveSession(data);return getStored();
+   }catch(error){
+    if([400,401,403].includes(error.status)){
+     if(getStored()?.refresh_token===session.refresh_token)clearSession();
+     return null;
+    }
+    // Réseau indisponible ou erreur temporaire : conserver la session pour réessayer.
+    throw error;
+   }finally{refreshInFlight=null;}
+  })();
+ }
+ return refreshInFlight;
 }
 export async function getUser(){
  const session=await getSession();if(!session)return null;
  try{return await authFetch('user',{method:'GET',token:session.access_token})}
- catch{clearSession();return null}
+ catch(error){if([401,403].includes(error.status)){clearSession();return null;}throw error;}
 }
 export async function signOut(){
- const session=await getSession();
- if(session)try{await authFetch('logout',{token:session.access_token})}catch{}
- clearSession();
+ try{
+  const session=getStored();
+  if(session?.access_token)await authFetch('logout?scope=local',{token:session.access_token});
+ }catch{}finally{clearSession();}
 }
 export async function checkPremium(){
  const session=await getSession();if(!session)return false;

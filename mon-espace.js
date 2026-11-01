@@ -1,5 +1,5 @@
-import {getUser,signOut,SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,getSession} from './auth-client.js';
-import {readMyProfile,saveMyProfile,readHistory,readFavorites,readAvatars,deleteHistory,deleteAvatar,deleteMyJourney} from './user-data.js';
+import {getUser,signOut,SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,getSession} from './auth-client.js?v=fix20261101';
+import {readMyProfile,saveMyProfile,readHistory,readFavorites,readAvatars,deleteHistory,deleteAvatar,deleteMyJourney} from './user-data.js?v=fix20261101';
 import {extraFreeJobs,premiumPreviews} from './catalogue-extra.js';
 import {ANIMALS} from './personnages.js';
 const careers=[
@@ -130,8 +130,8 @@ $('delete-account').addEventListener('click',async()=>{
  const text=$('delete-confirm').value;
  if(text!=='SUPPRIMER'){$('security-status').textContent='Saisis exactement SUPPRIMER pour confirmer.';return;}
  if(!confirm('Supprimer définitivement le compte, son profil et ses droits Premium ? Cette action est irréversible.'))return;
- const session=await getSession();if(!session){$('security-status').textContent='Session expirée : reconnectez-vous.';return;}
  try{
+  const session=await getSession();if(!session){$('security-status').textContent='Session expirée : reconnectez-vous.';return;}
   const r=await fetch(SUPABASE_URL+'/functions/v1/delete-my-account',{
    method:'POST',headers:{apikey:SUPABASE_PUBLISHABLE_KEY,Authorization:'Bearer '+session.access_token,'Content-Type':'application/json'},
    body:JSON.stringify({confirm:'SUPPRIMER'})

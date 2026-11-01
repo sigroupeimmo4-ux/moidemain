@@ -1,4 +1,4 @@
-import {SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY} from './auth-client.js';
+import {SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY} from './auth-client.js?v=fix20261101';
 async function showAnnouncements(){
  const target=document.getElementById('site-announcements');if(!target)return;
  try{

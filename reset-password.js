@@ -1,4 +1,4 @@
-import {verifyRecoveryToken,updateRecoveredPassword,revokeRecoveryToken,clearSession} from './auth-client.js?v=app20261101';
+import {verifyRecoveryToken,updateRecoveredPassword,revokeRecoveryToken,clearSession} from './auth-client.js?v=fix20261101';
 import {mountSiteNavigation} from './site-navigation.js';
 const form=document.getElementById('recovery-form'),status=document.getElementById('recovery-status');
 const password=document.getElementById('new-password'),confirm=document.getElementById('confirm-password');

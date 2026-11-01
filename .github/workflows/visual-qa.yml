@@ -30,6 +30,10 @@ jobs:
         run: MOI_DEMAIN_URL=http://127.0.0.1:3000/ node visual-qa.mjs
       - name: Vérifier les parcours ajoutés
         run: MOI_DEMAIN_URL=http://127.0.0.1:3000/ node app-journeys.browser.mjs
+      - name: Vérifier les régressions fonctionnelles
+        run: MOI_DEMAIN_URL=http://127.0.0.1:3000/ node regressions.browser.mjs
+      - name: Vérifier toutes les pages publiques
+        run: MOI_DEMAIN_URL=http://127.0.0.1:3000/ node all-pages.browser.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -38,6 +38,7 @@ if(typeof document!=='undefined'){
  const checks=document.querySelector('#advice-checklist');
  if(checks){
   let progress={};try{progress=JSON.parse(localStorage.getItem('moidemain-advice-v1')||'{}')||{}}catch{}
+  if(typeof progress!=='object'||Array.isArray(progress))progress={};
   checks.querySelectorAll('[data-check]').forEach(input=>{
    input.checked=progress[input.dataset.check]===true;
    input.addEventListener('change',()=>{

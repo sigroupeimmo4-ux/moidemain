@@ -1,4 +1,4 @@
-import {SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,getSession} from './auth-client.js';
+import {SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,getSession} from './auth-client.js?v=fix20261101';
 
 export async function api(table,{method='GET',query='',data,prefer='return=representation'}={}){
  const session=await getSession();
