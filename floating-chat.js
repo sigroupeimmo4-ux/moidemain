@@ -1,5 +1,6 @@
+import {mountSiteNavigation} from './site-navigation.js';
 import { planLocalAction } from './fullta.js';
-import {getSession,SUPABASE_PUBLISHABLE_KEY} from './auth-client.js';
+import {getSession,SUPABASE_PUBLISHABLE_KEY} from './auth-client.js?v=app20261101';
 import {extraFreeJobs,premiumPreviews} from './catalogue-extra.js';
 
 // Public catalogue pour que Fullta reconnaisse les métiers sur toutes les pages.
@@ -40,6 +41,7 @@ export function sanitizeFulltaAction(raw, jobs = publicJobs) {
 }
 
 export function mountFullta({jobs=publicJobs,onAction=null}={}) {
+  mountSiteNavigation();
   if (document.querySelector('.fullta-widget')) return null;
   const widget=document.createElement('aside');
   widget.className='fullta-widget';

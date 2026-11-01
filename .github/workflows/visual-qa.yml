@@ -1,7 +1,7 @@
 name: Tests visuels Moi Demain
 on:
   push:
-    branches: [feature/fullta-3d-clignement-interactif]
+    branches: [main, feature/fullta-3d-clignement-interactif]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -28,6 +28,8 @@ jobs:
           exit 1
       - name: Vérifier desktop et mobile
         run: MOI_DEMAIN_URL=http://127.0.0.1:3000/ node visual-qa.mjs
+      - name: Vérifier les parcours ajoutés
+        run: MOI_DEMAIN_URL=http://127.0.0.1:3000/ node app-journeys.browser.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:

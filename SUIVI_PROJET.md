@@ -93,3 +93,14 @@ Dernière mise à jour : 30 octobre 2026
 - Conserver les secrets Supabase/Prestataire **hors de GitHub et du navigateur** ; seule la clé publishable Supabase est publiable.
 - Ne jamais donner accès à une fiche Premium sur la seule base du localStorage, d'un cookie non signé ou d'un paramètre URL.
 - Pour chaque nouvelle évolution, mettre à jour ce fichier de suivi.
+
+### Parcours complétés — 1 novembre 2026
+
+- Navigation mobile accessible sur les pages avec en-tête : menu, liens vers les fonctionnalités, fermeture au clavier et au clic extérieur.
+- `comparer.html` : comparaison publique de deux métiers sans compte, quotidien, formations et activités gratuites ; détails Premium verrouillés. Lien partageable et impression/PDF, ainsi que comparaison des favoris de cet appareil.
+- Le catalogue gratuit est partagé dans `catalogue.js` pour conserver des informations cohérentes avec l’explorateur.
+- `explorer.html?vue=favoris` ouvre directement les favoris invités.
+- `reset-password.html` : vérification du lien Supabase, confirmation du nouveau mot de passe, gestion des liens expirés et des erreurs, retrait du jeton de l’adresse et absence de stockage du jeton de récupération.
+- Pré requis externe : ajouter `https://sigroupeimmo4-ux.github.io/moidemain/reset-password.html` aux URL de redirection autorisées dans Supabase Auth. L’envoi et la réception d’un e-mail réel n’ont pas été validés ; les scénarios de récupération utilisent des réponses API simulées, sans modification d’un compte existant.
+- Tests : `npm test`, `app-journeys.browser.mjs` et `visual-qa.mjs`. Le workflow visuel couvre désormais aussi les push sur `main`.
+- Les paiements, l’identité légale, l’attribution d’un administrateur et la validation pédagogique locale restent des prérequis externes décrits dans `AUDIT_ACTIONS.md`.

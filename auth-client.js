@@ -29,7 +29,8 @@ export async function signUp(email,password){
  return data;
 }
 export async function recoverPassword(email){
- return authFetch('recover',{body:{email}});
+ const redirect=new URL('./reset-password.html',location.href).href;
+ return authFetch('recover?redirect_to='+encodeURIComponent(redirect),{body:{email}});
 }
 export async function getSession(){
  let session=getStored();if(!session)return null;
@@ -65,4 +66,14 @@ export async function fetchPremiumCareer(id){
  });
  if(!response.ok)return null;
  const rows=await response.json();return Array.isArray(rows)?rows[0]||null:null;
+}
+
+export function verifyRecoveryToken(token){
+ return authFetch('user',{method:'GET',token});
+}
+export function updateRecoveredPassword(token,password){
+ return authFetch('user',{method:'PUT',token,body:{password}});
+}
+export function revokeRecoveryToken(token){
+ return authFetch('logout?scope=local',{token});
 }

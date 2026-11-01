@@ -1,4 +1,4 @@
-import {signIn,signUp,recoverPassword,getSession} from './auth-client.js';
+import {signIn,signUp,recoverPassword,getSession} from './auth-client.js?v=app20261101';
 const form=document.querySelector('#auth-form');
 const password=document.querySelector('#password'),feedback=document.querySelector('#auth-feedback');
 const nameInput=document.querySelector('#name');
@@ -70,8 +70,11 @@ form.addEventListener('submit',async e=>{
 document.querySelector('#forgot').addEventListener('click',async()=>{
  const emailValue=email.value.trim();
  if(!emailValue){notice('Indiquez votre adresse e-mail pour recevoir les instructions.');return;}
+ if(!email.reportValidity())return;
+ const button=document.querySelector('#forgot');button.disabled=true;
  try{await recoverPassword(emailValue);notice('Si un compte existe pour cette adresse, un message de réinitialisation a été envoyé.');}
  catch{notice('La demande de réinitialisation n’a pas pu être effectuée.');}
+ finally{button.disabled=false;}
 });
 setMode(new URLSearchParams(location.search).get('mode')==='signup'?'signup':'login');
 getSession().then(session=>{if(session)notice('Vous êtes déjà connecté. Vous pouvez continuer vers votre espace.')}).catch(()=>{});

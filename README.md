@@ -156,3 +156,11 @@ Les formulaires d’inscription, connexion et demande de réinitialisation sont 
 ## Illustration détaillée
 
 La page d’accueil et la connexion utilisent `assets/people-detailed-v3.png`, intégrée via `vibrant-illustrated.css`. Ces nouveaux noms évitent la réutilisation en cache des anciens dessins. L’illustration originale reste disponible dans les fichiers historiques.
+
+## Navigation, comparaison et récupération de compte
+
+Le menu mobile donne accès aux métiers, quiz, favoris, conseils et au comparateur public. Sur `comparer.html`, choisis deux métiers ou les deux premiers favoris de cet appareil. Les fiches gratuites affichent leurs activités et leurs formations ; les détails Premium restent verrouillés. La comparaison se partage par URL et peut s’imprimer ou s’enregistrer en PDF depuis la boîte d’impression du navigateur.
+
+« Mot de passe oublié ? » envoie vers `reset-password.html`. Dans **Supabase → Authentication → URL Configuration**, autoriser `https://sigroupeimmo4-ux.github.io/moidemain/reset-password.html` (et une URL locale uniquement pour les tests de développement si nécessaire). Cette configuration et la livraison réelle de l’e-mail doivent être vérifiées séparément. Les tests ne modifient aucun compte réel.
+
+Avec Playwright disponible, lancer `MOI_DEMAIN_URL=http://127.0.0.1:3000/ node app-journeys.browser.mjs` après `npm run dev`. `CHROMIUM_PATH` permet d’utiliser un Chromium installé. Les réponses Auth sont simulées dans ces tests pour les cas réussis, expirés et en erreur.
