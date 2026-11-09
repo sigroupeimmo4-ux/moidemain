@@ -1,7 +1,7 @@
 const url=Deno.env.get('SUPABASE_URL')||'';
 const anon=Deno.env.get('SUPABASE_ANON_KEY')||'';
 const admin=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')||'';
-const allowed=new Set(['https://sigroupeimmo4-ux.github.io','http://localhost:3000','http://127.0.0.1:3000']);
+const allowed=new Set(['https://sigroupeimmo4-ux.github.io','http://localhost:3000','http://127.0.0.1:3000',...(Deno.env.get("ALLOWED_ORIGINS")||"").split(",").map(v=>v.trim()).filter(Boolean)]);
 function hdr(origin){return {'Content-Type':'application/json','Cache-Control':'no-store','Vary':'Origin','Access-Control-Allow-Origin':allowed.has(origin||'')?origin:'https://sigroupeimmo4-ux.github.io','Access-Control-Allow-Headers':'authorization,apikey,content-type','Access-Control-Allow-Methods':'POST,OPTIONS'};}
 function send(data,status=200,origin){return new Response(JSON.stringify(data),{status,headers:hdr(origin)});}
 Deno.serve(async req=>{

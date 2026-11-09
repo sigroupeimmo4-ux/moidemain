@@ -11,11 +11,12 @@ export const cfg={
  amount:Number(env('PAYDUNYA_PRICE_XOF')),
  enabled:env('PAYDUNYA_ENABLE_CHECKOUT')==='true'
 };
-export const SITE='https://sigroupeimmo4-ux.github.io/moidemain/';
+export const SITE=(Deno.env.get("SITE_URL")||'https://sigroupeimmo4-ux.github.io/moidemain/').replace(/\/?$/,"/");
+const ORIGINS=['https://sigroupeimmo4-ux.github.io','http://localhost:3000','http://127.0.0.1:3000',...(Deno.env.get("ALLOWED_ORIGINS")||"").split(",").map(v=>v.trim()).filter(Boolean)];
 export const endpoint='https://app.paydunya.com/'+(cfg.mode==='live'?'api':'sandbox-api')+'/v1/checkout-invoice/';
 export const providerReady=()=>Boolean(cfg.master&&cfg.privateKey&&cfg.token&&cfg.url&&cfg.anon&&cfg.admin);
 export const configured=()=>Boolean(cfg.enabled&&providerReady()&&Number.isInteger(cfg.amount)&&cfg.amount>=100&&cfg.amount<=1000000&&(cfg.mode==='test'||env('PAYDUNYA_LIVE_APPROVED')==='true'));
-export const allowOrigin=o=>['https://sigroupeimmo4-ux.github.io','http://localhost:3000','http://127.0.0.1:3000'].includes(o||'');
+export const allowOrigin=o=>ORIGINS.includes(o||'');
 export function headers(origin){
  return {'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','Vary':'Origin',
   'Access-Control-Allow-Origin':allowOrigin(origin)?origin:'https://sigroupeimmo4-ux.github.io',
