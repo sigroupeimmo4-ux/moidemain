@@ -136,6 +136,7 @@ $('delete-account').addEventListener('click',async()=>{
    method:'POST',headers:{apikey:SUPABASE_PUBLISHABLE_KEY,Authorization:'Bearer '+session.access_token,'Content-Type':'application/json'},
    body:JSON.stringify({confirm:'SUPPRIMER'})
   });
+  if(r.status===403)throw Error('Pour votre sécurité, déconnectez-vous puis reconnectez-vous, et réessayez aussitôt.');
   if(!r.ok)throw Error('Suppression impossible actuellement. Contactez le support et réessayez.');
   await signOut();location.assign('./?compte=supprime');
  }catch(e){$('security-status').textContent=e.message;}

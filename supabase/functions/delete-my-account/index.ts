@@ -16,6 +16,9 @@ Deno.serve(async req=>{
  if(!auth.ok)return send({error:'Connexion expirée'},401,origin);
  const user=await auth.json();
  if(!/^[0-9a-f-]{36}$/i.test(user?.id||''))return send({error:'Compte invalide'},403,origin);
+ // Ré-authentification récente exigée : limite les dégâts en cas de vol de session.
+ const lastLogin=Date.parse(user?.last_sign_in_at||"");
+ if(!Number.isFinite(lastLogin)||Date.now()-lastLogin>15*60*1000)return send({error:"Reconnexion récente requise",code:"reauth_required"},403,origin);
  let body={};
  try{
   if(!req.headers.get('content-type')?.includes('application/json'))return send({error:'Format invalide'},415,origin);

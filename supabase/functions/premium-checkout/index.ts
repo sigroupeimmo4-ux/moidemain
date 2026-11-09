@@ -33,6 +33,10 @@ Deno.serve(async(req)=>{
  try{
   const own=await db('premium_access?user_id=eq.'+user.id+'&active=eq.true&select=user_id');
   if(own.length)return json({error:'Ce compte dispose déjà de Premium.'},409,origin);
+  // Limite les commandes en attente pour éviter l’accumulation de lignes.
+  const since=new Date(Date.now()-3600*1000).toISOString();
+  const recent=await db("premium_orders?user_id=eq."+user.id+"&status=eq.pending&created_at=gte."+encodeURIComponent(since)+"&select=id");
+  if(recent.length>=5)return json({error:"Trop de tentatives. Réessayez dans une heure."},429,origin);
   const order_id=crypto.randomUUID();
   await db('premium_orders',{
    method:'POST',body:JSON.stringify({id:order_id,user_id:user.id,mode:cfg.mode,amount_xof:cfg.amount,status:'pending'})
