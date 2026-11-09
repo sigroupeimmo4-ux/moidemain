@@ -32,3 +32,40 @@ body>header nav a{white-space:nowrap}
   body>header .site-menu-toggle{margin-left:8px}
 }
 @media(max-width:440px){body>header .site-menu-toggle{margin-left:auto}}
+
+/* ===== Visuels : étapes, univers, couvertures de métiers, bandeaux ===== */
+.step-visual{padding:0!important;overflow:hidden;display:flex;flex-direction:column;text-align:center}
+.step-visual img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover}
+.step-visual .number{position:absolute;top:12px;left:12px;background:#fff;color:#7028a1;border-radius:999px;padding:4px 10px;font-weight:800;font-size:12px;box-shadow:0 2px 8px #7028a122}
+.step-visual h3{margin:18px 16px 6px;font-size:18px}
+.step-visual p{margin:0 16px 22px;color:#826d89;font-size:14px;line-height:1.5}
+.step-visual:hover{transform:translateY(-4px)}
+.univers{max-width:1184px;margin:0 auto;padding:10px 24px 40px}
+.univers-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
+.univers-tile{position:relative;display:block;border-radius:22px;overflow:hidden;box-shadow:0 8px 24px #7028a118;text-decoration:none;transition:transform .2s,box-shadow .2s;aspect-ratio:5/4}
+.univers-tile img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s}
+.univers-tile span{position:absolute;left:12px;bottom:12px;background:#fff;color:#4a1f66;padding:8px 14px;border-radius:999px;font-weight:800;font-size:14px;box-shadow:0 4px 14px #38214922}
+.univers-tile:hover{transform:translateY(-4px);box-shadow:0 14px 32px #7028a130}
+.univers-tile:hover img{transform:scale(1.06)}
+.aud-ico{display:grid!important;place-items:center;width:64px;height:64px;font-size:32px!important;border-radius:20px;background:linear-gradient(135deg,#ffe3f3,#e8dcff)}
+.audiences p{font-size:14px!important;line-height:1.5!important}
+.job-cover{background-size:cover!important;background-position:center!important}
+.job-cover[data-cat="Création"]{background-image:url(./assets/visuels/cat-creation.svg)!important}
+.job-cover[data-cat="Technologie"]{background-image:url(./assets/visuels/cat-technologie.svg)!important}
+.job-cover[data-cat="Lien humain"]{background-image:url(./assets/visuels/cat-humain.svg)!important}
+.job-cover[data-cat="Nature & terrain"]{background-image:url(./assets/visuels/cat-nature.svg)!important}
+.job-cover .illustration{filter:drop-shadow(0 6px 10px #38214933);font-size:54px!important;background:#ffffffd9;border-radius:50%;width:84px;height:84px;display:grid;place-items:center;margin:auto}
+.job-premium .job-cover{filter:saturate(.8)}
+.has-visual{padding-right:min(340px,36%)!important}
+.hero-visual{position:absolute;right:-10px;top:50%;transform:translateY(-50%) rotate(3deg);width:min(320px,34%);height:auto;border-radius:24px;box-shadow:0 14px 36px #7028a130;border:6px solid #fff}
+@media(max-width:900px){
+  .univers-grid{grid-template-columns:repeat(2,1fr)}
+  .has-visual{padding-right:22px!important}
+  .hero-visual{position:static;transform:none;display:block;width:min(100%,300px);max-height:none;margin:0 auto 18px;border-width:4px;transform:none}
+}
+@media(max-width:700px){
+  .univers{padding:10px 16px 30px}
+  .step-visual img{aspect-ratio:16/8}
+}
+.step-visual .number{width:auto!important;right:auto!important;height:auto!important;display:inline-block!important;line-height:1.2}
+.univers-tile{aspect-ratio:5/3!important}
