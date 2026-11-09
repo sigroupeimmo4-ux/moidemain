@@ -69,3 +69,19 @@ body>header nav a{white-space:nowrap}
 }
 .step-visual .number{width:auto!important;right:auto!important;height:auto!important;display:inline-block!important;line-height:1.2}
 .univers-tile{aspect-ratio:5/3!important}
+
+/* ===== Fiches, résultats, quiz, conseils ===== */
+.detail-cover{height:150px;border-radius:20px;margin:0 0 18px;display:grid;place-items:center;background:#f6e6ff center/cover no-repeat}
+.detail-cover span{font-size:56px;background:#ffffffd9;border-radius:50%;width:92px;height:92px;display:grid;place-items:center;box-shadow:0 8px 22px #38214926}
+.detail-cover+.job-detail-icon{display:none}
+.detail-cover[data-cat="Création"]{background-image:url(./assets/visuels/cat-creation.svg)}
+.detail-cover[data-cat="Technologie"]{background-image:url(./assets/visuels/cat-technologie.svg)}
+.detail-cover[data-cat="Lien humain"]{background-image:url(./assets/visuels/cat-humain.svg)}
+.detail-cover[data-cat="Nature & terrain"]{background-image:url(./assets/visuels/cat-nature.svg)}
+.quiz-choice{overflow:hidden}
+.quiz-choice-visual{display:block;width:calc(100% + 54px);max-width:none;margin:-27px -27px 6px;aspect-ratio:5/3;object-fit:cover}
+.quiz-choice-icon{margin-top:-44px;position:relative;z-index:1;background:#fff!important}
+.result-visual{display:block;width:min(100%,360px);margin:0 auto 14px;border-radius:22px;box-shadow:0 10px 28px #7028a122}
+.experience-icon{width:62px!important;height:62px!important;font-size:30px!important;box-shadow:0 6px 16px #7028a114}
+.advice-step{transition:transform .2s,box-shadow .2s}
+.advice-step:hover{transform:translateY(-3px);box-shadow:0 12px 28px #7028a116}

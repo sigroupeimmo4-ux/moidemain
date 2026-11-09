@@ -18,6 +18,8 @@ function populateCatalog(){
  for(const quiz of QUIZZES){
   const card=node('article',undefined,'quiz-choice');
   card.dataset.accent=quiz.accent;
+  const art=document.createElement('img');art.className='quiz-choice-visual';art.alt='';art.loading='lazy';art.width=400;art.height=240;
+  art.src='./assets/visuels/'+({ecrans:'cat-technologie',moi:'cat-humain',passions:'cat-creation',apprendre:'cat-nature'}[quiz.id]||'etape-2')+'.svg';card.prepend(art);
   const badge=node('span',quiz.icon,'quiz-choice-icon');
   const header=node('div',undefined,'quiz-choice-header');
   header.append(badge,node('small',quiz.questions.length+' questions · '+quiz.duration));
@@ -83,6 +85,7 @@ function finish(){
  lastResult=result;
  $('quiz-play').hidden=true;
  const quiz=active;
+ {const v=$('result-visual');if(v)v.src='./assets/visuels/'+({'🎨':'cat-creation','🔎':'cat-technologie','💬':'cat-humain','🛠️':'cat-nature'}[result.main&&result.main.icon]||'etape-3')+'.svg';}
  $('result-title').textContent=result.isTie?'Deux envies ressortent de tes réponses !':'Ta piste du moment : '+result.main.title;
  $('result-lead').textContent='Dans ce quiz « '+quiz.title+' », tu as surtout choisi des activités liées à '+result.main.title.toLowerCase()+'. Voici d’autres idées à tester, sans te limiter.';
  const traits=$('result-traits');traits.replaceChildren();
