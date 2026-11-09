@@ -1,0 +1,34 @@
+/* Passe de polish : accessibilité, mobile, lisibilité. Chargé après les autres feuilles. */
+.skip-link{position:absolute;left:12px;top:-60px;z-index:2000;background:#5b1f86;color:#fff;padding:12px 18px;border-radius:12px;font-weight:700;text-decoration:none;transition:top .15s}
+.skip-link:focus{top:12px;outline:3px solid #ffd54a;outline-offset:2px}
+:focus-visible{outline:3px solid #7028a1;outline-offset:3px;border-radius:6px}
+a,button,summary,input,select,textarea{scroll-margin-top:90px}
+html{scroll-behavior:smooth}
+h1,h2,h3{text-wrap:balance}
+p{text-wrap:pretty}
+img{max-width:100%;height:auto}
+.header-cta{white-space:nowrap}
+@media(max-width:700px){
+  .landing-hero h1{font-size:clamp(30px,9vw,43px);line-height:1.08}
+  .landing-page .header-cta span{display:none}
+  button,.primary,.secondary-link,.text-btn,.filter,.option,summary{min-height:44px}
+  .filter{padding-top:10px;padding-bottom:10px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+@media print{.fullta-widget,.site-menu-toggle,header nav{display:none!important}}
+@media(max-width:440px){.landing-page .header-cta{display:none}}
+/* Entre 901 et 1240 px, onze liens ne tiennent plus dans l'en-tête : on utilise le menu compact. */
+@media(min-width:901px) and (max-width:1240px){
+  body>header nav:not(.site-mobile-menu){display:none!important}
+  body>header .site-menu-toggle{display:block;margin-left:auto}
+  body>header .header-cta{margin-left:8px}
+}
+body>header nav a{white-space:nowrap}
+@media(max-width:1240px){
+  body>header .header-cta{margin-left:auto}
+  body>header .site-menu-toggle{margin-left:8px}
+}
+@media(max-width:440px){body>header .site-menu-toggle{margin-left:auto}}

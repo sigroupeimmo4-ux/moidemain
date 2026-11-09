@@ -2,7 +2,7 @@ const LINKS=[
  ['./','Accueil'],['./explorer.html','Explorer les métiers'],['./quiz-personnalites.html','Mes quiz'],
  ['./explorer.html?vue=favoris','Mes favoris'],['./comparer.html','Comparer des métiers'],
  ['./conseils.html','Conseils'],['./personnages.html','Mes personnages'],
- ['./mon-espace.html','Mon espace'],['./parents.html','Espace parents'],['./contact.html','Contact']
+ ['./premium.html','Premium ✨'],['./mon-espace.html','Mon espace'],['./auth.html','Se connecter'],['./parents.html','Espace parents'],['./contact.html','Contact']
 ];
 export function mountSiteNavigation(){
  const header=document.querySelector('body > header');

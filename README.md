@@ -155,7 +155,7 @@ Les formulaires d’inscription, connexion et demande de réinitialisation sont 
 
 ## Illustration détaillée
 
-La page d’accueil et la connexion utilisent `assets/people-detailed-v3.png`, intégrée via `vibrant-illustrated.css`. Ces nouveaux noms évitent la réutilisation en cache des anciens dessins. L’illustration originale reste disponible dans les fichiers historiques.
+La page d’accueil et la connexion utilisent `assets/people-detailed-v3.webp`, intégrée via `vibrant-illustrated.css`. Ces nouveaux noms évitent la réutilisation en cache des anciens dessins. L’illustration originale reste disponible dans les fichiers historiques.
 
 ## Navigation, comparaison et récupération de compte
 
