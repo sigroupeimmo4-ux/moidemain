@@ -113,9 +113,9 @@ Les commandes reconnues localement fonctionnent **sans aucune API**. Pour les qu
 
 ### Activer la véritable IA
 
-1. Dans le tableau de bord Supabase du projet *Moi demain*, ouvrir **Edge Functions → Secrets** et définir `OPENAI_API_KEY` avec votre clé API privée. Ne jamais placer cette clé dans GitHub, le HTML ou JavaScript côté navigateur.
-2. Facultatif : définir `OPENAI_MODEL` (par défaut `gpt-4o-mini`).
-3. Si le site utilise un domaine distinct de `https://sigroupeimmo4-ux.github.io`, définir `FULLTA_ALLOWED_ORIGINS` avec les origines autorisées séparées par des virgules, puis redéployer si besoin.
+1. Dans le tableau de bord Supabase du projet *Moi demain*, ouvrir **Edge Functions → Secrets** et définir `ANTHROPIC_API_KEY` avec votre clé API privée (console.anthropic.com). Ne jamais placer cette clé dans GitHub, le HTML ou JavaScript côté navigateur.
+2. Facultatif : définir `ANTHROPIC_MODEL` (par défaut `claude-haiku-5-5`).
+3. Si le site utilise un domaine distinct de `https://moidemain.vercel.app`, définir `FULLTA_ALLOWED_ORIGINS` avec les origines autorisées séparées par des virgules, puis redéployer si besoin.
 
 La fonction propose des réponses et des actions structurées. Le navigateur revérifie **chaque action** contre une liste explicite et un catalogue connu avant toute exécution. Les messages libres, lorsqu’une clé est activée, transitent vers le modèle IA ; le chat invite à ne pas partager de données sensibles. Les réponses aux quiz ne sont pas envoyées.
 
