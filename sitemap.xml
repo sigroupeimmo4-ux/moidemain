@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://sigroupeimmo4-ux.github.io/moidemain/</loc><lastmod>2026-10-30</lastmod></url>
-  <url><loc>https://sigroupeimmo4-ux.github.io/moidemain/quiz-personnalites.html</loc><lastmod>2026-10-31</lastmod></url>
-  <url><loc>https://sigroupeimmo4-ux.github.io/moidemain/explorer.html</loc><lastmod>2026-10-30</lastmod></url>
-  <url><loc>https://sigroupeimmo4-ux.github.io/moidemain/personnages.html</loc><lastmod>2026-10-30</lastmod></url>
-  <url><loc>https://sigroupeimmo4-ux.github.io/moidemain/conseils.html</loc><lastmod>2026-10-30</lastmod></url>
-  <url><loc>https://sigroupeimmo4-ux.github.io/moidemain/premium.html</loc><lastmod>2026-10-30</lastmod></url>
-  <url><loc>https://sigroupeimmo4-ux.github.io/moidemain/parents.html</loc><lastmod>2026-10-30</lastmod></url>
-  <url><loc>https://sigroupeimmo4-ux.github.io/moidemain/a-propos.html</loc><lastmod>2026-10-30</lastmod></url>
-  <url><loc>https://sigroupeimmo4-ux.github.io/moidemain/contact.html</loc><lastmod>2026-10-30</lastmod></url>
-  <url><loc>https://sigroupeimmo4-ux.github.io/moidemain/cgu.html</loc><lastmod>2026-10-30</lastmod></url>
-  <url><loc>https://sigroupeimmo4-ux.github.io/moidemain/cgv.html</loc><lastmod>2026-10-30</lastmod></url>
-  <url><loc>https://sigroupeimmo4-ux.github.io/moidemain/confidentialite.html</loc><lastmod>2026-10-30</lastmod></url>
-  <url><loc>https://sigroupeimmo4-ux.github.io/moidemain/cookies.html</loc><lastmod>2026-10-30</lastmod></url>
-  <url><loc>https://sigroupeimmo4-ux.github.io/moidemain/mentions-legales.html</loc><lastmod>2026-10-30</lastmod></url>
-  <url><loc>https://sigroupeimmo4-ux.github.io/moidemain/comparer.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://moidemain.vercel.app/</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://moidemain.vercel.app/quiz-personnalites.html</loc><lastmod>2026-10-31</lastmod></url>
+  <url><loc>https://moidemain.vercel.app/explorer.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://moidemain.vercel.app/personnages.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://moidemain.vercel.app/conseils.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://moidemain.vercel.app/premium.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://moidemain.vercel.app/parents.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://moidemain.vercel.app/a-propos.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://moidemain.vercel.app/contact.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://moidemain.vercel.app/cgu.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://moidemain.vercel.app/cgv.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://moidemain.vercel.app/confidentialite.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://moidemain.vercel.app/cookies.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://moidemain.vercel.app/mentions-legales.html</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://moidemain.vercel.app/comparer.html</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://moidemain.vercel.app/auth.html</loc><lastmod>2026-11-10</lastmod></url>
 </urlset>

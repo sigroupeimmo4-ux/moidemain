@@ -13,7 +13,7 @@ jobs:
         shell: bash
         run: |
           set -eu
-          BASE="https://sigroupeimmo4-ux.github.io/moidemain"
+          BASE="https://moidemain.vercel.app"
           for route in / /explorer.html /mon-espace.html /personnages.html /conseils.html /parents.html /premium.html /a-propos.html /cgu.html /confidentialite.html; do
             echo "Checking: $BASE$route"
             curl --fail --location --silent --show-error --max-time 20 --retry 2 -o /tmp/health-check.html "$BASE$route"

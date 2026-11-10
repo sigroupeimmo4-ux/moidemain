@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://sigroupeimmo4-ux.github.io/moidemain/sitemap.xml
-# GitHub Pages projet: robots.txt du dépôt ne contrôle pas le domaine racine.
+Sitemap: https://moidemain.vercel.app/sitemap.xml
