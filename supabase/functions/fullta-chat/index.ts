@@ -7,14 +7,42 @@ const origins=new Set([
   ...(Deno.env.get('FULLTA_ALLOWED_ORIGINS')||'').split(',').map(v=>v.trim()).filter(Boolean)
 ]);
 const jobs=[
-  {id:'designer',name:'Designer UX / UI',category:'Création'},
-  {id:'dev',name:'Développeur web',category:'Technologie'},
-  {id:'educ',name:'Éducateur spécialisé',category:'Lien humain'},
-  {id:'paysage',name:'Paysagiste',category:'Nature & terrain'},
-  {id:'data',name:'Analyste de données',category:'Technologie'},
-  {id:'communication',name:'Chargé de communication',category:'Création'},
-  {id:'infirmier',name:'Infirmier / infirmière',category:'Lien humain'},
-  {id:'artisan',name:'Menuisier / menuisière',category:'Nature & terrain'}
+  {id:"designer",name:"Designer UX / UI",category:"Création"},
+  {id:"dev",name:"Développeur web",category:"Technologie"},
+  {id:"educ",name:"Éducateur spécialisé",category:"Lien humain"},
+  {id:"paysage",name:"Paysagiste",category:"Nature & terrain"},
+  {id:"data",name:"Analyste de données",category:"Technologie"},
+  {id:"communication",name:"Chargé de communication",category:"Création"},
+  {id:"infirmier",name:"Infirmier / infirmière",category:"Lien humain"},
+  {id:"artisan",name:"Menuisier / menuisière",category:"Nature & terrain"},
+  {id:"architecte",name:"Architecte",category:"Création"},
+  {id:"veterinaire",name:"Vétérinaire",category:"Lien humain"},
+  {id:"journaliste",name:"Journaliste",category:"Création"},
+  {id:"psychologue",name:"Psychologue",category:"Lien humain"},
+  {id:"ingenieure",name:"Ingénieur / ingénieure",category:"Technologie"},
+  {id:"cuisinier",name:"Cuisinier / cuisinière",category:"Nature & terrain"},
+  {id:"photographe",name:"Photographe",category:"Création"},
+  {id:"robotique",name:"Technicien / technicienne robotique",category:"Technologie"},
+  {id:"agriculteur",name:"Agriculteur / agricultrice",category:"Nature & terrain"},
+  {id:"enseignant",name:"Professeur / professeure des écoles",category:"Lien humain"},
+  {id:"jeuxvideo",name:"Créateur / créatrice de jeux vidéo",category:"Technologie"},
+  {id:"sport",name:"Éducateur / éducatrice sportive",category:"Lien humain"},
+  {id:"cybersecurite",name:"Expert / experte en cybersécurité",category:"Technologie"},
+  {id:"aerospatial",name:"Ingénieur / ingénieure aérospatial",category:"Technologie"},
+  {id:"oceanographe",name:"Océanographe",category:"Nature & terrain"},
+  {id:"magistrat",name:"Magistrat / magistrate",category:"Lien humain"},
+  {id:"archeologue",name:"Archéologue",category:"Nature & terrain"},
+  {id:"biologiste",name:"Biologiste",category:"Nature & terrain"},
+  {id:"architecte_interieur",name:"Architecte d’intérieur",category:"Création"},
+  {id:"meteorologue",name:"Météorologue",category:"Nature & terrain"},
+  {id:"podcast",name:"Créateur / créatrice de podcasts",category:"Création"},
+  {id:"urbaniste",name:"Urbaniste",category:"Lien humain"},
+  {id:"pilote",name:"Pilote de ligne",category:"Technologie"},
+  {id:"restaurateur_art",name:"Restaurateur / restauratrice d’art",category:"Création"},
+  {id:"chercheur_ia",name:"Chercheur / chercheuse en intelligence artificielle",category:"Technologie"},
+  {id:"soigneur",name:"Soigneur / soigneuse animalier",category:"Nature & terrain"},
+  {id:"ergotherapeute",name:"Ergothérapeute",category:"Lien humain"},
+  {id:"scenariste",name:"Scénariste",category:"Création"}
 ];
 const categories=['Création','Technologie','Lien humain','Nature & terrain'];
 const actions=['start_personality_quiz','start_job_quiz','open_job','add_favorite','remove_favorite','show_favorites','go_home','filter_jobs','search_jobs'];
@@ -98,13 +126,13 @@ Deno.serve(async req=>{
   if(!apiKey)return send({error:'L’IA n’est pas encore configurée.'},503,origin);
   const user=await authenticatedUser(req);
   if(!user)return send({error:'Connexion nécessaire pour discuter librement avec Fullta.'},401,origin);
-  if(!await takeQuota(user.id))return send({error:'Quota atteint pour cette heure. Les commandes locales restent disponibles.'},429,origin);
   try {
     const raw=await req.text();
     if(raw.length>7000)return send({error:'Demande trop longue'},413,origin);
     const data=JSON.parse(raw);
     if(typeof data.message!=='string'||!data.message.trim()||data.message.length>400)return send({error:'Message invalide'},400,origin);
-    if(await moderation(data.message,apiKey))return send({reply:'Je peux t’aider à découvrir des métiers. Si tu rencontres une difficulté personnelle, parles-en à un adulte de confiance.',action:null},200,origin);
+    if(await moderation(data.message,apiKey))return send({reply:'Je peux t’aider à découvrir des métiers. Si tu traverses un moment difficile, parles-en dès maintenant à un adulte de confiance. Si tu es en danger, contacte les secours de ton pays.',action:null},200,origin);
+    if(!await takeQuota(user.id))return send({error:'Quota atteint pour cette heure. Les commandes locales restent disponibles.'},429,origin);
     const rawHistory=Array.isArray(data.history)?data.history.slice(-8).filter(
       x=>x&&['user','assistant'].includes(x.role)&&typeof x.content==='string'&&x.content.trim()&&x.content.length<=500
     ).map(x=>({role:x.role,content:x.content})):[];
