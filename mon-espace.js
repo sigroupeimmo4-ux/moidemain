@@ -2,6 +2,7 @@ import {getUser,signOut,SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,getSession} from '
 import {readMyProfile,saveMyProfile,readHistory,readFavorites,readAvatars,deleteHistory,deleteAvatar,deleteMyJourney} from './user-data.js?v=fix20261101';
 import {extraFreeJobs,premiumPreviews} from './catalogue-extra.js';
 import {ANIMALS} from './personnages.js';
+import {ico} from './icons.js';
 const careers=[
  {id:'designer',name:'Designer UX / UI',category:'Création'},
  {id:'dev',name:'Développeur web',category:'Technologie'},
@@ -38,7 +39,7 @@ function renderBadges(){
  for(const badge of available){
   const card=make('article',null,'experience-card');
   card.style.opacity=badge.earned?'1':'.64';
-  card.append(make('span',badge.icon,'experience-icon'),make('h3',badge.name),make('p',badge.earned?'Débloqué !':'À découvrir : '+badge.condition));
+  const bi=make('span','','experience-icon');bi.innerHTML=ico(badge.icon);card.append(bi,make('h3',badge.name),make('p',badge.earned?'Débloqué !':'À découvrir : '+badge.condition));
   wrap.append(card);
  }
 }
@@ -47,7 +48,7 @@ function renderFavorites(){
  if(!snapshot.favorites.length){clearAndMessage(wrap,'Aucun favori synchronisé. Découvre les métiers dans le catalogue.');return;}
  for(const id of snapshot.favorites){
   const career=careers.find(c=>c.id===id);if(!career)continue;
-  const card=make('article',null,'experience-card');card.append(make('span',career.emoji||'💡','experience-icon'),make('h3',career.name),make('p',career.category));
+  const card=make('article',null,'experience-card');const ci=make('span','','experience-icon');ci.innerHTML=ico(career.emoji||'💡');card.append(ci,make('h3',career.name),make('p',career.category));
   const a=make('a','Voir dans les métiers →','experience-secondary');a.href='./explorer.html?metier='+encodeURIComponent(id);card.append(a);wrap.append(card);
  }
 }
@@ -70,7 +71,7 @@ function renderAvatars(){
  if(!snapshot.avatars.length){clearAndMessage(wrap,'Aucun personnage synchronisé. Crée-en un dans « Mes personnages ».');return;}
  for(const a of snapshot.avatars){
   const card=make('article',null,'experience-card'),animal=ANIMALS.find(x=>x.id===a.animal);
-  card.append(make('span',animal?.symbol||'🐰','account-avatar'),make('h3',a.name),make('span',animal?.label||'Compagnon','account-pill'));
+  card.append(make('span',(animal?.label||a.name||'C').slice(0,1).toUpperCase(),'account-avatar'),make('h3',a.name),make('span',animal?.label||'Compagnon','account-pill'));
   const btn=make('button','Supprimer ce personnage','experience-secondary small-button');
   btn.type='button';btn.addEventListener('click',async()=>{if(!confirm('Supprimer ce personnage synchronisé ?'))return;try{await deleteAvatar(a.id);snapshot.avatars=snapshot.avatars.filter(x=>x.id!==a.id);renderAvatars();stats();renderBadges();}catch(e){status.textContent=e.message;}});
   card.append(btn);wrap.append(card);
@@ -89,7 +90,7 @@ function compare(){
  for(const id of [$('compare-one').value,$('compare-two').value]){
   const c=careers.find(x=>x.id===id);if(!c)continue;
   const card=make('article',null,'experience-card');
-  card.append(make('span',c.emoji||'🔎','experience-icon'),make('h3',c.name),make('p',c.category),make('p',c.desc||'Découvre cette activité et son quotidien.'));
+  const di=make('span','','experience-icon');di.innerHTML=ico(c.emoji||'🔎');card.append(di,make('h3',c.name),make('p',c.category),make('p',c.desc||'Découvre cette activité et son quotidien.'));
   const a=make('a',c.premium?'Fiche Premium verrouillée →':'Découvrir ce métier →','experience-secondary');
   a.href=c.premium?'./premium.html':'./explorer.html?metier='+encodeURIComponent(id);card.append(a);out.append(card);
  }

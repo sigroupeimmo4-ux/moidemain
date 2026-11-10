@@ -1,3 +1,4 @@
+import {ico} from './icons.js';
 import {premiumPreviews} from './catalogue-extra.js';
 import {SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,getSession,checkPremium} from './auth-client.js?v=fix20261101';
 
@@ -31,10 +32,10 @@ function decorate(){
 }
 for(const job of premiumPreviews){
  const card=document.createElement('article');card.className='premium-preview';
- const emoji=document.createElement('span');emoji.className='icon';emoji.textContent=job.emoji;
+ const emoji=document.createElement('span');emoji.className='icon';emoji.innerHTML=ico(job.emoji);
  const title=document.createElement('strong');title.textContent=job.name;
  const desc=document.createElement('p');desc.textContent=job.desc;
- const lock=document.createElement('small');lock.textContent='🔒 Fiche Premium';
+ const lock=document.createElement('small');lock.textContent='Fiche Premium';
  card.append(emoji,title,desc,lock);root.append(card);
 }
 function disable(text){buy.disabled=true;buy.textContent=text;buy.removeAttribute('data-mode');}

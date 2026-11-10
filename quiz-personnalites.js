@@ -1,4 +1,5 @@
 import {QUIZZES,getQuiz,scoreQuiz} from './quiz-personnalites-data.js';
+import {ico} from './icons.js';
 import {addHistory} from './user-data.js?v=fix20261101';
 
 const $=id=>document.getElementById(id);
@@ -20,7 +21,7 @@ function populateCatalog(){
   card.dataset.accent=quiz.accent;
   const art=document.createElement('img');art.className='quiz-choice-visual';art.alt='';art.loading='lazy';art.width=400;art.height=240;
   art.src='./assets/visuels/'+({ecrans:'cat-technologie',moi:'cat-humain',passions:'cat-creation',apprendre:'cat-nature'}[quiz.id]||'etape-2')+'.svg';card.prepend(art);
-  const badge=node('span',quiz.icon,'quiz-choice-icon');
+  const badge=node('span','','quiz-choice-icon');badge.innerHTML=ico(quiz.icon);
   const header=node('div',undefined,'quiz-choice-header');
   header.append(badge,node('small',quiz.questions.length+' questions · '+quiz.duration));
   const title=node('h3',quiz.title),desc=node('p',quiz.short);
@@ -75,7 +76,7 @@ function renderQuestion(){
   options.append(label);
  });
  $('quiz-back').disabled=step===0;
- $('quiz-next').textContent=step===active.questions.length-1?'Voir mon résultat ✨':'Continuer →';
+ $('quiz-next').textContent=step===active.questions.length-1?'Voir mon résultat':'Continuer →';
  $('quiz-next').disabled=!selectedOption();
  $('quiz-question').focus({preventScroll:true});
 }
@@ -93,7 +94,7 @@ function finish(){
  selectedTraits.forEach((id,index)=>{
   const value=result.primary===id?result.main:result.complement;
   const card=node('article',undefined,'quiz-trait');
-  card.append(node('span',value.icon,'trait-icon'),node('strong',index===0?'Une envie qui ressort':'Une autre piste'),node('h3',value.title),node('p',value.summary),node('p','À essayer : '+value.action));
+  card.append((()=>{const t=node('span','','trait-icon');t.innerHTML=ico(value.icon);return t})(),node('strong',index===0?'Une envie qui ressort':'Une autre piste'),node('h3',value.title),node('p',value.summary),node('p','À essayer : '+value.action));
   traits.append(card);
  });
  $('result-note').textContent=result.summary+' Les goûts de vidéos ou de films ne suffisent pas à déterminer une orientation.';
@@ -101,7 +102,7 @@ function finish(){
  result.careers.forEach(career=>{
   const link=node('a',undefined,'quiz-career');
   link.href='./explorer.html?metier='+encodeURIComponent(career.id);
-  link.append(node('span',career.emoji),node('strong',career.name+' →'));
+  link.append((()=>{const t=node('span','');t.innerHTML=ico(career.emoji);return t})(),node('strong',career.name+' →'));
   careers.append(link);
  });
  $('quiz-save').disabled=false;
@@ -140,7 +141,7 @@ $('quiz-save').addEventListener('click',async()=>{
    return;
   }
   msg.replaceChildren(document.createTextNode('Ton résumé général est enregistré dans Mon espace. Les réponses détaillées ne sont pas enregistrées.'));
-  button.textContent='Résumé enregistré ✓';
+  button.textContent='Résumé enregistré';
  }catch{
   msg.textContent='Enregistrement indisponible. Aucun détail de tes réponses n’a été envoyé. Réessaie plus tard.';
   button.disabled=false;

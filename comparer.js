@@ -1,4 +1,5 @@
 import {jobs} from './catalogue.js';
+import {ico} from './icons.js';
 const $=id=>document.getElementById(id);
 const first=$('compare-first'),second=$('compare-second'),out=$('comparison');
 const feedback=$('compare-feedback'),share=$('compare-share'),print=$('compare-print');
@@ -14,7 +15,7 @@ function render(){
  const url=new URL(location.href);url.searchParams.set('un',first.value);url.searchParams.set('deux',second.value);history.replaceState(null,'',url);
  for(const id of [first.value,second.value]){
   const job=jobs.find(j=>j.id===id),card=el('article');card.className='experience-card';
-  const icon=el('span',job.emoji);icon.className='experience-icon';icon.setAttribute('aria-hidden','true');
+  const icon=el('span','');icon.innerHTML=ico(job.category);icon.className='experience-icon';icon.setAttribute('aria-hidden','true');
   card.append(icon,el('h2',job.name),el('p',job.category),el('p',job.desc));
   const dl=el('dl');
   for(const [title,key] of [['Le quotidien','detail'],['Pistes de formation','training']]){

@@ -125,3 +125,35 @@ body>header nav a[aria-current="page"]{color:#7028a1;font-weight:800;box-shadow:
 .ux-toasts{bottom:auto!important;top:86px}
 .section-intro a,.page-head a,.experience-note a{color:#7028a1;font-weight:700;text-underline-offset:3px}
 @media(max-width:700px){.ux-top{right:22px!important;bottom:150px!important}}
+
+/* ===== Icônes SVG (remplacent les emojis) ===== */
+.ic{width:1.1em;height:1.1em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.18em;flex:none}
+.experience-icon,.quiz-choice-icon,.aud-ico,.trait-icon,.job-premium .icon,.icon{color:#7028a1}
+.experience-icon .ic,.quiz-choice-icon .ic,.trait-icon .ic{width:1em;height:1em}
+.aud-ico .ic{width:1em;height:1em}
+.job-cover .illustration{color:#7028a1}
+.job-cover .illustration .ic{width:.62em;height:.62em;stroke-width:1.6}
+.detail-cover span{color:#7028a1}
+.detail-cover span .ic{width:.58em;height:.58em;stroke-width:1.6}
+.save{display:grid;place-items:center}
+.save .ic{width:20px;height:20px;color:#c0268a}
+.save[aria-pressed="true"] .ic{fill:#c0268a}
+.ux-top .ic{width:22px;height:22px;stroke-width:2.2}
+.landing-values .ic,.quiz-home-privacy .ic,.compare-table .ic{color:#1f9d78;width:1.05em;height:1.05em;stroke-width:2.2}
+.compare-table td:last-child .ic{color:#7028a1}
+.fullta-sparkle .ic{width:1em;height:1em;fill:currentColor;stroke:none}
+.option-symbol:empty,.account-avatar:empty{display:none}
+.quiz-home-tile .ic{display:block;margin:0 auto 6px;width:34px;height:34px;color:#7028a1}
+.premium-payment-methods span{display:inline-flex;align-items:center;gap:8px}
+.premium-payment-methods span::before{content:"";width:8px;height:8px;border-radius:50%;background:#7028a1;opacity:.55}
+/* Couvertures sobres : l'illustration de la catégorie suffit, pas de médaillon en plus */
+.job-cover .illustration,.detail-cover span{display:none!important}
+.detail-cover{height:130px}
+.avatar-options button{justify-content:center;min-height:56px}
+.avatar-options button:has(.avatar-swatch){min-height:84px}
+
+/* Identité unique : mêmes couleurs sur toutes les pages (certaines pages gardaient l'ancien vert) */
+:root{--green:#7028a1;--ink:#382149;--cream:#fff8fc;--muted:#77627f;--line:#ecd9ed}
+body{background-color:#fff8fc}
+.brand-icon{background:linear-gradient(135deg,#f34eaa,#7028a1)!important;color:#fff!important}
+.logo i{color:#e758a3!important}

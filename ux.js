@@ -1,3 +1,4 @@
+import { ico } from './icons.js';
 // Couche d'expérience : retours visuels et confort de navigation, sans dépendance.
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -25,7 +26,7 @@ document.addEventListener('click', (e) => {
   const b = e.target.closest('button[data-save], button[data-save-result]');
   if (!b) return;
   const wasSaved = b.getAttribute('aria-pressed') === 'true' || /retirer/i.test(b.textContent);
-  toast(wasSaved ? 'Retiré de tes favoris' : 'Ajouté à tes favoris ♥');
+  toast(wasSaved ? 'Retiré de tes favoris' : 'Ajouté à tes favoris');
 }, true);
 
 // 2. Page active dans la navigation
@@ -54,7 +55,7 @@ const top_ = document.createElement('button');
 top_.type = 'button';
 top_.className = 'ux-top';
 top_.setAttribute('aria-label', 'Retour en haut de la page');
-top_.textContent = '↑';
+top_.innerHTML = ico('arrowup');
 top_.addEventListener('click', () => scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }));
 document.body.append(top_);
 

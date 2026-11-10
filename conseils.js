@@ -1,3 +1,4 @@
+import {ico} from './icons.js';
 export const adviceByAge={
  '8-11':[
   {icon:'🔍',title:'Explore ce que tu aimes',body:'Dessiner, réparer, raconter, jardiner, aider : note ce qui te plaît et essaie une activité différente chaque semaine.'},
@@ -25,7 +26,7 @@ if(typeof document!=='undefined'){
    wrap.replaceChildren();
    adviceByAge[age].forEach(item=>{
     const article=document.createElement('article');article.className='advice-step';
-    const icon=document.createElement('span');icon.className='experience-icon';icon.textContent=item.icon;
+    const icon=document.createElement('span');icon.className='experience-icon';icon.innerHTML=ico(item.icon);
     const text=document.createElement('div'),title=document.createElement('h3'),body=document.createElement('p');
     title.textContent=item.title;body.textContent=item.body;text.append(title,body);article.append(icon,text);wrap.append(article);
    });

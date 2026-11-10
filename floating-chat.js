@@ -1,4 +1,5 @@
 import {mountSiteNavigation} from './site-navigation.js';
+import {ico} from './icons.js';
 import { planLocalAction } from './fullta.js';
 import {getSession,SUPABASE_PUBLISHABLE_KEY} from './auth-client.js?v=fix20261101';
 import {extraFreeJobs,premiumPreviews} from './catalogue-extra.js';
@@ -61,10 +62,10 @@ export function mountFullta({jobs=publicJobs,onAction=null}={}) {
           '<path d="M57 82 l-3 -4 M61 77 l-1 -3 M81 81 l4 -3" fill="none" stroke="#513953" stroke-width="1.2" stroke-linecap="round"/>',
         '</svg>',
       '</span>',
-      '<span class="fullta-sparkle fullta-sparkle-one" aria-hidden="true">✦</span>',
-      '<span class="fullta-sparkle fullta-sparkle-two" aria-hidden="true">✧</span>',
-      '<span class="fullta-sparkle fullta-sparkle-three" aria-hidden="true">✦</span>',
-      '<span class="fullta-hello" aria-hidden="true">👋 Coucou !</span>',
+      '<span class="fullta-sparkle fullta-sparkle-one" aria-hidden="true">'+ico('sparkle')+'</span>',
+      '<span class="fullta-sparkle fullta-sparkle-two" aria-hidden="true">'+ico('sparkle')+'</span>',
+      '<span class="fullta-sparkle fullta-sparkle-three" aria-hidden="true">'+ico('sparkle')+'</span>',
+      '<span class="fullta-hello" aria-hidden="true">Bonjour</span>',
       '<span class="fullta-launch-copy sr-only">Parler à Fullta</span>',
     '</button>',
     '<section id="fullta-panel" class="fullta-panel" role="dialog" aria-modal="false" aria-labelledby="fullta-title" hidden>',
@@ -283,7 +284,7 @@ export function mountFullta({jobs=publicJobs,onAction=null}={}) {
   widget.querySelectorAll('[data-prompt]').forEach(button=>{
     button.addEventListener('click',()=>void sendMessage(button.dataset.prompt));
   });
-  addMessage('Coucou ! 🐰 Je suis Fullta, ton petit compagnon pour explorer les métiers. Je peux lancer un quiz, ouvrir une fiche ou garder tes favoris. Par quoi commence-t-on ?');
+  addMessage('Bonjour, je suis Fullta, ton compagnon pour explorer les métiers. Je peux lancer un quiz, ouvrir une fiche ou garder tes favoris. Par quoi commence-t-on ?');
 
   if(typeof onAction==='function') {
     let stored=null;

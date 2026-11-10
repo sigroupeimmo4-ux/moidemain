@@ -1,7 +1,7 @@
 // Atelier de personnages : tout reste sur cet appareil, aucun envoi réseau.
-export const ANIMALS=[{id:'lapin',label:'Lapin',symbol:'🐰'},{id:'renard',label:'Renard',symbol:'🦊'},{id:'chat',label:'Chat',symbol:'🐱'},{id:'hibou',label:'Hibou',symbol:'🦉'}];
+export const ANIMALS=[{id:'lapin',label:'Lapin',symbol:''},{id:'renard',label:'Renard',symbol:''},{id:'chat',label:'Chat',symbol:''},{id:'hibou',label:'Hibou',symbol:''}];
 export const COLORS=[{id:'lavande',label:'Lavande',color:'#d9c6f5'},{id:'rose',label:'Rose',color:'#f7c6d9'},{id:'menthe',label:'Menthe',color:'#bce8d8'},{id:'ciel',label:'Bleu ciel',color:'#c5e2f9'}];
-export const ACCESSORIES=[{id:'aucun',label:'Naturel',symbol:'✨'},{id:'noeud',label:'Nœud',symbol:'🎀'},{id:'lunettes',label:'Lunettes',symbol:'👓'},{id:'couronne',label:'Couronne',symbol:'👑'}];
+export const ACCESSORIES=[{id:'aucun',label:'Naturel',symbol:''},{id:'noeud',label:'Nœud',symbol:''},{id:'lunettes',label:'Lunettes',symbol:''},{id:'couronne',label:'Couronne',symbol:''}];
 export const OUTFITS=[{id:'peche',label:'Pêche',color:'#f3a6a8'},{id:'violet',label:'Violet',color:'#9d89ca'},{id:'menthe',label:'Menthe',color:'#89cbb9'},{id:'bleu',label:'Bleu',color:'#8fbde9'}];
 export const defaults={animal:'lapin',color:'lavande',accessory:'aucun',outfit:'violet',name:'Mon compagnon'};
 const key='moidemain-avatar-v1',find=(arr,id)=>arr.find(x=>x.id===id);
